@@ -22,24 +22,13 @@ class SentMemesCollectionViewController: UICollectionViewController {
         self.navigationController!.pushViewController(detailController, animated: true)
     }
     
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //createFlowLayout()
         collectionView!.reloadData()
         self.tabBarController?.tabBar.hidden = false
     }
-    
-    func createFlowLayout(){
-        let space : CGFloat = 3.0
-        wdt_dimension = (self.view.frame.width - (2 * space)) / 2.0
-        hgt_dimension = (self.view.frame.height - (2 * space)) / 3.0
-        flowLayout.minimumInteritemSpacing = space
-        flowLayout.minimumLineSpacing = space
-        flowLayout.itemSize = CGSizeMake(wdt_dimension, hgt_dimension)
-        collectionView!.collectionViewLayout = flowLayout
-    }
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
@@ -86,7 +75,6 @@ class SentMemesCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemesCollectionViewCell", forIndexPath: indexPath) as! MemesCollectionViewCell
         let meme = getAppDelegate().memes[indexPath.item]
         cell.memeImageView?.image = meme.image
@@ -102,10 +90,19 @@ class SentMemesCollectionViewController: UICollectionViewController {
     
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath:NSIndexPath) {
-
-            let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailsViewController") as! MemeDetailsViewController
-            detailController.meme = getAppDelegate().memes[indexPath.item]
-            self.navigationController!.pushViewController(detailController, animated: true)
+        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailsViewController") as! MemeDetailsViewController
+        detailController.meme = getAppDelegate().memes[indexPath.item]
+        self.navigationController!.pushViewController(detailController, animated: true)
+    }
+    
+    func createFlowLayout(){
+        let space : CGFloat = 3.0
+        wdt_dimension = (self.view.frame.width - (2 * space)) / 2.0
+        hgt_dimension = (self.view.frame.height - (2 * space)) / 3.0
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        flowLayout.itemSize = CGSizeMake(wdt_dimension, hgt_dimension)
+        collectionView!.collectionViewLayout = flowLayout
     }
     
     

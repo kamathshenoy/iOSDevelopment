@@ -11,7 +11,6 @@ import UIKit
 class SentMemesTableViewController: UITableViewController {
 
     @IBOutlet weak var addMeme: UIBarButtonItem!
-   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +60,6 @@ class SentMemesTableViewController: UITableViewController {
         cell.imageView?.image = meme.image
         cell.textLabel?.text = meme.topText + "...." + meme.bottomText
         return cell
-   
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
