@@ -2,19 +2,17 @@
 //  GenreTableViewController.swift
 //  MyFavoriteMovies
 //
-//  Created by Jarrod Parkes on 1/23/15.
-//  Copyright (c) 2015 Udacity. All rights reserved.
 //
 
 import UIKit
+import MapKit
 
-// MARK: - GenreTableViewController: UITableViewController
 
 class MapListViewController: UITableViewController {
     
     // MARK: Properties
     
-    var appDelegate: AppDelegate!
+    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var titles: [String] = [String]()
     var genreID: Int? = nil
     
@@ -23,35 +21,27 @@ class MapListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-                for dictionary in appDelegate.studentLocations {
-                    let title = dictionary.fullName
-                    print(title)
-                    
-                    let trimmedString = title.stringByTrimmingCharactersInSet(
-                        NSCharacterSet.whitespaceAndNewlineCharacterSet()
-                    )
-                    
-                    if(trimmedString.characters.count > 0 && !self.titles.contains(trimmedString)){
-                        self.titles.append(title)
-                    }else{
-                        print("not unique")
-                    }
-                }
-
-        
-            self.performUIUpdatesOnMain {
-                self.tableView.reloadData()
-            }
-        
-        
+        loaddata()
     }
     
-    func performUIUpdatesOnMain(updates: () -> Void) {
-        dispatch_async(dispatch_get_main_queue()) {
-            updates()
+    func loaddata() -> Void {
+        
+        for dictionary in appDelegate.studentLocations {
+            let title = dictionary.fullName
+            
+            let trimmedString = title.stringByTrimmingCharactersInSet(
+                NSCharacterSet.whitespaceAndNewlineCharacterSet()
+            )
+            
+            if(trimmedString.characters.count > 0 && !self.titles.contains(trimmedString)){
+                self.titles.append(title)
+                 print(" unique")
+            }else{
+                print("not unique")
+            }
         }
+         self.reloadTable()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -60,8 +50,29 @@ class MapListViewController: UITableViewController {
         /* TASK: Get movies by a genre id, then populate the table */
     }
     
-    // MARK: Logout
+    func reloadTable() ->Void {
+         print("reloadTable")
+        dispatch_async(dispatch_get_main_queue()) {
+            self.tableView.reloadData()
+        }
+    }
     
+    @IBAction func refresh(){
+        appDelegate.studentLocations.removeAll()
+        MapUtility.sharedInstance().getStudentLocations { (locations, error) in
+            MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
+            self.loaddata()
+            self.reloadTable()
+        }
+
+    }
+    
+    @IBAction func addLocation(){
+        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddLocationViewController")
+        self.presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    // MARK: Logout
     @IBAction func logout() {
         MapUtility.sharedInstance().logoutUdacity() { (data, error) in
             
@@ -72,7 +83,14 @@ class MapListViewController: UITableViewController {
                 self.presentViewController(alert, animated: true, completion: nil)
                 return
             }
+            
+            if data != nil {
+               
+                self.dismissViewControllerAnimated(false, completion: nil)
+            }
+            
         }
+        
         
     }
     
@@ -91,12 +109,12 @@ extension MapListViewController {
         
         // set cell defaults
         cell.textLabel!.text = title
-        print(cell.textLabel!.text)
+       
         return cell
     }
     
       override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("titles.count",self.titles.count)
+        
         return self.titles.count
     }
     

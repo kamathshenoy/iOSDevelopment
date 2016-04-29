@@ -113,20 +113,13 @@
 		3335F6261CC556EF0016CDE2 /* OnTheMapUdacity */ = {
 			isa = PBXGroup;
 			children = (
+				33FD57F91CD36B6A00B98DAE /* Controller */,
+				33FD57F81CD36B6300B98DAE /* View */,
+				33FD57F71CD36B4D00B98DAE /* Model */,
 				3335F6271CC556EF0016CDE2 /* AppDelegate.swift */,
-				3335F65D1CC694F40016CDE2 /* MapListViewController.swift */,
-				3335F6571CC576050016CDE2 /* LoginViewController.swift */,
-				33FD57B51CC9668500B98DAE /* AddLocationViewController.swift */,
-				3335F6291CC556EF0016CDE2 /* MapViewController.swift */,
-				3335F62B1CC556EF0016CDE2 /* Main.storyboard */,
 				3335F62E1CC556EF0016CDE2 /* Assets.xcassets */,
 				3335F6551CC5618D0016CDE2 /* On The Map Assets-3 */,
-				3335F6301CC556EF0016CDE2 /* LaunchScreen.storyboard */,
 				3335F6331CC556EF0016CDE2 /* Info.plist */,
-				3335F65B1CC6930E0016CDE2 /* Constants.swift */,
-				33FD57B31CC7F01200B98DAE /* MapUtility.swift */,
-				33FD57B71CCABA9100B98DAE /* ShowLocationViewController.swift */,
-				33FD57B91CCEA89100B98DAE /* StudentLocation.swift */,
 			);
 			path = OnTheMapUdacity;
 			sourceTree = "<group>";
@@ -147,6 +140,37 @@
 				3335F6491CC556EF0016CDE2 /* Info.plist */,
 			);
 			path = OnTheMapUdacityUITests;
+			sourceTree = "<group>";
+		};
+		33FD57F71CD36B4D00B98DAE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3335F65B1CC6930E0016CDE2 /* Constants.swift */,
+				33FD57B31CC7F01200B98DAE /* MapUtility.swift */,
+				33FD57B91CCEA89100B98DAE /* StudentLocation.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		33FD57F81CD36B6300B98DAE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3335F6301CC556EF0016CDE2 /* LaunchScreen.storyboard */,
+				3335F62B1CC556EF0016CDE2 /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		33FD57F91CD36B6A00B98DAE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				33FD57B71CCABA9100B98DAE /* ShowLocationViewController.swift */,
+				3335F6291CC556EF0016CDE2 /* MapViewController.swift */,
+				33FD57B51CC9668500B98DAE /* AddLocationViewController.swift */,
+				3335F6571CC576050016CDE2 /* LoginViewController.swift */,
+				3335F65D1CC694F40016CDE2 /* MapListViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

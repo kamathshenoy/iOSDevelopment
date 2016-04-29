@@ -22,6 +22,7 @@ struct Constants {
         static let Account = "account"
         static let ID = "id"
         static let ObjectID = "objectid"
+        static let user = "user"
         static let FirstName = "first_name"
         static let LastName = "last_name"
     }

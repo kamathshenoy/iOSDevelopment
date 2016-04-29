@@ -59,23 +59,18 @@ class LoginViewController: UIViewController {
             setUIEnabled(true)
         } else {
             setUIEnabled(false)
-            performUIUpdatesOnMain {
+           dispatch_async(dispatch_get_main_queue()){
                 self.getRequestToken()
                 
             }
-            print("the session id ",self.appDelegate.key)
+            
         }
         
     }
     
-    func performUIUpdatesOnMain(updates: () -> Void) {
-        dispatch_async(dispatch_get_main_queue()) {
-            updates()
-        }
-    }
     
     private func completeLogin() {
-        performUIUpdatesOnMain {
+        dispatch_async(dispatch_get_main_queue()) {
             self.debugTextLabel.text = ""
             self.setUIEnabled(true)
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabViewController") as! UITabBarController
@@ -94,9 +89,8 @@ class LoginViewController: UIViewController {
         let username = /*usernameTextField.text!*/"sheethal.shenoy@gmail.com"
         let password = /*passwordTextField.text!*/"Sriram123"
         let str = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}"
-        print("++++++++++++++++++")
-        print(str)
-        print("++++++++++++++++++")
+        
+        
         request.HTTPBody = str.dataUsingEncoding(NSUTF8StringEncoding)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
@@ -111,11 +105,8 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            print("=============")
+           
             let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
-            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
-             print("=============")
-            
             
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
@@ -132,7 +123,7 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            print(parsedResult)
+            //print(parsedResult)
             
             
             guard let sessionResult = parsedResult[Constants.Login.Account] as? [String:AnyObject] else {
@@ -150,7 +141,7 @@ class LoginViewController: UIViewController {
             self.appDelegate.key = userid
             self.getUserData()
             self.completeLogin()
-            print(userid)
+            print("userid:",userid)
         }
         task.resume()
         
@@ -176,11 +167,7 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            print("=============")
             let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
-            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
-            print("=============")
-            
             
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
@@ -196,24 +183,24 @@ class LoginViewController: UIViewController {
                 print("Could not parse the data as JSON: '\(newData)'")
                 return
             }
+            guard let user = parsedResult[Constants.Login.user] as? [String:AnyObject] else {
+                print(" Can't find the user in \(parsedResult)")
+                return
+            }
             
-            print("===================")
-            
-            guard let firstName = parsedResult[Constants.Login.FirstName] as? String else {
+            guard let firstName = user[Constants.Login.FirstName] as? String else {
                 print(" Can't find the firstname in \(parsedResult)")
                 return
             }
             
             /* GUARD: Is firstName "success" key in parsedResult? */
-            guard let lastName = parsedResult[Constants.Login.LastName] as? String else {
+            guard let lastName = user[Constants.Login.LastName] as? String else {
                 print(" Can't find the lastname in \(parsedResult)")
                 return
             }
 
         self.appDelegate.firstName = firstName
         self.appDelegate.lastName = lastName
-            print(firstName,lastName)
-              print("===================")
         self.completeLogin()
         
     }

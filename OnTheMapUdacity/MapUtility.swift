@@ -8,40 +8,57 @@
 
 import Foundation
 import UIKit
+import MapKit
+
 class MapUtility: NSObject {
     
-    
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+ 
     func getStudentLocations(completionHandlerForLocations: (result: [[String:AnyObject]]?, error: NSError?) -> Void) {
         
-      /*  var mutableMethod: String = Methods.AccountIDFavoriteMovies
-        mutableMethod = subtituteKeyInMethod(mutableMethod, key: TMDBClient.URLKeys.UserID, value: String(TMDBClient.sharedInstance().userID!))*/
-        
-        /* 2. Make the request */
-        performUIUpdatesOnMain {
-        self.taskForGETData(Constants.Student.StudentsURL) { (results, error) in
+        /* . Make the request */
+        dispatch_async(dispatch_get_main_queue()) {
+            self.taskForGETData(Constants.Student.StudentsURL) { (results, error) in
             
-            /* 3. Send the desired value(s) to completion handler */
-            if let error = error {
-                completionHandlerForLocations(result: nil, error: error)
-            } else {
-                
-                if let results = results![Constants.ParseResponseKeys.Results] as? [[String:AnyObject]]! {
-                    
-                  
-                    completionHandlerForLocations(result: results, error: nil)
+            /* . Send the desired value(s) to completion handler */
+                if let error = error {
+                    completionHandlerForLocations(result: nil, error: error)
                 } else {
-                    completionHandlerForLocations(result: nil, error: NSError(domain: "getFavoriteMovies parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse getFavoriteMovies"]))
+                
+                    if let results = results![Constants.ParseResponseKeys.Results] as? [[String:AnyObject]]! {
+                    completionHandlerForLocations(result: results, error: nil)
+                    } else {
+                        completionHandlerForLocations(result: nil, error: NSError(domain: "getFavoriteMovies parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse getFavoriteMovies"]))
+                    }
                 }
             }
         }
+    }
+    
+    func populateStudentLocations(locations :[[String:AnyObject]]?, error: NSError?)->Void{
+        if let locations = locations {
+            for dictionary in locations {
+                
+                let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
+                let long = CLLocationDegrees(dictionary["longitude"] as! Double)
+                
+                
+                let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                
+                let first = dictionary["firstName"] as! String
+                let last = dictionary["lastName"] as! String
+                let mediaURL = dictionary["mediaURL"] as! String
+                let fullName = "\(first) \(last)"
+                
+                let annotation = StudentLocation(coordinate: coordinate, fullName: (fullName), mediaURL: mediaURL)
+                appDelegate.studentLocations.append(annotation)
+            }
+        }else{
+            print(error)
         }
     }
-
-    func performUIUpdatesOnMain(updates: () -> Void) {
-        dispatch_async(dispatch_get_main_queue()) {
-            updates()
-        }
-    }
+    
+ 
     
    func taskForGETData(filePath: String, completionHandlerForGET: (data: AnyObject?, error: NSError?) -> Void) -> NSURLSessionTask {
         
@@ -95,7 +112,7 @@ class MapUtility: NSObject {
     }
     
     func logoutUdacity(completionHandlerForLogout: (result: NSData?, error: NSError?) -> Void){
-        let request = NSMutableURLRequest(URL: NSURL(string: Constants.Login.Session)!)
+        let request = NSMutableURLRequest(URL: NSURL(string: Constants.Login.loginURL)!)
         request.HTTPMethod = "DELETE"
         var xsrfCookie: NSHTTPCookie? = nil
         let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
@@ -105,6 +122,7 @@ class MapUtility: NSObject {
         if let xsrfCookie = xsrfCookie {
             request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
         }
+        //print(request.URL?.path)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…
@@ -113,11 +131,13 @@ class MapUtility: NSObject {
                 return
             }
             let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+            completionHandlerForLogout(result: newData, error: nil)
+            
         }
         task.resume()
     }
 
+    
 
     class func sharedInstance() -> MapUtility {
         struct Singleton {

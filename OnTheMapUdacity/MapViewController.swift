@@ -12,9 +12,7 @@ import MapKit
 
 class MapViewController: UIViewController {
 
-    
-    // The map. See the setup in the Storyboard file. Note particularly that the view controller
-    // is set up as the map view's delegate.
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     @IBOutlet weak var mapView: MKMapView!
    
     let iExists :Bool = false
@@ -22,53 +20,31 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // The "locations" array is an array of dictionary objects that are similar to the JSON
-        // data that you can download from parse.
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
         MapUtility.sharedInstance().getStudentLocations { (locations, error) in
-            if let locations = locations {
-                
-               // var annotations = [MKAnnotation]()
-                
-                // The "locations" array is loaded with the sample data below. We are using the dictionaries
-                // to create map annotations. This would be more stylish if the dictionaries were being
-                // used to create custom structs. Perhaps StudentLocation structs.
-                
-                for dictionary in locations {
-                    
-                    // Notice that the float values are being used to create CLLocationDegree values.
-                    // This is a version of the Double type.
-                    let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-                    let long = CLLocationDegrees(dictionary["longitude"] as! Double)
-                    
-                    // The lat and long are used to create a CLLocationCoordinates2D instance.
-                    let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                    
-                    let first = dictionary["firstName"] as! String
-                    let last = dictionary["lastName"] as! String
-                    let mediaURL = dictionary["mediaURL"] as! String
-                    let fullName = "\(first) \(last)"
-                    // Here we create the annotation and set its coordiate, title, and subtitle properties
-                    let annotation = StudentLocation(coordinate: coordinate, fullName: (fullName), mediaURL: mediaURL)
-                    appDelegate.studentLocations.append(annotation)
-                    //annotations.append(annotation)
-                }
-                
-                // When the array is complete, we add the annotations to the map.
-                self.mapView.addAnnotations(appDelegate.studentLocations)
-                
-            } else {
-                print(error)
-            }
+            MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
+            self.mapView.addAnnotations(self.appDelegate.studentLocations)
         }
 
-        }
-    
-    func handleCancel(alertView: UIAlertAction!)
-    {
-        print("User click cancel button")
     }
+    
+    func reloadView() ->Void {
+        print("reloadTable")
+        dispatch_async(dispatch_get_main_queue()) {
+            self.mapView.reloadInputViews()
+        }
+    }
+
+    
+    @IBAction func refresh(sender: AnyObject) {
+        appDelegate.studentLocations.removeAll()
+        MapUtility.sharedInstance().getStudentLocations { (locations, error) in
+            MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
+            
+            self.reloadView()
+        }
+
+    }
+    
     
     @IBAction func addLocation(){
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddLocationViewController")
@@ -85,52 +61,17 @@ class MapViewController: UIViewController {
                 self.presentViewController(alert, animated: true, completion: nil)
                 return
             }
-        }
+            
+            if data != nil {
+                
+                    self.dismissViewControllerAnimated(false, completion: nil)
+                }
+
+            }
+        
         
     }
     
-    
-      /*  var locManager = CLLocationManager()
-        if (CLLocationManager.locationServicesEnabled()) {
-            locManager.requestAlwaysAuthorization()
-            locManager.desiredAccuracy = kCLLocationAccuracyBest
-           // locManager.startUpdatingLocation()
-            var currentLocation = CLLocation!()
-            currentLocation = locManager.location
-            print("location",currentLocation)
-
-            let longitude = currentLocation.coordinate.longitude
-            let latitude = currentLocation.coordinate.latitude
-            for dictionary in locations! {
-                let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-                let long = CLLocationDegrees(dictionary["longitude"] as! Double)
-                
-                if(longitude == long && latitude == lat){
-                    let alert = UIAlertController(title: "", message: Constants.Student.Warn, preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Overwrite", style: UIAlertActionStyle.Cancel, handler:{(ACTION :UIAlertAction!)in
-                        print("User adding location")
-                        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddLocationViewController")
-                        self.presentViewController(controller, animated: true, completion: nil)
-                    }))
-                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler:handleCancel))
-                    self.presentViewController(alert, animated: true, completion: nil)
-                    
-                }else{
-                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddLocationViewController")
-                    self.presentViewController(controller, animated: true, completion: nil)
-                }
-            }
-
-        }else{
-            print("location services not enabled")
-            let alert = UIAlertController(title: "", message: Constants.Student.Warn2, preferredStyle: UIAlertControllerStyle.Alert)
-            
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:handleCancel))
-            self.presentViewController(alert, animated: true, completion: nil)
-            
-        }*/
-        
-        
     
     
     // MARK: - MKMapViewDelegate
@@ -145,16 +86,19 @@ class MapViewController: UIViewController {
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
         
         if pinView == nil {
+            print("=========1")
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
-            pinView!.pinColor = .Red
+            pinView!.pinTintColor = UIColor.redColor()
             pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
         }
         else {
+            print("=========2")
             pinView!.annotation = annotation
         }
         
         return pinView
+    
     }
     
     
@@ -164,6 +108,7 @@ class MapViewController: UIViewController {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.sharedApplication()
             if let toOpen = view.annotation?.subtitle! {
+                
                 app.openURL(NSURL(string: toOpen)!)
             }
         }

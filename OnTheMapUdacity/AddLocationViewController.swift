@@ -29,28 +29,28 @@ class AddLocationViewController: UIViewController {
     
 
     @IBAction func findLocation(sender: AnyObject) {
-        print("-------------",addressTextField)
-        if(addressTextField == nil){
-            let alert = UIAlertController(title: "", message: "Please enter the location", preferredStyle: UIAlertControllerStyle.Alert)
+       
+        let location = addressTextField.text!
+        print("address",location)
+        guard location.characters.count > 0   else {
+            print("address is nil")
+            let alert = UIAlertController(title: "", message: "Please enter a valid location", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
             self.presentViewController(alert, animated: true, completion: nil)
-        }else{
-            findLocation(addressTextField.text!)
+            return
+
         }
         
+        findLocation(location)
     }
     
     @IBAction func cancel(sender: AnyObject) {
         self.dismissViewControllerAnimated(false, completion: nil)
-        print("cancel")
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // get the app delegate
-        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
         setUIEnabled(true)
         
         subscribeToNotification(UIKeyboardWillShowNotification, selector: Constants.Selectors.KeyboardWillShow)
@@ -64,34 +64,31 @@ class AddLocationViewController: UIViewController {
         unsubscribeFromAllNotifications()
     }
     
-    func performUIUpdatesOnMain(updates: () -> Void) {
-        dispatch_async(dispatch_get_main_queue()) {
-            updates()
-        }
-    }
-    
-    
-    // MARK: TheMovieDB
     
     private func findLocation(address: String) {
-        print("-------------",address)
+       
         CLGeocoder().geocodeAddressString(address, completionHandler: { (placemarks, error) in
                 if error != nil {
                     print(error)
                     return
                 }
+            print("placemark",placemarks?.count)
                 if placemarks?.count > 0 {
                     let placemark = placemarks?[0]
                     let location = placemark?.location
                     let coordinate = location?.coordinate
-                    print("\nlat: \(coordinate!.latitude), long: \(coordinate!.longitude)")
-                    
-                    self.showDetailsScene(coordinate!.latitude, long: coordinate!.longitude, address: address)
+                     print("placemark coordinate",coordinate)
+                    self.showDetailsScene(coordinate!, address: address)
+                }else{
+                    let alert = UIAlertController(title: "", message: "Please enter a valid location", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    return
                 }
             })
         }
     
-    private func showDetailsScene(lat: CLLocationDegrees, long: CLLocationDegrees, address: String){
+    private func showDetailsScene(coordinates: CLLocationCoordinate2D, address: String){
        /* let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ShowLocationViewController")
         controller.
         self.presentViewController(controller, animated: true, completion: nil)*/
@@ -99,10 +96,10 @@ class AddLocationViewController: UIViewController {
       let resultVC = self.storyboard!.instantiateViewControllerWithIdentifier("ShowLocationViewController") as! ShowLocationViewController
         
         // Communicate the match
-        resultVC.lat = lat
-        resultVC.long = long
+        resultVC.coor = coordinates
+        
         resultVC.address = address
-        print("push the next controller")
+        
         self.presentViewController(resultVC, animated: true, completion: nil)
         
     }
