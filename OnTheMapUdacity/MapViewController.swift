@@ -10,22 +10,22 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: CommonMapViewController, MKMapViewDelegate {
 
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     @IBOutlet weak var mapView: MKMapView!
    
-    let iExists :Bool = false
-    
+    //let iExists :Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        appDelegate.studentLocations.removeAll()
         MapUtility.sharedInstance().getStudentLocations { (locations, error) in
             MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
             self.mapView.addAnnotations(self.appDelegate.studentLocations)
+            
         }
-
     }
+    
     
     func reloadView() ->Void {
         print("reloadTable")
@@ -39,12 +39,11 @@ class MapViewController: UIViewController {
         appDelegate.studentLocations.removeAll()
         MapUtility.sharedInstance().getStudentLocations { (locations, error) in
             MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
-            
             self.reloadView()
+            
         }
-
     }
-    
+    /*
     
     @IBAction func addLocation(){
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddLocationViewController")
@@ -55,24 +54,24 @@ class MapViewController: UIViewController {
          MapUtility.sharedInstance().logoutUdacity() { (data, error) in
             
             if error != nil { // Handle error…
-                
-                let alert = UIAlertController(title: "", message: "Unable to logout, please try again!", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                self.showAlertMsg(Constants.ErrorMsgs.LogoutErrorMsg)
                 return
             }
             
             if data != nil {
-                
                     self.dismissViewControllerAnimated(false, completion: nil)
                 }
-
-            }
-        
-        
+        }
     }
+
     
-    
+    func showAlertMsg(msg:String)->Void {
+        let alert = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        return
+    }
+    */
     
     // MARK: - MKMapViewDelegate
     

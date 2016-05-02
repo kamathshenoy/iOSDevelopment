@@ -14,27 +14,42 @@ struct Constants {
     
     
     struct Login {
-        static let loginURL = "https://www.udacity.com/api/session"
-        static let UserData = "https://www.udacity.com/api/users/"
+        static let ApiScheme = "https"
+        static let ApiHost = "www.udacity.com"
+        static let ApiPath = "/api"
+        //static let loginURL = "https://www.udacity.com/api/"
+        //static let UserData = "https://www.udacity.com/api/users/"
+        static let Userdata = "users"
         static let Session = "session"
         static let Registered = "registered"
         static let Key = "key"
         static let Account = "account"
         static let ID = "id"
-        static let ObjectID = "objectid"
+        static let ObjectID = "objectId"
         static let user = "user"
         static let FirstName = "first_name"
         static let LastName = "last_name"
+        
+
+    }
+    
+    struct  ErrorMsgs {
+        static let LogoutErrorMsg = "Unable to logout, please try again!"
+        static let AddressErrorMsg = "Please enter a valid location."
+        static let AddLinkErrorMsg = "Please enter a valid link."
+        static let AddLinkSuccessMsg = "Your post was successful."
     }
     
     struct Student {
-        static let StudentsURL = "https://api.parse.com/1/classes/StudentLocation"
+        static let ApiScheme = "https"
+        static let ApiHost = "api.parse.com"
+        static let ApiPath = "/1/classes/"
+        static let StudentLocation = "StudentLocation"
+        //        static let StudentsURL = "https://api.parse.com/1/classes/StudentLocation"
         
         static let ApplicationID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
         static let RestAPIKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
-        
-        static let Warn = "The student location exists. Would you like to override the location?"
-        static let Warn2 = "Location services not enabled. Please check your settings"
+     
     }
     
     

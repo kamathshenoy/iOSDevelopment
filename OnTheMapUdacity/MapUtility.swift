@@ -18,7 +18,7 @@ class MapUtility: NSObject {
         
         /* . Make the request */
         dispatch_async(dispatch_get_main_queue()) {
-            self.taskForGETData(Constants.Student.StudentsURL) { (results, error) in
+            self.taskForGETData() { (results, error) in
             
             /* . Send the desired value(s) to completion handler */
                 if let error = error {
@@ -28,7 +28,7 @@ class MapUtility: NSObject {
                     if let results = results![Constants.ParseResponseKeys.Results] as? [[String:AnyObject]]! {
                     completionHandlerForLocations(result: results, error: nil)
                     } else {
-                        completionHandlerForLocations(result: nil, error: NSError(domain: "getFavoriteMovies parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse getFavoriteMovies"]))
+                        completionHandlerForLocations(result: nil, error: NSError(domain: "getStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse getStudentLocations"]))
                     }
                 }
             }
@@ -52,7 +52,9 @@ class MapUtility: NSObject {
                 
                 let annotation = StudentLocation(coordinate: coordinate, fullName: (fullName), mediaURL: mediaURL)
                 appDelegate.studentLocations.append(annotation)
+                
             }
+            print("studentlocaions", appDelegate.studentLocations.count)
         }else{
             print(error)
         }
@@ -60,10 +62,10 @@ class MapUtility: NSObject {
     
  
     
-   func taskForGETData(filePath: String, completionHandlerForGET: (data: AnyObject?, error: NSError?) -> Void) -> NSURLSessionTask {
+   func taskForGETData(completionHandlerForGET: (data: AnyObject?, error: NSError?) -> Void) -> NSURLSessionTask {
+        let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().parseURLFromParameters([String:AnyObject](), withPathExtension: Constants.Student.StudentLocation))
         
-        
-        let request = NSMutableURLRequest(URL:  NSURL(string:filePath)!)
+       // let request = NSMutableURLRequest(URL:  NSURL(string:filePath)!)
         request.addValue(Constants.Student.ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(Constants.Student.RestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         let session = NSURLSession.sharedSession()
@@ -112,7 +114,7 @@ class MapUtility: NSObject {
     }
     
     func logoutUdacity(completionHandlerForLogout: (result: NSData?, error: NSError?) -> Void){
-        let request = NSMutableURLRequest(URL: NSURL(string: Constants.Login.loginURL)!)
+        let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().udacityURLFromParameters([String:AnyObject](), withPathExtension: [Constants.Login.Session]))
         request.HTTPMethod = "DELETE"
         var xsrfCookie: NSHTTPCookie? = nil
         let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
@@ -137,7 +139,38 @@ class MapUtility: NSObject {
         task.resume()
     }
 
+    // create a URL from parameters
+     func udacityURLFromParameters(parameters: [String:AnyObject], withPathExtension: [String]? = nil) -> NSURL {
+        
+        let components = NSURLComponents()
+        components.scheme = Constants.Login.ApiScheme
+        components.host = Constants.Login.ApiHost
+       // print("++++++", components.URL)
+
+        var path = Constants.Login.ApiPath
+        for (extn) in withPathExtension! {
+            path = path + "/"+extn ?? ""
+        }
+        components.path = path//Constants.Login.ApiPath + (withPathExtension[0] ?? "")
+       
+        print("===========", components.URL)
+        return components.URL!
+    }
     
+    
+    // create a URL from parameters
+    func parseURLFromParameters(parameters: [String:AnyObject], withPathExtension: String? = nil) -> NSURL {
+        
+        let components = NSURLComponents()
+        components.scheme = Constants.Student.ApiScheme
+        components.host = Constants.Student.ApiHost
+        components.path = Constants.Student.ApiPath + (withPathExtension ?? "")
+        print("=======parse===", components.URL)
+        return components.URL!
+    }
+
+    
+
 
     class func sharedInstance() -> MapUtility {
         struct Singleton {

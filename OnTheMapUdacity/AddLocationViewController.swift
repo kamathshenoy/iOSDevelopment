@@ -34,9 +34,7 @@ class AddLocationViewController: UIViewController {
         print("address",location)
         guard location.characters.count > 0   else {
             print("address is nil")
-            let alert = UIAlertController(title: "", message: "Please enter a valid location", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            self.showAlertMsg(Constants.ErrorMsgs.AddressErrorMsg)
             return
 
         }
@@ -70,6 +68,7 @@ class AddLocationViewController: UIViewController {
         CLGeocoder().geocodeAddressString(address, completionHandler: { (placemarks, error) in
                 if error != nil {
                     print(error)
+                    self.showAlertMsg("Please enter a valid location")
                     return
                 }
             print("placemark",placemarks?.count)
@@ -80,13 +79,17 @@ class AddLocationViewController: UIViewController {
                      print("placemark coordinate",coordinate)
                     self.showDetailsScene(coordinate!, address: address)
                 }else{
-                    let alert = UIAlertController(title: "", message: "Please enter a valid location", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
-                    return
+                   self.showAlertMsg(Constants.ErrorMsgs.AddressErrorMsg)
                 }
             })
         }
+    
+    func showAlertMsg(msg:String)->Void {
+        let alert = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        return
+    }
     
     private func showDetailsScene(coordinates: CLLocationCoordinate2D, address: String){
        /* let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ShowLocationViewController")

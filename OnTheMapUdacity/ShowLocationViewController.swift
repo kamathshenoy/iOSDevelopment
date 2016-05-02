@@ -13,6 +13,7 @@ import MapKit
 class ShowLocationViewController: UIViewController {
     
     
+    @IBOutlet weak var activityController: UIActivityIndicatorView!
     // The map. See the setup in the Storyboard file. Note particularly that the view controller
     // is set up as the map view's delegate.
     @IBOutlet weak var mapView: MKMapView!
@@ -20,10 +21,13 @@ class ShowLocationViewController: UIViewController {
     var coor:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     var address = ""
     var keyboardOnScreen = false
+    
     @IBOutlet weak var linkTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //textFieldShouldReturn(linkTextField)
         subscribeToNotification(UIKeyboardWillShowNotification, selector: Constants.Selectors.KeyboardWillShow)
         subscribeToNotification(UIKeyboardWillHideNotification, selector: Constants.Selectors.KeyboardWillHide)
         subscribeToNotification(UIKeyboardDidShowNotification, selector: Constants.Selectors.KeyboardDidShow)
@@ -44,36 +48,51 @@ class ShowLocationViewController: UIViewController {
     
     
     @IBAction func onSubmit(sender: AnyObject) {
+        activityController.hidden = false
+        activityController.startAnimating()
         let link = linkTextField.text!
         print("link",link)
         guard link.characters.count > 0   else {
-            print("ink is nil")
-            let alert = UIAlertController(title: "", message: "Please enter a valid link", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            print("link is nil")
+            self.showAlertErrorMsg(Constants.ErrorMsgs.AddLinkErrorMsg)
             return
-            
         }
+         textFieldShouldReturn(linkTextField)
         submit(link, address: address)
-        
+        self.activityController.stopAnimating()
+        self.showAlertErrorMsg(Constants.ErrorMsgs.AddLinkSuccessMsg)
+
     }
     
     
-    @IBAction func cancel(sender: AnyObject) {
+    private func showNextScene() -> Void {
+        print("next scene")
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabViewController") as! UITabBarController
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+        
+        
+
+        
+    }
+    
+    @IBAction func cancel(){
         self.dismissViewControllerAnimated(false, completion: nil)
         
     }
     
     private func submit(link: String, address:String) {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: Constants.Student.StudentsURL)!)
+        let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().parseURLFromParameters([String:AnyObject](), withPathExtension: Constants.Student.StudentLocation))
         request.HTTPMethod = "POST"
         request.addValue(Constants.Student.ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(Constants.Student.RestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let username = appDelegate.firstName
+        let username = "Mariane"//appDelegate.firstName
 
-        let lastname = appDelegate.lastName
+        let lastname = "lassy"//appDelegate.lastName
         let key = appDelegate.key
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let str = "{\"uniqueKey\": \"\(key)\", \"firstName\": \"\(username)\", \"lastName\": \"\(lastname)\",\"mapString\": \"\(address)\", \"mediaURL\": \"\(link)\",\"latitude\": \(coor.latitude), \"longitude\": \(coor.longitude)}"
@@ -82,47 +101,47 @@ class ShowLocationViewController: UIViewController {
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…
-                self.showAlertErrorMsg()
+                self.showAlertErrorMsg("Error occured, Please try again!")
                 return
             }
             
             /* GUARD: Was there any data returned? */
             guard let data = data else {
-                self.showAlertErrorMsg()
+                
                 return
             }
-            
-            
-            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
-            
-            /* GUARD: Did we get a successful 2XX response? */
-            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                self.showAlertErrorMsg()
-                return
-            }
-            
+            print("++++++++++")
+            print(NSString(data: data, encoding: NSUTF8StringEncoding))
+
+                     
             // parse the data
             let parsedResult: AnyObject!
             do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
+                parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
             } catch {
-                print("Could not parse the data as JSON: '\(newData)'")
+                print("++++++++++Could not parse the data as JSON: '\(data)'")
+                self.showAlertErrorMsg("Error occured, Please try again!")
                 return
             }
             
-           // print(parsedResult)
+            print("=========================",parsedResult)
             
-            guard let objectID = parsedResult[Constants.Login.ObjectID] as? String else {
-                print(" See error code and message in \(parsedResult)")
+            guard let _ = parsedResult[Constants.Login.ObjectID] as? String else {
+                print(" ++++++++See error code and message in \(parsedResult)")
+                self.showAlertErrorMsg("Error occured, Please try again!")
                 return
             }
+            
+                       // self.showNextScene()
+            
+           
         }
         task.resume()
     }
     
     
-    func showAlertErrorMsg() ->Void{
-        let alert = UIAlertController(title: "", message: "Recieved an error, please retry", preferredStyle: UIAlertControllerStyle.Alert)
+    func showAlertErrorMsg(errorMsg:String) ->Void{
+        let alert = UIAlertController(title: "", message: errorMsg, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
@@ -172,7 +191,7 @@ class ShowLocationViewController: UIViewController {
 
 extension ShowLocationViewController: UITextFieldDelegate {
     
-    // MARK: UITextFieldDelegate
+   
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()

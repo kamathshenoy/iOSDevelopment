@@ -8,7 +8,7 @@ import UIKit
 import MapKit
 
 
-class MapListViewController: UITableViewController {
+class MapListViewController: CommonMapViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: Properties
     
@@ -53,7 +53,7 @@ class MapListViewController: UITableViewController {
     func reloadTable() ->Void {
          print("reloadTable")
         dispatch_async(dispatch_get_main_queue()) {
-            self.tableView.reloadData()
+            self.reloadInputViews()
         }
     }
     
@@ -67,7 +67,7 @@ class MapListViewController: UITableViewController {
 
     }
     
-    @IBAction func addLocation(){
+   /* @IBAction func addLocation(){
         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddLocationViewController")
         self.presentViewController(controller, animated: true, completion: nil)
     }
@@ -77,22 +77,21 @@ class MapListViewController: UITableViewController {
         MapUtility.sharedInstance().logoutUdacity() { (data, error) in
             
             if error != nil { // Handle error…
-                
-                let alert = UIAlertController(title: "", message: "Unable to logout, please try again!", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
-                self.presentViewController(alert, animated: true, completion: nil)
-                return
+                self.showAlertMsg(Constants.ErrorMsgs.LogoutErrorMsg)
             }
             
             if data != nil {
-               
                 self.dismissViewControllerAnimated(false, completion: nil)
             }
-            
         }
-        
-        
     }
+    
+    func showAlertMsg(msg:String)->Void {
+        let alert = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        return
+    }*/
     
    }
 
@@ -100,7 +99,7 @@ class MapListViewController: UITableViewController {
 
 extension MapListViewController {
 
-      override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+       func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // get cell type
         let cellReuseIdentifier = "StudentsCell"
@@ -113,13 +112,13 @@ extension MapListViewController {
         return cell
     }
     
-      override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.titles.count
     }
     
     
-     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         /*
         // push the movie detail view
         let controller = storyboard!.instantiateViewControllerWithIdentifier("MapListViewController") as! MovieDetailViewController

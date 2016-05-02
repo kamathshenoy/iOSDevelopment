@@ -19,6 +19,7 @@ class LoginViewController: UIViewController {
     
     // MARK: Outlets
     
+    @IBOutlet weak var activityController: UIActivityIndicatorView!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
@@ -29,7 +30,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        activityController.hidden = true
         // get the app delegate
         appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
@@ -59,7 +60,10 @@ class LoginViewController: UIViewController {
             setUIEnabled(true)
         } else {
             setUIEnabled(false)
+            activityController.hidden = false
+            activityController.startAnimating()
            dispatch_async(dispatch_get_main_queue()){
+            
                 self.getRequestToken()
                 
             }
@@ -71,18 +75,26 @@ class LoginViewController: UIViewController {
     
     private func completeLogin() {
         dispatch_async(dispatch_get_main_queue()) {
-            self.debugTextLabel.text = ""
+            self.resetInputFields()
+            self.activityController.stopAnimating()
             self.setUIEnabled(true)
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabViewController") as! UITabBarController
             self.presentViewController(controller, animated: true, completion: nil)
         }
     }
     
+    private func resetInputFields() -> Void {
+        self.debugTextLabel.text = ""
+        self.usernameTextField.text = ""
+        self.passwordTextField.text = ""
+    }
+    
     // MARK: TheMovieDB
     
     private func getRequestToken() {
         
-        let request = NSMutableURLRequest(URL: NSURL(string: Constants.Login.loginURL)!)
+        let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().udacityURLFromParameters([String:AnyObject](), withPathExtension: [Constants.Login.Session]))
+        
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -110,7 +122,7 @@ class LoginViewController: UIViewController {
             
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                self.debugTextLabel.text = "Username or Password not correct."
+                self.debugTextLabel.text = "Your request returned a status code other than 2xx"
                 return
             }
             
@@ -123,7 +135,7 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            //print(parsedResult)
+            print("parsedResult",parsedResult)
             
             
             guard let sessionResult = parsedResult[Constants.Login.Account] as? [String:AnyObject] else {
@@ -150,10 +162,9 @@ class LoginViewController: UIViewController {
     
     private func getUserData() {
         
-        let baseURL = NSURL(string: Constants.Login.UserData)!
-        let url = baseURL.URLByAppendingPathComponent(self.appDelegate.key)
-        let request = NSMutableURLRequest(URL: url)
-       
+        let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().udacityURLFromParameters([String:AnyObject](), withPathExtension: [Constants.Login.Userdata,(self.appDelegate.key) ]))
+        
+
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…
@@ -171,7 +182,7 @@ class LoginViewController: UIViewController {
             
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                self.debugTextLabel.text = "Unable to get userdata."
+                self.debugTextLabel.text = "Your request returned a status code other than 2xx"
                 return
             }
             
@@ -201,6 +212,7 @@ class LoginViewController: UIViewController {
 
         self.appDelegate.firstName = firstName
         self.appDelegate.lastName = lastName
+        print("firstname:",firstName,"lastname:",lastName)
         self.completeLogin()
         
     }

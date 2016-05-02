@@ -22,6 +22,7 @@
 		33FD57B61CC9668500B98DAE /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD57B51CC9668500B98DAE /* AddLocationViewController.swift */; };
 		33FD57B81CCABA9100B98DAE /* ShowLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD57B71CCABA9100B98DAE /* ShowLocationViewController.swift */; };
 		33FD57BA1CCEA89100B98DAE /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD57B91CCEA89100B98DAE /* StudentLocation.swift */; };
+		33FD57FB1CD76B2F00B98DAE /* CommonMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD57FA1CD76B2F00B98DAE /* CommonMapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		33FD57B51CC9668500B98DAE /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		33FD57B71CCABA9100B98DAE /* ShowLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowLocationViewController.swift; sourceTree = "<group>"; };
 		33FD57B91CCEA89100B98DAE /* StudentLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
+		33FD57FA1CD76B2F00B98DAE /* CommonMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				33FD57B51CC9668500B98DAE /* AddLocationViewController.swift */,
 				3335F6571CC576050016CDE2 /* LoginViewController.swift */,
 				3335F65D1CC694F40016CDE2 /* MapListViewController.swift */,
+				33FD57FA1CD76B2F00B98DAE /* CommonMapViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33FD57FB1CD76B2F00B98DAE /* CommonMapViewController.swift in Sources */,
 				33FD57BA1CCEA89100B98DAE /* StudentLocation.swift in Sources */,
 				33FD57B81CCABA9100B98DAE /* ShowLocationViewController.swift in Sources */,
 				3335F65C1CC6930E0016CDE2 /* Constants.swift in Sources */,
