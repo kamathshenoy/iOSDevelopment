@@ -87,7 +87,7 @@ class AddLocationViewController: UIViewController {
     func showAlertMsg(msg:String)->Void {
         let alert = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+        presentViewController(alert, animated: true, completion: nil)
         return
     }
     

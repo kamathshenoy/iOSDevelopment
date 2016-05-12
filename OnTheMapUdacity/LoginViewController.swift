@@ -17,13 +17,11 @@ class LoginViewController: UIViewController {
     var appDelegate: AppDelegate!
     var keyboardOnScreen = false
     
-    // MARK: Outlets
-    
     @IBOutlet weak var activityController: UIActivityIndicatorView!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var debugTextLabel: UILabel!
+    
     @IBOutlet weak var movieImageView: UIImageView!
     
     // MARK: Life Cycle
@@ -42,6 +40,11 @@ class LoginViewController: UIViewController {
         subscribeToNotification(UIKeyboardDidHideNotification, selector: Constants.Selectors.KeyboardDidHide)
     }
     
+    override func viewWillAppear(animated: Bool) {
+       
+        activityController.hidden = true
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromAllNotifications()
@@ -54,7 +57,8 @@ class LoginViewController: UIViewController {
         userDidTapView(self)
         
         if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
-            debugTextLabel.text = "Username or Password Empty."
+            showAlertMsg("Username or Password Empty.")
+            
             usernameTextField.text = ""
             passwordTextField.text = ""
             setUIEnabled(true)
@@ -84,7 +88,7 @@ class LoginViewController: UIViewController {
     }
     
     private func resetInputFields() -> Void {
-        self.debugTextLabel.text = ""
+       
         self.usernameTextField.text = ""
         self.passwordTextField.text = ""
     }
@@ -107,13 +111,13 @@ class LoginViewController: UIViewController {
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…
-                self.debugTextLabel.text = "Username or Password not correct."
+               self.showAlertMsg( "Username or Password not correct.")
                 return
             }
             
             /* GUARD: Was there any data returned? */
             guard let data = data else {
-                self.debugTextLabel.text = "Username or Password not correct."
+                self.showAlertMsg( "Username or Password not correct.")
                 return
             }
             
@@ -122,7 +126,7 @@ class LoginViewController: UIViewController {
             
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                self.debugTextLabel.text = "Your request returned a status code other than 2xx"
+                self.showAlertMsg("Your request returned a status code other than 2xx")
                 return
             }
             
@@ -160,6 +164,19 @@ class LoginViewController: UIViewController {
     }
     
     
+    @IBAction func facebookLogin(sender: AnyObject) {
+      showAlertMsg(Constants.ErrorMsgs.FacebookError)
+    }
+    
+    
+    func showAlertMsg(msg:String)->Void {
+        let alert = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
+        presentViewController(alert, animated: true, completion: nil)
+        return
+    }
+    
+    
     private func getUserData() {
         
         let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().udacityURLFromParameters([String:AnyObject](), withPathExtension: [Constants.Login.Userdata,(self.appDelegate.key) ]))
@@ -168,13 +185,13 @@ class LoginViewController: UIViewController {
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…
-                self.debugTextLabel.text = "Unable to get userdata."
+                self.showAlertMsg("Unable to get userdata.")
                 return
             }
             
             /* GUARD: Was there any data returned? */
             guard let data = data else {
-                self.debugTextLabel.text = "Unable to get userdata."
+                self.showAlertMsg("Unable to get userdata.")
                 return
             }
             
@@ -182,7 +199,7 @@ class LoginViewController: UIViewController {
             
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                self.debugTextLabel.text = "Your request returned a status code other than 2xx"
+                self.showAlertMsg("Your request returned a status code other than 2xx")
                 return
             }
             
@@ -237,17 +254,21 @@ extension LoginViewController: UITextFieldDelegate {
     // MARK: Show/Hide Keyboard
     
     func keyboardWillShow(notification: NSNotification) {
-        if !keyboardOnScreen {
+        print("keyboardWillShow")
+       /* if !keyboardOnScreen {
             view.frame.origin.y -= keyboardHeight(notification)
-            movieImageView.hidden = true
-        }
+            //movieImageView.hidden = true
+            
+            print("keyboardWillShow - view.frame.origin.y",view.frame.origin.y)
+        }*/
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        if keyboardOnScreen {
+       /* if keyboardOnScreen {
             view.frame.origin.y += keyboardHeight(notification)
-            movieImageView.hidden = false
-        }
+            //movieImageView.hidden = false
+            print("keyboardWillHide - view.frame.origin.y",view.frame.origin.y)
+        }*/
     }
     
     func keyboardDidShow(notification: NSNotification) {
@@ -284,8 +305,6 @@ extension LoginViewController {
         usernameTextField.enabled = enabled
         passwordTextField.enabled = enabled
         loginButton.enabled = enabled
-        debugTextLabel.text = ""
-        debugTextLabel.enabled = enabled
         
         // adjust login button alpha
         if enabled {
@@ -319,11 +338,6 @@ extension LoginViewController {
         textField.tintColor = Constants.UI.BlueColor
         textField.delegate = self
     }
-}
-
-// MARK: - LoginViewController (Notifications)
-
-extension LoginViewController {
     
     private func subscribeToNotification(notification: String, selector: Selector) {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: selector, name: notification, object: nil)

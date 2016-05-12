@@ -36,6 +36,7 @@ struct Constants {
     struct  ErrorMsgs {
         static let LogoutErrorMsg = "Unable to logout, please try again!"
         static let AddressErrorMsg = "Please enter a valid location."
+        static let FacebookError = "Feature not implemented. Please upgrade to next version!"
         static let AddLinkErrorMsg = "Please enter a valid link."
         static let AddLinkSuccessMsg = "Your post was successful."
     }
