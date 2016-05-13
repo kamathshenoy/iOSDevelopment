@@ -18,6 +18,7 @@
 		3335F6581CC576050016CDE2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335F6571CC576050016CDE2 /* LoginViewController.swift */; };
 		3335F65C1CC6930E0016CDE2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335F65B1CC6930E0016CDE2 /* Constants.swift */; };
 		3335F65E1CC694F40016CDE2 /* MapListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3335F65D1CC694F40016CDE2 /* MapListViewController.swift */; };
+		335423B41CE66389004B0C55 /* UdacityClientStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335423B31CE66389004B0C55 /* UdacityClientStore.swift */; };
 		33FD57B41CC7F01200B98DAE /* MapUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD57B31CC7F01200B98DAE /* MapUtility.swift */; };
 		33FD57B61CC9668500B98DAE /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD57B51CC9668500B98DAE /* AddLocationViewController.swift */; };
 		33FD57B81CCABA9100B98DAE /* ShowLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FD57B71CCABA9100B98DAE /* ShowLocationViewController.swift */; };
@@ -60,6 +61,7 @@
 		3335F6571CC576050016CDE2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3335F65B1CC6930E0016CDE2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3335F65D1CC694F40016CDE2 /* MapListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapListViewController.swift; sourceTree = "<group>"; };
+		335423B31CE66389004B0C55 /* UdacityClientStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClientStore.swift; sourceTree = "<group>"; };
 		33FD57B31CC7F01200B98DAE /* MapUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUtility.swift; sourceTree = "<group>"; };
 		33FD57B51CC9668500B98DAE /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		33FD57B71CCABA9100B98DAE /* ShowLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowLocationViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				3335F65B1CC6930E0016CDE2 /* Constants.swift */,
 				33FD57B31CC7F01200B98DAE /* MapUtility.swift */,
 				33FD57B91CCEA89100B98DAE /* StudentLocation.swift */,
+				335423B31CE66389004B0C55 /* UdacityClientStore.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				335423B41CE66389004B0C55 /* UdacityClientStore.swift in Sources */,
 				33FD57FB1CD76B2F00B98DAE /* CommonMapViewController.swift in Sources */,
 				33FD57BA1CCEA89100B98DAE /* StudentLocation.swift in Sources */,
 				33FD57B81CCABA9100B98DAE /* ShowLocationViewController.swift in Sources */,

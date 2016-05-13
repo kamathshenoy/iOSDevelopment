@@ -108,71 +108,7 @@ class LoginViewController: UIViewController {
          
         }
 
-       /*
-        
-        let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().udacityURLFromParameters([String:AnyObject](), withPathExtension: [Constants.Login.Session]))
-        
-        request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let username = /*usernameTextField.text!*/"sheethal.shenoy@gmail.com"
-        let password = /*passwordTextField.text!*/"Sriram123"
-        let str = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}"
-        
-        
-        request.HTTPBody = str.dataUsingEncoding(NSUTF8StringEncoding)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil { // Handle error…
-               self.showAlertMsg( "Username or Password not correct.")
-                return
-            }
-            
-            /* GUARD: Was there any data returned? */
-            guard let data = data else {
-                self.showAlertMsg( "Username or Password not correct.")
-                return
-            }
-            
-           
-            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
-            
-            /* GUARD: Did we get a successful 2XX response? */
-            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                self.showAlertMsg("Your request returned a status code other than 2xx")
-                return
-            }
-            
-            // parse the data
-            let parsedResult: AnyObject!
-            do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
-            } catch {
-                print("Could not parse the data as JSON: '\(newData)'")
-                return
-            }
-            
-            print("parsedResult",parsedResult)
-            
-            
-            guard let sessionResult = parsedResult[Constants.Login.Account] as? [String:AnyObject] else {
-                print(" See error code and message \(parsedResult)")
-                return
-            }
-            
-            /* GUARD: Is userID "success" key in parsedResult? */
-            guard let userid = sessionResult[Constants.Login.Key] as? String else {
-                print("Cannot find key 'session id ")
-                return
-            }
-            
-            
-            self.appDelegate.key = userid
-            self.getUserData()
-            self.completeLogin()
-            print("userid:",userid)
-        }
-        task.resume()*/
+       
         
     }
     
@@ -200,14 +136,34 @@ class LoginViewController: UIViewController {
                         return
                     }
                 }else{
-                    print("No error, recived the first and lastname")
+                    
                     self.appDelegate.firstName = data![0] as! String
                     self.appDelegate.lastName = data![1] as! String
-                    print("No error, recived the first and lastname", self.appDelegate.lastName, self.appDelegate.firstName)
-                    self.completeLogin()
+                    print("No error, recieved the first and lastname", self.appDelegate.lastName, self.appDelegate.firstName)
+                    self.getStudentLocations()
+                    
                 }
             }
         
+    }
+    
+    
+    private func getStudentLocations(){
+        
+        appDelegate.studentLocations.removeAll()
+        MapUtility.sharedInstance().getStudentLocations { (locations, error) in
+            if error == nil {
+                print("got student location")
+                MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
+                self.completeLogin()
+            }else{
+                print("did not get student location")
+                dispatch_async(dispatch_get_main_queue()){
+                    self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
+                    return
+                }
+            }
+        }
     }
 }
 

@@ -18,12 +18,8 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
     //let iExists :Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        appDelegate.studentLocations.removeAll()
-        MapUtility.sharedInstance().getStudentLocations { (locations, error) in
-            MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
-            self.mapView.addAnnotations(self.appDelegate.studentLocations)
-            
-        }
+        self.mapView.addAnnotations(self.appDelegate.studentLocations)
+        
     }
     
     
@@ -31,6 +27,7 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
         print("reloadTable")
         dispatch_async(dispatch_get_main_queue()) {
             self.mapView.reloadInputViews()
+            
         }
     }
 
@@ -38,40 +35,97 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
     @IBAction func refresh(sender: AnyObject) {
         appDelegate.studentLocations.removeAll()
         MapUtility.sharedInstance().getStudentLocations { (locations, error) in
-            MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
-            self.reloadView()
-            
-        }
-    }
-    /*
-    
-    @IBAction func addLocation(){
-            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddLocationViewController")
-            self.presentViewController(controller, animated: true, completion: nil)
-    }
-
-    @IBAction func logout() {
-         MapUtility.sharedInstance().logoutUdacity() { (data, error) in
-            
-            if error != nil { // Handle error…
-                self.showAlertMsg(Constants.ErrorMsgs.LogoutErrorMsg)
-                return
+            if error == nil {
+                MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
+                self.mapView.addAnnotations(self.appDelegate.studentLocations)
+                self.reloadView()
+                
+            }else{
+                self.showAlertMsg("Unable to refresh data. Try again!")
             }
             
-            if data != nil {
-                    self.dismissViewControllerAnimated(false, completion: nil)
-                }
         }
     }
-
     
-    func showAlertMsg(msg:String)->Void {
-        let alert = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-        return
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        print("%%%%%%%%%%%%")
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            print("+++++++++++++++++++++++++")
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinTintColor = UIColor.redColor()
+            pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+        }
+        else {
+            print("+$$$$$$$$$$$$$$")
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
+    
     }
-    */
+    
+    
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let app = UIApplication.sharedApplication()
+            if let toOpen = view.annotation?.subtitle! {
+                app.openURL(NSURL(string: toOpen)!)
+            }
+        }
+    }
+    
+    
+   /* override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // The "locations" array is an array of dictionary objects that are similar to the JSON
+        // data that you can download from parse.
+        let locations = hardCodedLocationData()
+        
+        // We will create an MKPointAnnotation for each dictionary in "locations". The
+        // point annotations will be stored in this array, and then provided to the map view.
+        var annotations = [MKPointAnnotation]()
+        
+        // The "locations" array is loaded with the sample data below. We are using the dictionaries
+        // to create map annotations. This would be more stylish if the dictionaries were being
+        // used to create custom structs. Perhaps StudentLocation structs.
+        
+        for dictionary in locations {
+            
+            // Notice that the float values are being used to create CLLocationDegree values.
+            // This is a version of the Double type.
+            let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
+            let long = CLLocationDegrees(dictionary["longitude"] as! Double)
+            
+            // The lat and long are used to create a CLLocationCoordinates2D instance.
+            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            
+            let first = dictionary["firstName"] as! String
+            let last = dictionary["lastName"] as! String
+            let mediaURL = dictionary["mediaURL"] as! String
+            
+            // Here we create the annotation and set its coordiate, title, and subtitle properties
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "\(first) \(last)"
+            annotation.subtitle = mediaURL
+            
+            // Finally we place the annotation in an array of annotations.
+            annotations.append(annotation)
+        }
+        
+        // When the array is complete, we add the annotations to the map.
+        print("studentlocaions", self.appDelegate.studentLocations.count)
+        self.mapView.addAnnotations(self.appDelegate.studentLocations)
+        //self.mapView.addAnnotations(annotations)
+        
+    }
     
     // MARK: - MKMapViewDelegate
     
@@ -85,19 +139,18 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
         
         if pinView == nil {
-            print("=========1")
+            print("+++++++++++++++++++++++++")
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
-            pinView!.pinTintColor = UIColor.redColor()
+            pinView!.pinColor = .Red
             pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
         }
         else {
-            print("=========2")
+            print("###########")
             pinView!.annotation = annotation
         }
         
         return pinView
-    
     }
     
     
@@ -107,7 +160,6 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.sharedApplication()
             if let toOpen = view.annotation?.subtitle! {
-                
                 app.openURL(NSURL(string: toOpen)!)
             }
         }
@@ -124,5 +176,58 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
     
     // Some sample data. This is a dictionary that is more or less similar to the
     // JSON data that you will download from Parse.
-    }
+    
+    func hardCodedLocationData() -> [[String : AnyObject]] {
+        return  [
+            [
+                "createdAt" : "2015-02-24T22:27:14.456Z",
+                "firstName" : "Jessica",
+                "lastName" : "Uelmen",
+                "latitude" : 28.1461248,
+                "longitude" : -82.75676799999999,
+                "mapString" : "Tarpon Springs, FL",
+                "mediaURL" : "www.linkedin.com/in/jessicauelmen/en",
+                "objectId" : "kj18GEaWD8",
+                "uniqueKey" : 872458750,
+                "updatedAt" : "2015-03-09T22:07:09.593Z"
+            ], [
+                "createdAt" : "2015-02-24T22:35:30.639Z",
+                "firstName" : "Gabrielle",
+                "lastName" : "Miller-Messner",
+                "latitude" : 35.1740471,
+                "longitude" : -79.3922539,
+                "mapString" : "Southern Pines, NC",
+                "mediaURL" : "http://www.linkedin.com/pub/gabrielle-miller-messner/11/557/60/en",
+                "objectId" : "8ZEuHF5uX8",
+                "uniqueKey" : 2256298598,
+                "updatedAt" : "2015-03-11T03:23:49.582Z"
+            ], [
+                "createdAt" : "2015-02-24T22:30:54.442Z",
+                "firstName" : "Jason",
+                "lastName" : "Schatz",
+                "latitude" : 37.7617,
+                "longitude" : -122.4216,
+                "mapString" : "18th and Valencia, San Francisco, CA",
+                "mediaURL" : "http://en.wikipedia.org/wiki/Swift_%28programming_language%29",
+                "objectId" : "hiz0vOTmrL",
+                "uniqueKey" : 2362758535,
+                "updatedAt" : "2015-03-10T17:20:31.828Z"
+            ], [
+                "createdAt" : "2015-03-11T02:48:18.321Z",
+                "firstName" : "Jarrod",
+                "lastName" : "Parkes",
+                "latitude" : 34.73037,
+                "longitude" : -86.58611000000001,
+                "mapString" : "Huntsville, Alabama",
+                "mediaURL" : "https://linkedin.com/in/jarrodparkes",
+                "objectId" : "CDHfAy8sdp",
+                "uniqueKey" : 996618664,
+                "updatedAt" : "2015-03-13T03:37:58.389Z"
+            ]
+        ]
+    }*/
+}
+
+    
+
 

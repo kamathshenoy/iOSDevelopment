@@ -9,14 +9,14 @@
 import Foundation
 import MapKit
 
-class StudentLocation: NSObject, MKAnnotation {
-    let coordinate: CLLocationCoordinate2D
+class StudentLocation:  MKPointAnnotation {
+    let coordinates: CLLocationCoordinate2D
     let fullName: String
   
     let mediaURL: String
     
     init(coordinate: CLLocationCoordinate2D, fullName: String, mediaURL : String) {
-        self.coordinate = coordinate
+        self.coordinates = coordinate
         self.fullName = fullName
         self.mediaURL = mediaURL
     }

@@ -21,14 +21,16 @@ class MapUtility: NSObject {
             self.taskForGETData() { (results, error) in
             
             /* . Send the desired value(s) to completion handler */
-                if let error = error {
-                    completionHandlerForLocations(result: nil, error: error)
+                if let _ = error {
+                    completionHandlerForLocations(result: nil, error: NSError(domain: "getStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not get getStudentLocations"]))
                 } else {
                 
                     if let results = results![Constants.ParseResponseKeys.Results] as? [[String:AnyObject]]! {
-                    completionHandlerForLocations(result: results, error: nil)
+                        print("got results")
+                        completionHandlerForLocations(result: results, error: nil)
                     } else {
-                        completionHandlerForLocations(result: nil, error: NSError(domain: "getStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse getStudentLocations"]))
+                        print("no results")
+                        completionHandlerForLocations(result: nil, error: NSError(domain: "getStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not get getStudentLocations"]))
                     }
                 }
             }
@@ -36,27 +38,32 @@ class MapUtility: NSObject {
     }
     
     func populateStudentLocations(locations :[[String:AnyObject]]?, error: NSError?)->Void{
+        var stuLocs = appDelegate.studentLocations
         if let locations = locations {
             for dictionary in locations {
                 
                 let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
                 let long = CLLocationDegrees(dictionary["longitude"] as! Double)
                 
-                
+                // The lat and long are used to create a CLLocationCoordinates2D instance.
                 let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
                 
                 let first = dictionary["firstName"] as! String
                 let last = dictionary["lastName"] as! String
                 let mediaURL = dictionary["mediaURL"] as! String
-                let fullName = "\(first) \(last)"
-                
+                 let fullName = "\(first) \(last)"
+                // Here we create the annotation and set its coordiate, title, and subtitle properties
                 let annotation = StudentLocation(coordinate: coordinate, fullName: (fullName), mediaURL: mediaURL)
-                appDelegate.studentLocations.append(annotation)
+                annotation.coordinate = coordinate
+                annotation.title = "\(first) \(last)"
+                annotation.subtitle = mediaURL
+                stuLocs.append(annotation)
                 
             }
-            print("studentlocaions", appDelegate.studentLocations.count)
+            appDelegate.studentLocations = stuLocs
+            
         }else{
-            print(error)
+            print("Unable to get student locations", error)
         }
     }
     
@@ -334,8 +341,8 @@ class MapUtility: NSObject {
             path = path + "/"+extn ?? ""
         }
         components.path = path//Constants.Login.ApiPath + (withPathExtension[0] ?? "")
-        print("===========", components.path)
-        print("===========", components.URL)
+       // print("===========", components.path)
+       // print("===========", components.URL)
         return components.URL!
     }
     

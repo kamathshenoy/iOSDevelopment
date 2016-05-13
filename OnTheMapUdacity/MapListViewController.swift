@@ -60,12 +60,19 @@ class MapListViewController: CommonMapViewController, UITableViewDelegate, UITab
     @IBAction func refresh(){
         appDelegate.studentLocations.removeAll()
         MapUtility.sharedInstance().getStudentLocations { (locations, error) in
-            MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
-            self.loaddata()
-            self.reloadTable()
+            if error == nil {
+                MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
+                self.loaddata()
+                self.reloadTable()
+            }else{
+                self.showAlertMsg("Unable to refresh data. Try again!")
+            }
         }
 
     }
+    
+    
+
     
    /* @IBAction func addLocation(){
         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddLocationViewController")

@@ -86,15 +86,17 @@ class ShowLocationViewController: UIViewController {
     }
     
     private func submit(link: String, address:String) {
-       // MapUtility.sharedInstance().submitData(link, address: address) { completionHandlerForSubmit;:   (data, error) in
+       
         MapUtility.sharedInstance().submitData(coor, link: link, address: address) { (data, error) in
-            if error != nil {
-                self.showAlertErrorMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
-                return
+            dispatch_async(dispatch_get_main_queue()){
+                self.activityController.stopAnimating()
+                if error != nil {
+                    self.showAlertErrorMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
+                    return
+                }else{
+                    self.showAlertErrorMsg(Constants.ErrorMsgs.AddLinkSuccessMsg)
+                }
             }
-            self.activityController.stopAnimating()
-            self.showAlertErrorMsg(Constants.ErrorMsgs.AddLinkSuccessMsg)
-
         }
     }
     
