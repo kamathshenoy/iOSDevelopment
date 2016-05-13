@@ -24,9 +24,7 @@ class AddLocationViewController: UIViewController {
     
     @IBOutlet weak var debugTextLabel: UILabel!
     
-    
     @IBOutlet weak var findButton: UIButton!
-    
 
     @IBAction func findLocation(sender: AnyObject) {
        

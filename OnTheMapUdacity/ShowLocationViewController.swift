@@ -12,8 +12,8 @@ import MapKit
 
 class ShowLocationViewController: UIViewController {
     
-    
     @IBOutlet weak var activityController: UIActivityIndicatorView!
+    
     // The map. See the setup in the Storyboard file. Note particularly that the view controller
     // is set up as the map view's delegate.
     @IBOutlet weak var mapView: MKMapView!
@@ -57,11 +57,9 @@ class ShowLocationViewController: UIViewController {
             self.showAlertErrorMsg(Constants.ErrorMsgs.AddLinkErrorMsg)
             return
         }
-         textFieldShouldReturn(linkTextField)
+        textFieldShouldReturn(linkTextField)
         submit(link, address: address)
-        self.activityController.stopAnimating()
-        self.showAlertErrorMsg(Constants.ErrorMsgs.AddLinkSuccessMsg)
-
+       
     }
     
     
@@ -72,72 +70,34 @@ class ShowLocationViewController: UIViewController {
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabViewController") as! UITabBarController
             self.presentViewController(controller, animated: true, completion: nil)
         }
-        
-        
-
-        
+      
     }
     
+       
     @IBAction func cancel(){
-        self.dismissViewControllerAnimated(false, completion: nil)
+       // self.dismissViewControllerAnimated(false, completion: nil)
+        
+        self.presentingViewController?.dismissViewControllerAnimated(true, completion: {
+                let secondPresentingVC = self.presentingViewController?.presentingViewController;
+                secondPresentingVC?.dismissViewControllerAnimated(true, completion: {});
+            });
+        
         
     }
     
     private func submit(link: String, address:String) {
-        
-        let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().parseURLFromParameters([String:AnyObject](), withPathExtension: Constants.Student.StudentLocation))
-        request.HTTPMethod = "POST"
-        request.addValue(Constants.Student.ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue(Constants.Student.RestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let username = "Mariane"//appDelegate.firstName
+       // MapUtility.sharedInstance().submitData(link, address: address) { completionHandlerForSubmit;:   (data, error) in
+        MapUtility.sharedInstance().submitData(coor, link: link, address: address) { (data, error) in
+            if error != nil {
+                self.showAlertErrorMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
+                return
+            }
+            self.activityController.stopAnimating()
+            self.showAlertErrorMsg(Constants.ErrorMsgs.AddLinkSuccessMsg)
 
-        let lastname = "lassy"//appDelegate.lastName
-        let key = appDelegate.key
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let str = "{\"uniqueKey\": \"\(key)\", \"firstName\": \"\(username)\", \"lastName\": \"\(lastname)\",\"mapString\": \"\(address)\", \"mediaURL\": \"\(link)\",\"latitude\": \(coor.latitude), \"longitude\": \(coor.longitude)}"
-        request.HTTPBody = str.dataUsingEncoding(NSUTF8StringEncoding)
-        
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil { // Handle error…
-                self.showAlertErrorMsg("Error occured, Please try again!")
-                return
-            }
-            
-            /* GUARD: Was there any data returned? */
-            guard let data = data else {
-                
-                return
-            }
-            print("++++++++++")
-            print(NSString(data: data, encoding: NSUTF8StringEncoding))
-
-                     
-            // parse the data
-            let parsedResult: AnyObject!
-            do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
-            } catch {
-                print("++++++++++Could not parse the data as JSON: '\(data)'")
-                self.showAlertErrorMsg("Error occured, Please try again!")
-                return
-            }
-            
-            print("=========================",parsedResult)
-            
-            guard let _ = parsedResult[Constants.Login.ObjectID] as? String else {
-                print(" ++++++++See error code and message in \(parsedResult)")
-                self.showAlertErrorMsg("Error occured, Please try again!")
-                return
-            }
-            
-                       // self.showNextScene()
-            
-           
         }
-        task.resume()
     }
+    
     
     
     func showAlertErrorMsg(errorMsg:String) ->Void{

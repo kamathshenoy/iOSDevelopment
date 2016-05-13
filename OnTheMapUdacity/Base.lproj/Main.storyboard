@@ -129,8 +129,8 @@
         <scene sceneID="VYR-Vv-b4g">
             <objects>
                 <viewController storyboardIdentifier="MapViewController" title="MapViewController" id="efj-aV-f3X" customClass="MapViewController" customModule="OnTheMapUdacity" sceneMemberID="viewController">
-                    <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="8q4-OO-diZ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="zYY-Qw-Tmh">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </mapView>
                     <navigationItem key="navigationItem" title="On the Map" id="Yfw-aT-o47">
@@ -153,7 +153,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="mapView" destination="8q4-OO-diZ" id="rEH-nS-yqH"/>
+                        <outlet property="mapView" destination="zYY-Qw-Tmh" id="nT6-ih-SfB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrs-k1-jQq" sceneMemberID="firstResponder"/>
@@ -175,14 +175,14 @@
                             <stackView contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="oyf-S1-nkv">
                                 <rect key="frame" x="20" y="55" width="560" height="527"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="kUz-cL-bds">
+                                    <imageView userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="kUz-cL-bds">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="60"/>
                                         <color key="tintColor" red="1" green="0.39385270760000002" blue="0.21396886570000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="fhs-cF-hFH"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" misplaced="YES" text="Login to Udacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SzX-g0-mfx">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" text="Login to Udacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SzX-g0-mfx">
                                         <rect key="frame" x="0.0" y="70" width="560" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="lcu-dO-BtB"/>
@@ -195,7 +195,7 @@
                                             <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="17"/>
                                         </variation>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IAP-bm-Lue">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IAP-bm-Lue">
                                         <rect key="frame" x="0.0" y="120" width="560" height="32"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -216,7 +216,7 @@
                                             </mask>
                                         </variation>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aAB-r1-TaD">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aAB-r1-TaD">
                                         <rect key="frame" x="0.0" y="162" width="560" height="32"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -235,7 +235,7 @@
                                             </mask>
                                         </variation>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cat-LT-tZD">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cat-LT-tZD">
                                         <rect key="frame" x="0.0" y="204" width="560" height="44"/>
                                         <color key="backgroundColor" red="0.92101603403141363" green="0.24550506085207516" blue="0.13054219683475249" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -261,7 +261,7 @@
                                             <action selector="loginPressed:" destination="Fvb-jc-6a9" eventType="touchUpInside" id="XiJ-UF-Q65"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Don't have an account? Sign up." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHB-3e-NM7">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account? Sign up." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHB-3e-NM7">
                                         <rect key="frame" x="0.0" y="258" width="560" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="mR3-oT-mzc"/>
@@ -274,13 +274,14 @@
                                                 <exclude reference="mR3-oT-mzc"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="258" width="360" height="40"/>
                                             <mask key="constraints">
                                                 <include reference="mR3-oT-mzc"/>
                                             </mask>
                                         </variation>
                                     </label>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Sqg-7o-oon">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Sqg-7o-oon">
                                         <rect key="frame" x="0.0" y="285" width="560" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="160" id="vdz-8w-1wt"/>
@@ -290,14 +291,15 @@
                                                 <exclude reference="vdz-8w-1wt"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="308" width="360" height="99"/>
                                             <mask key="constraints">
                                                 <include reference="vdz-8w-1wt"/>
                                             </mask>
                                         </variation>
                                     </activityIndicatorView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ob4-Qg-Z1K">
-                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ob4-Qg-Z1K">
+                                        <rect key="frame" x="0.0" y="315" width="560" height="202"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Q8D-NR-ACu"/>
                                         </constraints>
@@ -309,7 +311,8 @@
                                                 <exclude reference="Q8D-NR-ACu"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="417" width="360" height="60"/>
                                             <mask key="constraints">
                                                 <include reference="Q8D-NR-ACu"/>
                                             </mask>
@@ -333,7 +336,8 @@
                                                 <exclude reference="tCN-rI-1Zm"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="487" width="360" height="40"/>
                                             <mask key="constraints">
                                                 <include reference="GLd-Xq-xsB"/>
                                                 <include reference="tCN-rI-1Zm"/>
@@ -446,8 +450,7 @@
                                                 <exclude reference="sVD-Yg-Xi7"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="130" width="360" height="252"/>
+                                        <variation key="widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="sVD-Yg-Xi7"/>
                                             </mask>
@@ -466,8 +469,7 @@
                                                 <exclude reference="MWn-tL-SpZ"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="392" width="360" height="70"/>
+                                        <variation key="widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="MWn-tL-SpZ"/>
                                             </mask>
@@ -489,8 +491,7 @@
                                                 <exclude reference="WXS-un-4rF"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="472" width="360" height="40"/>
+                                        <variation key="widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="88d-Ck-mtK"/>
                                                 <include reference="WXS-un-4rF"/>
@@ -639,6 +640,18 @@
                                     </mask>
                                 </variation>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZd-4p-hUY">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.25066556470000001" green="0.46550060059999998" blue="0.69968913610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancel" destination="mxu-xz-gOt" eventType="touchUpInside" id="b5e-dB-MRR"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="fEM-ix-KID">
+                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uur-5d-APQ">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -650,19 +663,6 @@
                                     <action selector="onSubmit:" destination="mxu-xz-gOt" eventType="touchUpInside" id="5bQ-QL-X5L"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZd-4p-hUY">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" red="0.25066556470000001" green="0.46550060059999998" blue="0.69968913610000005" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancel:" destination="GG2-TM-tJ5" eventType="touchUpInside" id="tod-Pi-sdL"/>
-                                    <action selector="cancel:" destination="mxu-xz-gOt" eventType="touchUpInside" id="wev-Kv-l7F"/>
-                                </connections>
-                            </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="fEM-ix-KID">
-                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.95955361039999998" green="0.95955361039999998" blue="0.95955361039999998" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.95955361039999998" green="0.95955361039999998" blue="0.95955361039999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -690,9 +690,9 @@
                             <mask key="subviews">
                                 <exclude reference="a1p-7u-d7A"/>
                                 <exclude reference="oDz-9w-QG8"/>
-                                <exclude reference="uur-5d-APQ"/>
                                 <exclude reference="kZd-4p-hUY"/>
                                 <exclude reference="fEM-ix-KID"/>
+                                <exclude reference="uur-5d-APQ"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="2N7-Uo-nbd"/>
@@ -718,9 +718,9 @@
                             <mask key="subviews">
                                 <include reference="a1p-7u-d7A"/>
                                 <include reference="oDz-9w-QG8"/>
-                                <include reference="uur-5d-APQ"/>
                                 <include reference="kZd-4p-hUY"/>
                                 <include reference="fEM-ix-KID"/>
+                                <include reference="uur-5d-APQ"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="2N7-Uo-nbd"/>
@@ -747,7 +747,7 @@
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="activityController" destination="fEM-ix-KID" id="sh8-G9-ysM"/>
+                        <outlet property="activityController" destination="fEM-ix-KID" id="O4n-xw-VQo"/>
                         <outlet property="linkTextField" destination="a1p-7u-d7A" id="eHe-qf-I0e"/>
                         <outlet property="mapView" destination="oDz-9w-QG8" id="eS2-t7-rC9"/>
                     </connections>

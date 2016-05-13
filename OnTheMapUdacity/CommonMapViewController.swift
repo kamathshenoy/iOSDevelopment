@@ -18,15 +18,16 @@ class CommonMapViewController:  UIViewController{
     }
     
     @IBAction func logout() {
+        self.dismissViewControllerAnimated(false, completion: nil)
         MapUtility.sharedInstance().logoutUdacity() { (data, error) in
             
             if error != nil { // Handle error…
-                self.showAlertMsg(Constants.ErrorMsgs.LogoutErrorMsg)
+                
                 return
             }
             
             if data != nil {
-                self.dismissViewControllerAnimated(false, completion: nil)
+                print("LOGGED OUT")
             }
         }
     }

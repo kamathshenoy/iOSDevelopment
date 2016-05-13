@@ -66,11 +66,7 @@ class LoginViewController: UIViewController {
             setUIEnabled(false)
             activityController.hidden = false
             activityController.startAnimating()
-           dispatch_async(dispatch_get_main_queue()){
-            
-                self.getRequestToken()
-                
-            }
+            getRequestToken()
             
         }
         
@@ -96,6 +92,23 @@ class LoginViewController: UIViewController {
     // MARK: TheMovieDB
     
     private func getRequestToken() {
+        
+        MapUtility.sharedInstance().loginUdacity { (data, error) in
+           
+                if error != nil {
+                    dispatch_async(dispatch_get_main_queue()){
+                        self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
+                        return
+                    }
+                }else{
+                    self.appDelegate.key = data as! String
+                    print("Key",self.appDelegate.key)
+                    self.getUserData()
+                }
+         
+        }
+
+       /*
         
         let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().udacityURLFromParameters([String:AnyObject](), withPathExtension: [Constants.Login.Session]))
         
@@ -159,7 +172,7 @@ class LoginViewController: UIViewController {
             self.completeLogin()
             print("userid:",userid)
         }
-        task.resume()
+        task.resume()*/
         
     }
     
@@ -179,63 +192,23 @@ class LoginViewController: UIViewController {
     
     private func getUserData() {
         
-        let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().udacityURLFromParameters([String:AnyObject](), withPathExtension: [Constants.Login.Userdata,(self.appDelegate.key) ]))
-        
-
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil { // Handle error…
-                self.showAlertMsg("Unable to get userdata.")
-                return
-            }
+        MapUtility.sharedInstance().getRequestTokenFromUdacity { (data, error) in
             
-            /* GUARD: Was there any data returned? */
-            guard let data = data else {
-                self.showAlertMsg("Unable to get userdata.")
-                return
+                if error != nil {
+                    dispatch_async(dispatch_get_main_queue()){
+                        self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
+                        return
+                    }
+                }else{
+                    print("No error, recived the first and lastname")
+                    self.appDelegate.firstName = data![0] as! String
+                    self.appDelegate.lastName = data![1] as! String
+                    print("No error, recived the first and lastname", self.appDelegate.lastName, self.appDelegate.firstName)
+                    self.completeLogin()
+                }
             }
-            
-            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
-            
-            /* GUARD: Did we get a successful 2XX response? */
-            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                self.showAlertMsg("Your request returned a status code other than 2xx")
-                return
-            }
-            
-            // parse the data
-            let parsedResult: AnyObject!
-            do {
-                parsedResult = try NSJSONSerialization.JSONObjectWithData(newData, options: .AllowFragments)
-            } catch {
-                print("Could not parse the data as JSON: '\(newData)'")
-                return
-            }
-            guard let user = parsedResult[Constants.Login.user] as? [String:AnyObject] else {
-                print(" Can't find the user in \(parsedResult)")
-                return
-            }
-            
-            guard let firstName = user[Constants.Login.FirstName] as? String else {
-                print(" Can't find the firstname in \(parsedResult)")
-                return
-            }
-            
-            /* GUARD: Is firstName "success" key in parsedResult? */
-            guard let lastName = user[Constants.Login.LastName] as? String else {
-                print(" Can't find the lastname in \(parsedResult)")
-                return
-            }
-
-        self.appDelegate.firstName = firstName
-        self.appDelegate.lastName = lastName
-        print("firstname:",firstName,"lastname:",lastName)
-        self.completeLogin()
         
     }
-    task.resume()
-}
-    
 }
 
 
