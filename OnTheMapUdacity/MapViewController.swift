@@ -31,8 +31,9 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
 
     
     @IBAction func refresh(sender: AnyObject) {
-        appDelegate.studentLocations.removeAll()
         
+        mapView.removeAnnotations(self.appDelegate.studentLocations)
+        appDelegate.studentLocations.removeAll()
         MapUtility.sharedInstance().getStudentLocations { (locations, error) in
             if error == nil {
                 MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
@@ -63,9 +64,12 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.sharedApplication()
-            if let toOpen = view.annotation?.subtitle! {
-                app.openURL(NSURL(string: toOpen)!)
+            let toOpen = view.annotation?.subtitle!
+            
+            if MapUtility.sharedInstance().validateUrl(toOpen) {
+                UIApplication.sharedApplication().openURL(NSURL(string: toOpen!)!)
+            } else {
+                showAlertMsg(Constants.ErrorMsgs.URLErrorMsg)
             }
         }
     }

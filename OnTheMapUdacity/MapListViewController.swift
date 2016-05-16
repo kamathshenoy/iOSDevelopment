@@ -17,6 +17,7 @@ class MapListViewController: CommonMapViewController, UITableViewDelegate, UITab
     var links: [String] = [String]()
     
     
+    @IBOutlet var tableView: UITableView!
     @IBOutlet weak var logoutBtn: UIBarButtonItem!
     // MARK: Life Cycle
     
@@ -35,12 +36,9 @@ class MapListViewController: CommonMapViewController, UITableViewDelegate, UITab
             if(trimmedString.characters.count > 0 && !self.titles.contains(trimmedString)){
                 self.titles.append(title)
                 self.links.append(dictionary.mediaURL)
-                 print(" unique")
-            }else{
-                print("not unique")
             }
         }
-         self.reloadTable()
+        self.reloadTable()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -50,7 +48,7 @@ class MapListViewController: CommonMapViewController, UITableViewDelegate, UITab
     func reloadTable() ->Void {
         print("reloadTable")
         dispatch_async(dispatch_get_main_queue()) {
-            self.reloadInputViews()
+            self.tableView.reloadData()
         }
     }
     
@@ -92,21 +90,13 @@ extension MapListViewController {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let toOpen =  links[indexPath.row]
-        if validateUrl(toOpen) {
+        if MapUtility.sharedInstance().validateUrl(toOpen) {
             UIApplication.sharedApplication().openURL(NSURL(string: toOpen)!)
         } else {
             showAlertMsg(Constants.ErrorMsgs.URLErrorMsg)
         }
 
     }
-    
-    func validateUrl (urlString: String?) -> Bool {
-        if let urlString = urlString {
-            if let url = NSURL(string: urlString) {
-                return UIApplication.sharedApplication().canOpenURL(url)
-            }
-        }
-        return false
-    }
+   
 
 }

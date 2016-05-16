@@ -84,7 +84,7 @@ class LoginViewController: UIViewController {
     
     
     private func getRequestToken() {
-        MapUtility.sharedInstance().loginUdacity { (data, error) in
+        MapUtility.sharedInstance().loginUdacity( self.usernameTextField.text!,  password: self.passwordTextField.text!) { (data, error) in
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue()){
                         self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)

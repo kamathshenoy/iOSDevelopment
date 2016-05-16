@@ -38,7 +38,7 @@ struct Constants {
         static let FacebookError = "Feature not implemented. Please upgrade to next version!"
         static let AddLinkErrorMsg = "Please enter a valid link."
         static let AddLinkSuccessMsg = "Your post was successful."
-        static let LoginErrorMsg = "Username or Password Empty."
+        static let LoginErrorMsg = "Username or Password empty or incorrect."
         static let LocationErrorMsg = "Please enter a valid location"
         static let ReloadErrorMsg = "Unable to refresh data. Try again!"
         static let URLErrorMsg = "Invalid URL. Try some other URL!"

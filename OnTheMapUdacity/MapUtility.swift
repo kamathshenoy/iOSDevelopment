@@ -113,9 +113,9 @@ class MapUtility: NSObject {
         request.addValue(Constants.Student.ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(Constants.Student.RestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
 
-        let username = "Maria"//appDelegate.firstName
+        let username = "Pamela"//appDelegate.firstName
         
-        let lastname = "Geneva Parker"//appDelegate.lastName
+        let lastname = "Johnson"//appDelegate.lastName
         let key = appDelegate.udacityUserInformation?.key
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let str = "{\"uniqueKey\": \"\(key)\", \"firstName\": \"\(username)\", \"lastName\": \"\(lastname)\",\"mapString\": \"\(address)\", \"mediaURL\": \"\(link)\",\"latitude\": \(coor.latitude), \"longitude\": \(coor.longitude)}"
@@ -201,16 +201,25 @@ class MapUtility: NSObject {
     }
     
     
+    func validateUrl (urlString: String?) -> Bool {
+        if let urlString = urlString {
+            if let url = NSURL(string: urlString) {
+                return UIApplication.sharedApplication().canOpenURL(url)
+            }
+        }
+        return false
+    }
     
-    func loginUdacity(completionHandlerForLogin: (result: AnyObject?, error: NSError?) -> Void){
+    
+    func loginUdacity(username:String, password:String, completionHandlerForLogin: (result: AnyObject?, error: NSError?) -> Void){
         
         let request = NSMutableURLRequest(URL:udacityURLFromParameters([String:AnyObject](), withPathExtension: [Constants.Login.Session]))
         
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let username = /*usernameTextField.text!*/"sheethal.shenoy@gmail.com"
-        let password = /*passwordTextField.text!*/"Sriram123"
+        let username = username//"sheethal.shenoy@gmail.com"
+        let password = password//"Sriram123"
         let str = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}"
         
         
@@ -219,7 +228,7 @@ class MapUtility: NSObject {
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…
                 //self.showAlertMsg( "Username or Password not correct.")
-                let info = [NSLocalizedDescriptionKey : "Username or Password not correct."]
+                let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.LoginErrorMsg]
                 completionHandlerForLogin(result: nil, error: NSError(domain: "completionHandlerForLogin", code: 1, userInfo: info))
                 return
                 
