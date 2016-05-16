@@ -72,14 +72,6 @@ class ShowLocationViewController: UIViewController, MKMapViewDelegate {
     
        
     @IBAction func cancel(){
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-       
-        appDelegate.studentLocations.removeAll()
-        MapUtility.sharedInstance().getStudentLocations { (locations, error) in
-            if error == nil {
-                MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
-            }
-        }
         
         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabViewController") as! UITabBarController
         self.presentViewController(controller, animated: true, completion: nil)
@@ -94,6 +86,14 @@ class ShowLocationViewController: UIViewController, MKMapViewDelegate {
                     self.showAlertErrorMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
                     return
                 }else{
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    
+                    appDelegate.studentLocations.removeAll()
+                    MapUtility.sharedInstance().getStudentLocations { (locations, error) in
+                        if error == nil {
+                            MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
+                        }
+                    }
                     
                     let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabViewController") as! UITabBarController
                     self.presentViewController(controller, animated: true, completion: nil)

@@ -51,7 +51,8 @@ class MapUtility: NSObject {
                 let first = dictionary["firstName"] as! String
                 let last = dictionary["lastName"] as! String
                 let mediaURL = dictionary["mediaURL"] as! String
-                 let fullName = "\(first) \(last)"
+                let fullName = "\(first) \(last)"
+
                 // Here we create the annotation and set its coordiate, title, and subtitle properties
                 let annotation = StudentLocation(coordinate: coordinate, fullName: (fullName), mediaURL: mediaURL)
                 annotation.coordinate = coordinate
@@ -105,20 +106,21 @@ class MapUtility: NSObject {
     
     }
     
-    
-    
     func submitData(coor:CLLocationCoordinate2D, link: String, address:String, completionHandlerForSubmit: (data: AnyObject?, error: NSError?) -> Void) -> Void {
         let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().parseURLFromParameters([String:AnyObject](), withPathExtension: Constants.Student.StudentLocation))
         request.HTTPMethod = "POST"
         request.addValue(Constants.Student.ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(Constants.Student.RestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
-
-        let username = "Pamela"//appDelegate.firstName
         
-        let lastname = "Johnson"//appDelegate.lastName
+        var username = appDelegate.udacityUserInformation?.firstName
+        var lastname = appDelegate.udacityUserInformation?.lastName
         let key = appDelegate.udacityUserInformation?.key
+        print("key ",key!," fname", username!, "lname", lastname!)
+        username = "Samuel"
+        lastname = "lina"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let str = "{\"uniqueKey\": \"\(key)\", \"firstName\": \"\(username)\", \"lastName\": \"\(lastname)\",\"mapString\": \"\(address)\", \"mediaURL\": \"\(link)\",\"latitude\": \(coor.latitude), \"longitude\": \(coor.longitude)}"
+        let str = "{\"uniqueKey\": \"\(key!)\", \"firstName\": \"\(username!)\", \"lastName\": \"\(lastname!)\",\"mapString\": \"\(address)\", \"mediaURL\": \"\(link)\",\"latitude\": \(coor.latitude), \"longitude\": \(coor.longitude)}"
+        print(str)
         request.HTTPBody = str.dataUsingEncoding(NSUTF8StringEncoding)
         
         let session = NSURLSession.sharedSession()
@@ -218,8 +220,8 @@ class MapUtility: NSObject {
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let username = username//"sheethal.shenoy@gmail.com"
-        let password = password//"Sriram123"
+        let username = /*username*/"sheethal.shenoy@gmail.com"
+        let password = /*password*/"Sriram123"
         let str = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}"
         
         
@@ -350,9 +352,6 @@ class MapUtility: NSObject {
         components.path = Constants.Student.ApiPath + (withPathExtension ?? "")
         return components.URL!
     }
-
-    
-
 
     class func sharedInstance() -> MapUtility {
         struct Singleton {

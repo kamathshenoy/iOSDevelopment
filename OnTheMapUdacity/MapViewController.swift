@@ -18,6 +18,9 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
         mapView.addAnnotations(self.appDelegate.studentLocations)
     }
     

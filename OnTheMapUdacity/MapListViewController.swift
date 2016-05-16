@@ -29,14 +29,14 @@ class MapListViewController: CommonMapViewController, UITableViewDelegate, UITab
     func loaddata() -> Void {
         for dictionary in appDelegate.studentLocations {
             let title = dictionary.fullName
-            let trimmedString = title.stringByTrimmingCharactersInSet(
+            /*let trimmedString = title.stringByTrimmingCharactersInSet(
                 NSCharacterSet.whitespaceAndNewlineCharacterSet()
             )
             
-            if(trimmedString.characters.count > 0 && !self.titles.contains(trimmedString)){
+            if(trimmedString.characters.count > 0 && !self.titles.contains(trimmedString)){*/
                 self.titles.append(title)
                 self.links.append(dictionary.mediaURL)
-            }
+            //}
         }
         self.reloadTable()
     }

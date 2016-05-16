@@ -119,7 +119,7 @@ class LoginViewController: UIViewController {
                         return
                     }
                 }else{
-                    UdacityClientStore(key: key, fName:  data![0] as! String, lName:  data![1] as! String)
+                    self.appDelegate.udacityUserInformation = UdacityClientStore(key: key, fName:  data![0] as! String, lName:  data![1] as! String)
                     self.getStudentLocations()
                 }
             }
