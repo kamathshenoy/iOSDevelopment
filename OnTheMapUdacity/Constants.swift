@@ -29,6 +29,7 @@ struct Constants {
         static let user = "user"
         static let FirstName = "first_name"
         static let LastName = "last_name"
+        static let UdacitySignUp = "https://www.udacity.com/account/auth#!/signup"
     }
     
     struct  ErrorMsgs {

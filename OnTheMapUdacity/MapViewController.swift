@@ -23,6 +23,7 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
     func reloadView() ->Void {
         print("reloadTable")
         dispatch_async(dispatch_get_main_queue()) {
+            
             self.mapView.reloadInputViews()
         }
     }
@@ -30,6 +31,7 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
     
     @IBAction func refresh(sender: AnyObject) {
         appDelegate.studentLocations.removeAll()
+        mapView.removeAnnotations(mapView.annotations)
         MapUtility.sharedInstance().getStudentLocations { (locations, error) in
             if error == nil {
                 MapUtility.sharedInstance().populateStudentLocations(locations, error: error)

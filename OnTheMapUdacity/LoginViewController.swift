@@ -120,7 +120,7 @@ class LoginViewController: UIViewController {
                         return
                     }
                 }else{
-                    UdacityClientStore.init(key: key, fName:  data![0] as! String, lName:  data![1] as! String)
+                    UdacityClientStore(key: key, fName:  data![0] as! String, lName:  data![1] as! String)
                     //self.appDelegate.udacityUserInformation?.firstName = data![0] as! String
                    // self.appDelegate.udacityUserInformation?.lastName = data![1] as! String
                     print("No error, recieved the first and lastname", self.appDelegate.udacityUserInformation?.lastName, self.appDelegate.udacityUserInformation?.firstName)
@@ -128,6 +128,14 @@ class LoginViewController: UIViewController {
                 }
             }
     }
+    
+    
+    @IBAction func signUpButtonClicked(sender: AnyObject) {
+        if let url = NSURL(string: Constants.Login.UdacitySignUp) {
+            UIApplication.sharedApplication().openURL(url)
+        }
+    }
+
     
     
     private func getStudentLocations(){

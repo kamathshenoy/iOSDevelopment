@@ -72,11 +72,10 @@ class ShowLocationViewController: UIViewController, MKMapViewDelegate {
     
        
     @IBAction func cancel(){
-       // self.dismissViewControllerAnimated(false, completion: nil)
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion: {
-                let secondPresentingVC = self.presentingViewController?.presentingViewController;
-                secondPresentingVC?.dismissViewControllerAnimated(true, completion: {});
-            });
+       //self.dismissViewControllerAnimated(false, completion: nil)
+        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabViewController") as! UITabBarController
+        self.presentViewController(controller, animated: true, completion: nil)
+        
     }
     
     private func submit(link: String, address:String) {

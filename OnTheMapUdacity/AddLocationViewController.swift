@@ -82,6 +82,7 @@ class AddLocationViewController: UIViewController {
       let resultVC = self.storyboard!.instantiateViewControllerWithIdentifier("ShowLocationViewController") as! ShowLocationViewController
         resultVC.coor = coordinates
         resultVC.address = address
+         
         self.presentViewController(resultVC, animated: true, completion: nil)
     }
 }

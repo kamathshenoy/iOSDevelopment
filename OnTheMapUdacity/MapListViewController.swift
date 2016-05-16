@@ -60,7 +60,7 @@ class MapListViewController: CommonMapViewController, UITableViewDelegate, UITab
             if error == nil {
                 MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
                 self.loaddata()
-                self.reloadTable()
+                
             }else{
                 self.showAlertMsg(Constants.ErrorMsgs.ReloadErrorMsg)
             }

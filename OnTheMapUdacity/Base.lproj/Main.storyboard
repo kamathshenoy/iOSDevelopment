@@ -264,25 +264,32 @@
                                             <action selector="loginPressed:" destination="Fvb-jc-6a9" eventType="touchUpInside" id="XiJ-UF-Q65"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account? Sign up." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHB-3e-NM7">
-                                        <rect key="frame" x="0.0" y="258" width="560" height="17"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YSN-cG-9k9">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="mR3-oT-mzc"/>
+                                            <constraint firstAttribute="height" constant="40" id="9vQ-c2-DNu"/>
+                                            <constraint firstAttribute="width" constant="340" id="cmJ-xD-9YD"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
+                                        <state key="normal" title="Don't have an account? Sign up.">
+                                            <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="mR3-oT-mzc"/>
+                                                <exclude reference="9vQ-c2-DNu"/>
+                                                <exclude reference="cmJ-xD-9YD"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="mR3-oT-mzc"/>
+                                                <include reference="9vQ-c2-DNu"/>
+                                                <include reference="cmJ-xD-9YD"/>
                                             </mask>
                                         </variation>
-                                    </label>
+                                        <connections>
+                                            <action selector="signUpButtonClicked:" destination="Fvb-jc-6a9" eventType="touchUpInside" id="f9Y-rx-2KM"/>
+                                        </connections>
+                                    </button>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Sqg-7o-oon">
                                         <rect key="frame" x="0.0" y="285" width="560" height="20"/>
                                         <constraints>
@@ -449,8 +456,7 @@
                                                 <exclude reference="sVD-Yg-Xi7"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="130" width="360" height="252"/>
+                                        <variation key="widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="sVD-Yg-Xi7"/>
                                             </mask>
@@ -469,8 +475,7 @@
                                                 <exclude reference="MWn-tL-SpZ"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="392" width="360" height="70"/>
+                                        <variation key="widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="MWn-tL-SpZ"/>
                                             </mask>
@@ -492,8 +497,7 @@
                                                 <exclude reference="WXS-un-4rF"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="472" width="360" height="40"/>
+                                        <variation key="widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="88d-Ck-mtK"/>
                                                 <include reference="WXS-un-4rF"/>

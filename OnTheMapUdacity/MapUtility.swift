@@ -112,9 +112,9 @@ class MapUtility: NSObject {
         request.addValue(Constants.Student.ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(Constants.Student.RestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let username = "Mariane"//appDelegate.firstName
+        let username = "Maria"//appDelegate.firstName
         
-        let lastname = "lassy"//appDelegate.lastName
+        let lastname = "Geneva Parker"//appDelegate.lastName
         let key = appDelegate.udacityUserInformation?.key
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let str = "{\"uniqueKey\": \"\(key)\", \"firstName\": \"\(username)\", \"lastName\": \"\(lastname)\",\"mapString\": \"\(address)\", \"mediaURL\": \"\(link)\",\"latitude\": \(coor.latitude), \"longitude\": \(coor.longitude)}"
