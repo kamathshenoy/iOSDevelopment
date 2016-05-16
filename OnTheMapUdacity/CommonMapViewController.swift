@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 class CommonMapViewController:  UIViewController{
-    
-   
-    
     @IBAction func addLocation(){
         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddLocationViewController")
         self.presentViewController(controller, animated: true, completion: nil)
@@ -20,12 +17,9 @@ class CommonMapViewController:  UIViewController{
     @IBAction func logout() {
         self.dismissViewControllerAnimated(false, completion: nil)
         MapUtility.sharedInstance().logoutUdacity() { (data, error) in
-            
             if error != nil { // Handle error…
-                
                 return
             }
-            
             if data != nil {
                 print("LOGGED OUT")
             }
@@ -38,6 +32,5 @@ class CommonMapViewController:  UIViewController{
         self.presentViewController(alert, animated: true, completion: nil)
         return
     }
-
     
 }

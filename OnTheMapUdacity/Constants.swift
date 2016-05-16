@@ -1,9 +1,9 @@
 //
 //  Constants.swift
-//  SleepingInTheLibrary
+//  OnTheMapUdacity
 //
-//  Created by Jarrod Parkes on 11/5/15.
-//  Copyright © 2015 Udacity. All rights reserved.
+//  Created by Sheethal Shenoy on 4/18/16.
+//  Copyright © 2016 Sheethal Shenoy. All rights reserved.
 //
 
 import UIKit
@@ -29,8 +29,6 @@ struct Constants {
         static let user = "user"
         static let FirstName = "first_name"
         static let LastName = "last_name"
-        
-
     }
     
     struct  ErrorMsgs {
@@ -39,6 +37,10 @@ struct Constants {
         static let FacebookError = "Feature not implemented. Please upgrade to next version!"
         static let AddLinkErrorMsg = "Please enter a valid link."
         static let AddLinkSuccessMsg = "Your post was successful."
+        static let LoginErrorMsg = "Username or Password Empty."
+        static let LocationErrorMsg = "Please enter a valid location"
+        static let ReloadErrorMsg = "Unable to refresh data. Try again!"
+        static let URLErrorMsg = "Invalid URL. Try some other URL!"
     }
     
     struct Student {
@@ -53,7 +55,6 @@ struct Constants {
      
     }
     
-    
     struct StudentLocation {
         static let CreatedAt =  "createdAt"
         static let FirstName = "firstName"
@@ -67,22 +68,7 @@ struct Constants {
         static let UpdatedAt = "updatedAt"
     }
     
-    
-    // MARK: TMDB Parameter Keys
-    struct TMDBParameterKeys {
-        static let ApiKey = "api_key"
-        static let RequestToken = "request_token"
-        static let SessionID = "session_id"
-        static let Username = "username"
-        static let Password = "password"
-    }
-    
-    // MARK: TMDB Parameter Values
-    struct TMDBParameterValues {
-        static let ApiKey = "c59caf3dda17a95e037c70739ec2a847"
-    }
-    
-    // MARK: TMDB Response Keys
+    //Response Keys
     struct ParseResponseKeys {
         static let Title = "title"
         static let ID = "id"

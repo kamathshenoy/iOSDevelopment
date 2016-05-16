@@ -26,10 +26,10 @@ class MapUtility: NSObject {
                 } else {
                 
                     if let results = results![Constants.ParseResponseKeys.Results] as? [[String:AnyObject]]! {
-                        print("got results")
+                       
                         completionHandlerForLocations(result: results, error: nil)
                     } else {
-                        print("no results")
+                        
                         completionHandlerForLocations(result: nil, error: NSError(domain: "getStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not get getStudentLocations"]))
                     }
                 }
@@ -115,7 +115,7 @@ class MapUtility: NSObject {
         let username = "Mariane"//appDelegate.firstName
         
         let lastname = "lassy"//appDelegate.lastName
-        let key = appDelegate.key
+        let key = appDelegate.udacityUserInformation?.key
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let str = "{\"uniqueKey\": \"\(key)\", \"firstName\": \"\(username)\", \"lastName\": \"\(lastname)\",\"mapString\": \"\(address)\", \"mediaURL\": \"\(link)\",\"latitude\": \(coor.latitude), \"longitude\": \(coor.longitude)}"
         request.HTTPBody = str.dataUsingEncoding(NSUTF8StringEncoding)
@@ -129,24 +129,20 @@ class MapUtility: NSObject {
                 return
             }
             
-            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-            
             // parse the data
             let parsedResult: AnyObject!
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
             } catch {
-                print("++++++++++Could not parse the data as JSON: '\(data)'")
+                print("Could not parse the data as JSON: '\(data)'")
                 let info = [NSLocalizedDescriptionKey : "Error occured, Please try again!"]
                 completionHandlerForSubmit(data: nil, error: NSError(domain: "completionHandlerForSubmit", code: 1, userInfo: info))
 
                 return
             }
             
-            print("=========================",parsedResult)
-            
             guard let objectID = parsedResult[Constants.Login.ObjectID] as? String else {
-                print(" ++++++++See error code and message in \(parsedResult)")
+                print(" See error code and message in \(parsedResult)")
                 let info = [NSLocalizedDescriptionKey : "Error occured, Please try again!"]
                 completionHandlerForSubmit(data: nil, error: NSError(domain: "completionHandlerForSubmit", code: 1, userInfo: info))
                 return
@@ -248,9 +244,6 @@ class MapUtility: NSObject {
                 return
             }
             
-            print("parsedResult",parsedResult)
-            
-            
             guard let sessionResult = parsedResult[Constants.Login.Account] as? [String:AnyObject] else {
                 print(" See error code and message \(parsedResult)")
                 return
@@ -261,8 +254,6 @@ class MapUtility: NSObject {
                 print("Cannot find key 'session id ")
                 return
             }
-            print("loginUdacity - NO ERROR")
-
             completionHandlerForLogin(result: userid, error: nil)
             
         }
@@ -271,11 +262,10 @@ class MapUtility: NSObject {
     }
     
     
-    func getRequestTokenFromUdacity(completionHandlerForRequestToken: (result: AnyObject?, error: NSError?) -> Void){
+    func getRequestTokenFromUdacity(key: String, completionHandlerForRequestToken: (result: AnyObject?, error: NSError?) -> Void){
         
         
-        let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().udacityURLFromParameters([String:AnyObject](), withPathExtension: [Constants.Login.Userdata,(appDelegate.key) ]))
-        print("self.appDelegate.key",appDelegate.key)
+        let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().udacityURLFromParameters([String:AnyObject](), withPathExtension: [Constants.Login.Userdata, key]))
         
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
@@ -318,8 +308,6 @@ class MapUtility: NSObject {
                 print(" Can't find the lastname in \(parsedResult)")
                 return
             }
-            print("getRequestTokenFromUdacity - NO ERROR")
-            
             completionHandlerForRequestToken(result: [firstName,lastName], error: nil)
         }
         task.resume()
@@ -334,27 +322,22 @@ class MapUtility: NSObject {
         let components = NSURLComponents()
         components.scheme = Constants.Login.ApiScheme
         components.host = Constants.Login.ApiHost
-       // print("++++++", components.URL)
-
         var path = Constants.Login.ApiPath
         for (extn) in withPathExtension! {
             path = path + "/"+extn ?? ""
         }
         components.path = path//Constants.Login.ApiPath + (withPathExtension[0] ?? "")
-       // print("===========", components.path)
-       // print("===========", components.URL)
+       
         return components.URL!
     }
     
     
     // create a URL from parameters
     func parseURLFromParameters(parameters: [String:AnyObject], withPathExtension: String? = nil) -> NSURL {
-        
         let components = NSURLComponents()
         components.scheme = Constants.Student.ApiScheme
         components.host = Constants.Student.ApiHost
         components.path = Constants.Student.ApiPath + (withPathExtension ?? "")
-        print("=======parse===", components.URL)
         return components.URL!
     }
 

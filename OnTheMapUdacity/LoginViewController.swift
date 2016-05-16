@@ -1,9 +1,9 @@
 //
 //  LoginViewController.swift
-//  MyFavoriteMovies
+//  OnTheMapUdacity
 //
-//  Created by Jarrod Parkes on 1/23/15.
-//  Copyright (c) 2015 Udacity. All rights reserved.
+//  Created by Sheethal Shenoy on 5/2/16.
+//  Copyright © 2016 Sheethal Shenoy. All rights reserved.
 //
 
 import UIKit
@@ -33,7 +33,6 @@ class LoginViewController: UIViewController {
         appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         configureUI()
-        
         subscribeToNotification(UIKeyboardWillShowNotification, selector: Constants.Selectors.KeyboardWillShow)
         subscribeToNotification(UIKeyboardWillHideNotification, selector: Constants.Selectors.KeyboardWillHide)
         subscribeToNotification(UIKeyboardDidShowNotification, selector: Constants.Selectors.KeyboardDidShow)
@@ -41,7 +40,6 @@ class LoginViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-       
         activityController.hidden = true
     }
     
@@ -50,15 +48,13 @@ class LoginViewController: UIViewController {
         unsubscribeFromAllNotifications()
     }
     
-    // MARK: Login
     
     @IBAction func loginPressed(sender: AnyObject) {
         
         userDidTapView(self)
         
         if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
-            showAlertMsg("Username or Password Empty.")
-            
+            showAlertMsg(Constants.ErrorMsgs.LoginErrorMsg)
             usernameTextField.text = ""
             passwordTextField.text = ""
             setUIEnabled(true)
@@ -67,9 +63,7 @@ class LoginViewController: UIViewController {
             activityController.hidden = false
             activityController.startAnimating()
             getRequestToken()
-            
         }
-        
     }
     
     
@@ -84,31 +78,23 @@ class LoginViewController: UIViewController {
     }
     
     private func resetInputFields() -> Void {
-       
         self.usernameTextField.text = ""
         self.passwordTextField.text = ""
     }
     
-    // MARK: TheMovieDB
     
     private func getRequestToken() {
-        
         MapUtility.sharedInstance().loginUdacity { (data, error) in
-           
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue()){
                         self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
                         return
                     }
                 }else{
-                    self.appDelegate.key = data as! String
-                    print("Key",self.appDelegate.key)
-                    self.getUserData()
+                    /*self.appDelegate.udacityUserInformation?.setValue(data as! String, forKey: UdacityClientStore.UdacityCientKeys.key)*/
+                    self.getUserData(data as! String)
                 }
-         
         }
-
-       
         
     }
     
@@ -126,38 +112,31 @@ class LoginViewController: UIViewController {
     }
     
     
-    private func getUserData() {
-        
-        MapUtility.sharedInstance().getRequestTokenFromUdacity { (data, error) in
-            
+    private func getUserData(key:String) {
+        MapUtility.sharedInstance().getRequestTokenFromUdacity(key) { (data, error) in
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue()){
                         self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
                         return
                     }
                 }else{
-                    
-                    self.appDelegate.firstName = data![0] as! String
-                    self.appDelegate.lastName = data![1] as! String
-                    print("No error, recieved the first and lastname", self.appDelegate.lastName, self.appDelegate.firstName)
+                    UdacityClientStore.init(key: key, fName:  data![0] as! String, lName:  data![1] as! String)
+                    //self.appDelegate.udacityUserInformation?.firstName = data![0] as! String
+                   // self.appDelegate.udacityUserInformation?.lastName = data![1] as! String
+                    print("No error, recieved the first and lastname", self.appDelegate.udacityUserInformation?.lastName, self.appDelegate.udacityUserInformation?.firstName)
                     self.getStudentLocations()
-                    
                 }
             }
-        
     }
     
     
     private func getStudentLocations(){
-        
         appDelegate.studentLocations.removeAll()
         MapUtility.sharedInstance().getStudentLocations { (locations, error) in
             if error == nil {
-                print("got student location")
                 MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
                 self.completeLogin()
             }else{
-                print("did not get student location")
                 dispatch_async(dispatch_get_main_queue()){
                     self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
                     return
@@ -183,7 +162,6 @@ extension LoginViewController: UITextFieldDelegate {
     // MARK: Show/Hide Keyboard
     
     func keyboardWillShow(notification: NSNotification) {
-        print("keyboardWillShow")
        /* if !keyboardOnScreen {
             view.frame.origin.y -= keyboardHeight(notification)
             //movieImageView.hidden = true

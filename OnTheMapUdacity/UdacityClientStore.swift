@@ -10,9 +10,14 @@ import Foundation
 
 class UdacityClientStore: NSObject {
     
-    struct UserInformation {
-        var key: String
-        var firstName: String
-        var lastName: String
+    var key : String = ""
+    var firstName : String = ""
+    var lastName :String = ""
+   
+
+    init(key: String, fName: String, lName : String) {
+        self.key = key
+        firstName = fName
+        lastName = lName
     }
 }

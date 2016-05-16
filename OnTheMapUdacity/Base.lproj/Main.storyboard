@@ -130,8 +130,11 @@
             <objects>
                 <viewController storyboardIdentifier="MapViewController" title="MapViewController" id="efj-aV-f3X" customClass="MapViewController" customModule="OnTheMapUdacity" sceneMemberID="viewController">
                     <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="zYY-Qw-Tmh">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <connections>
+                            <outlet property="delegate" destination="efj-aV-f3X" id="nBf-fF-UQL"/>
+                        </connections>
                     </mapView>
                     <navigationItem key="navigationItem" title="On the Map" id="Yfw-aT-o47">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="f6n-zi-oYu">
@@ -274,8 +277,7 @@
                                                 <exclude reference="mR3-oT-mzc"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="258" width="360" height="40"/>
+                                        <variation key="widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="mR3-oT-mzc"/>
                                             </mask>
@@ -291,8 +293,7 @@
                                                 <exclude reference="vdz-8w-1wt"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="308" width="360" height="99"/>
+                                        <variation key="widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="vdz-8w-1wt"/>
                                             </mask>
@@ -311,8 +312,7 @@
                                                 <exclude reference="Q8D-NR-ACu"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="417" width="360" height="60"/>
+                                        <variation key="widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="Q8D-NR-ACu"/>
                                             </mask>
@@ -336,8 +336,7 @@
                                                 <exclude reference="tCN-rI-1Zm"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="487" width="360" height="40"/>
+                                        <variation key="widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="GLd-Xq-xsB"/>
                                                 <include reference="tCN-rI-1Zm"/>
@@ -450,7 +449,8 @@
                                                 <exclude reference="sVD-Yg-Xi7"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="130" width="360" height="252"/>
                                             <mask key="constraints">
                                                 <include reference="sVD-Yg-Xi7"/>
                                             </mask>
@@ -469,7 +469,8 @@
                                                 <exclude reference="MWn-tL-SpZ"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="392" width="360" height="70"/>
                                             <mask key="constraints">
                                                 <include reference="MWn-tL-SpZ"/>
                                             </mask>
@@ -491,7 +492,8 @@
                                                 <exclude reference="WXS-un-4rF"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="472" width="360" height="40"/>
                                             <mask key="constraints">
                                                 <include reference="88d-Ck-mtK"/>
                                                 <include reference="WXS-un-4rF"/>

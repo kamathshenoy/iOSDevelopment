@@ -1,20 +1,21 @@
-//
-//  GenreTableViewController.swift
-//  MyFavoriteMovies
-//
-//
 
+//
+//  MapListViewController.swift
+//  OnTheMapUdacity
+//
+//  Created by Sheethal Shenoy on 5/2/16.
+//  Copyright © 2016 Sheethal Shenoy. All rights reserved.
+//
 import UIKit
 import MapKit
 
 
 class MapListViewController: CommonMapViewController, UITableViewDelegate, UITableViewDataSource {
     
-    // MARK: Properties
-    
     var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var titles: [String] = [String]()
-    var genreID: Int? = nil
+    var links: [String] = [String]()
+    
     
     @IBOutlet weak var logoutBtn: UIBarButtonItem!
     // MARK: Life Cycle
@@ -25,33 +26,29 @@ class MapListViewController: CommonMapViewController, UITableViewDelegate, UITab
     }
     
     func loaddata() -> Void {
-        
         for dictionary in appDelegate.studentLocations {
             let title = dictionary.fullName
-            
             let trimmedString = title.stringByTrimmingCharactersInSet(
                 NSCharacterSet.whitespaceAndNewlineCharacterSet()
             )
             
             if(trimmedString.characters.count > 0 && !self.titles.contains(trimmedString)){
                 self.titles.append(title)
+                self.links.append(dictionary.mediaURL)
                  print(" unique")
             }else{
                 print("not unique")
             }
         }
          self.reloadTable()
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         
-       
-        /* TASK: Get movies by a genre id, then populate the table */
     }
     
     func reloadTable() ->Void {
-         print("reloadTable")
+        print("reloadTable")
         dispatch_async(dispatch_get_main_queue()) {
             self.reloadInputViews()
         }
@@ -65,48 +62,18 @@ class MapListViewController: CommonMapViewController, UITableViewDelegate, UITab
                 self.loaddata()
                 self.reloadTable()
             }else{
-                self.showAlertMsg("Unable to refresh data. Try again!")
-            }
-        }
-
-    }
-    
-    
-
-    
-   /* @IBAction func addLocation(){
-        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddLocationViewController")
-        self.presentViewController(controller, animated: true, completion: nil)
-    }
-    
-    // MARK: Logout
-    @IBAction func logout() {
-        MapUtility.sharedInstance().logoutUdacity() { (data, error) in
-            
-            if error != nil { // Handle error…
-                self.showAlertMsg(Constants.ErrorMsgs.LogoutErrorMsg)
-            }
-            
-            if data != nil {
-                self.dismissViewControllerAnimated(false, completion: nil)
+                self.showAlertMsg(Constants.ErrorMsgs.ReloadErrorMsg)
             }
         }
     }
     
-    func showAlertMsg(msg:String)->Void {
-        let alert = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-        return
-    }*/
-    
-   }
+}
 
 
 
 extension MapListViewController {
 
-       func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         // get cell type
         let cellReuseIdentifier = "StudentsCell"
@@ -115,23 +82,31 @@ extension MapListViewController {
         
         // set cell defaults
         cell.textLabel!.text = title
-       
         return cell
     }
     
-       func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.titles.count
     }
     
     
-      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        /*
-        // push the movie detail view
-        let controller = storyboard!.instantiateViewControllerWithIdentifier("MapListViewController") as! MovieDetailViewController
-        controller.movie = movies[indexPath.row]
-        navigationController!.pushViewController(controller, animated: true)*/
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let toOpen =  links[indexPath.row]
+        if validateUrl(toOpen) {
+            UIApplication.sharedApplication().openURL(NSURL(string: toOpen)!)
+        } else {
+            showAlertMsg(Constants.ErrorMsgs.URLErrorMsg)
+        }
+
     }
     
+    func validateUrl (urlString: String?) -> Bool {
+        if let urlString = urlString {
+            if let url = NSURL(string: urlString) {
+                return UIApplication.sharedApplication().canOpenURL(url)
+            }
+        }
+        return false
+    }
 
 }

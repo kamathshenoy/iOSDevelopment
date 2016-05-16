@@ -10,19 +10,17 @@
 import UIKit
 import MapKit
 
-class ShowLocationViewController: UIViewController {
+class ShowLocationViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var activityController: UIActivityIndicatorView!
-    
-    // The map. See the setup in the Storyboard file. Note particularly that the view controller
-    // is set up as the map view's delegate.
     @IBOutlet weak var mapView: MKMapView!
-    //var myLocation = CLLocation(latitude: your_latitiude_value, longitude: your_longitude_value)
+    
     var coor:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
-    var address = ""
+    var address:String = ""
     var keyboardOnScreen = false
     
     @IBOutlet weak var linkTextField: UITextField!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +36,9 @@ class ShowLocationViewController: UIViewController {
         
         self.mapView.addAnnotation(annotation)
         self.mapView.reloadInputViews()
-         
+        let region = MKCoordinateRegionMakeWithDistance(coor, 10000, 10000)
+        
+        mapView.setRegion(region, animated: true)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -51,42 +51,35 @@ class ShowLocationViewController: UIViewController {
         activityController.hidden = false
         activityController.startAnimating()
         let link = linkTextField.text!
-        print("link",link)
+        
         guard link.characters.count > 0   else {
-            print("link is nil")
+            
             self.showAlertErrorMsg(Constants.ErrorMsgs.AddLinkErrorMsg)
             return
         }
         textFieldShouldReturn(linkTextField)
         submit(link, address: address)
-       
     }
     
     
     private func showNextScene() -> Void {
-        print("next scene")
         dispatch_async(dispatch_get_main_queue()) {
             
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabViewController") as! UITabBarController
             self.presentViewController(controller, animated: true, completion: nil)
         }
-      
     }
     
        
     @IBAction func cancel(){
        // self.dismissViewControllerAnimated(false, completion: nil)
-        
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: {
                 let secondPresentingVC = self.presentingViewController?.presentingViewController;
                 secondPresentingVC?.dismissViewControllerAnimated(true, completion: {});
             });
-        
-        
     }
     
     private func submit(link: String, address:String) {
-       
         MapUtility.sharedInstance().submitData(coor, link: link, address: address) { (data, error) in
             dispatch_async(dispatch_get_main_queue()){
                 self.activityController.stopAnimating()
@@ -101,7 +94,6 @@ class ShowLocationViewController: UIViewController {
     }
     
     
-    
     func showAlertErrorMsg(errorMsg:String) ->Void{
         let alert = UIAlertController(title: "", message: errorMsg, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
@@ -110,27 +102,21 @@ class ShowLocationViewController: UIViewController {
 
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        
         let reuseId = "pin"
-        
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
         
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
-            pinView!.pinColor = .Red
-            pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+            pinView!.pinTintColor = UIColor.redColor()
         }
         else {
             pinView!.annotation = annotation
         }
-        
         return pinView
     }
     
     
-    // This delegate method is implemented to respond to taps. It opens the system browser
-    // to the URL specified in the annotationViews subtitle property.
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.sharedApplication()
@@ -139,21 +125,11 @@ class ShowLocationViewController: UIViewController {
             }
         }
     }
-    //    func mapView(mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-    //
-    //        if control == annotationView.rightCalloutAccessoryView {
-    //            let app = UIApplication.sharedApplication()
-    //            app.openURL(NSURL(string: annotationView.annotation.subtitle))
-    //        }
-    //    }
-   }
-
+}
 
 
 
 extension ShowLocationViewController: UITextFieldDelegate {
-    
-   
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
