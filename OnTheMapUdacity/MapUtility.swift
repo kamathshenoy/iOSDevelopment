@@ -106,12 +106,13 @@ class MapUtility: NSObject {
     }
     
     
+    
     func submitData(coor:CLLocationCoordinate2D, link: String, address:String, completionHandlerForSubmit: (data: AnyObject?, error: NSError?) -> Void) -> Void {
         let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().parseURLFromParameters([String:AnyObject](), withPathExtension: Constants.Student.StudentLocation))
         request.HTTPMethod = "POST"
         request.addValue(Constants.Student.ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(Constants.Student.RestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
         let username = "Maria"//appDelegate.firstName
         
         let lastname = "Geneva Parker"//appDelegate.lastName

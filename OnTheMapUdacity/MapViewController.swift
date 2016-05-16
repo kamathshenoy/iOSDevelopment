@@ -17,7 +17,8 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.mapView.addAnnotations(self.appDelegate.studentLocations)
+        
+        mapView.addAnnotations(self.appDelegate.studentLocations)
     }
     
     func reloadView() ->Void {
@@ -31,7 +32,7 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
     
     @IBAction func refresh(sender: AnyObject) {
         appDelegate.studentLocations.removeAll()
-        mapView.removeAnnotations(mapView.annotations)
+        
         MapUtility.sharedInstance().getStudentLocations { (locations, error) in
             if error == nil {
                 MapUtility.sharedInstance().populateStudentLocations(locations, error: error)

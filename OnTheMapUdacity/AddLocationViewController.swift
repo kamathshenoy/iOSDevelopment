@@ -11,8 +11,7 @@ import AddressBookUI
 
 
 class AddLocationViewController: UIViewController {
-    
-    var appDelegate: AppDelegate!
+   
     var keyboardOnScreen = false
     
     @IBOutlet weak var addressTextField: UITextField!

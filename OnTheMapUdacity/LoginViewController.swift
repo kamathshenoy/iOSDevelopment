@@ -91,7 +91,6 @@ class LoginViewController: UIViewController {
                         return
                     }
                 }else{
-                    /*self.appDelegate.udacityUserInformation?.setValue(data as! String, forKey: UdacityClientStore.UdacityCientKeys.key)*/
                     self.getUserData(data as! String)
                 }
         }
@@ -121,9 +120,6 @@ class LoginViewController: UIViewController {
                     }
                 }else{
                     UdacityClientStore(key: key, fName:  data![0] as! String, lName:  data![1] as! String)
-                    //self.appDelegate.udacityUserInformation?.firstName = data![0] as! String
-                   // self.appDelegate.udacityUserInformation?.lastName = data![1] as! String
-                    print("No error, recieved the first and lastname", self.appDelegate.udacityUserInformation?.lastName, self.appDelegate.udacityUserInformation?.firstName)
                     self.getStudentLocations()
                 }
             }
@@ -135,8 +131,6 @@ class LoginViewController: UIViewController {
             UIApplication.sharedApplication().openURL(url)
         }
     }
-
-    
     
     private func getStudentLocations(){
         appDelegate.studentLocations.removeAll()
@@ -152,7 +146,9 @@ class LoginViewController: UIViewController {
             }
         }
     }
-}
+
+    
+   }
 
 
 

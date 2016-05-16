@@ -15,7 +15,9 @@ class CommonMapViewController:  UIViewController{
     }
     
     @IBAction func logout() {
-        self.dismissViewControllerAnimated(false, completion: nil)
+       /// self.dismissViewControllerAnimated(false, completion: nil)
+        self.view.window!.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
+        
         MapUtility.sharedInstance().logoutUdacity() { (data, error) in
             if error != nil { // Handle error…
                 return

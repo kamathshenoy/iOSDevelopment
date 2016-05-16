@@ -72,7 +72,15 @@ class ShowLocationViewController: UIViewController, MKMapViewDelegate {
     
        
     @IBAction func cancel(){
-       //self.dismissViewControllerAnimated(false, completion: nil)
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+       
+        appDelegate.studentLocations.removeAll()
+        MapUtility.sharedInstance().getStudentLocations { (locations, error) in
+            if error == nil {
+                MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
+            }
+        }
+        
         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabViewController") as! UITabBarController
         self.presentViewController(controller, animated: true, completion: nil)
         
@@ -86,7 +94,10 @@ class ShowLocationViewController: UIViewController, MKMapViewDelegate {
                     self.showAlertErrorMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
                     return
                 }else{
-                    self.showAlertErrorMsg(Constants.ErrorMsgs.AddLinkSuccessMsg)
+                    
+                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabViewController") as! UITabBarController
+                    self.presentViewController(controller, animated: true, completion: nil)
+                    
                 }
             }
         }
@@ -96,7 +107,9 @@ class ShowLocationViewController: UIViewController, MKMapViewDelegate {
     func showAlertErrorMsg(errorMsg:String) ->Void{
         let alert = UIAlertController(title: "", message: errorMsg, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.presentViewController(alert, animated: true, completion: {
+            
+        })
     }
 
     
