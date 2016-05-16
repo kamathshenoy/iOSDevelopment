@@ -42,6 +42,7 @@ struct Constants {
         static let LocationErrorMsg = "Please enter a valid location"
         static let ReloadErrorMsg = "Unable to refresh data. Try again!"
         static let URLErrorMsg = "Invalid URL. Try some other URL!"
+        static let NetworkErrorMsg = "Your request returned a status code other than 2xx. Please check for internet connectivity"
     }
     
     struct Student {

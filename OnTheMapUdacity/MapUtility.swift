@@ -239,7 +239,7 @@ class MapUtility: NSObject {
             
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                let info = [NSLocalizedDescriptionKey : "Your request returned a status code other than 2xx."]
+                let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.NetworkErrorMsg]
                 completionHandlerForLogin(result: nil, error: NSError(domain: "completionHandlerForLogin", code: 1, userInfo: info))
                 //self.showAlertMsg("Your request returned a status code other than 2xx")
                 return
@@ -290,7 +290,7 @@ class MapUtility: NSObject {
             
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                let info = [NSLocalizedDescriptionKey : "Check you network. Recieved an status code other than 2xx."]
+                let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.NetworkErrorMsg]
                 completionHandlerForRequestToken(result: nil, error: NSError(domain: "completionHandlerForRequestToken", code: 1, userInfo: info))
                 return
             }
