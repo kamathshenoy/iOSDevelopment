@@ -23,31 +23,29 @@ class MapListViewController: CommonMapViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loaddata()
+       
     }
     
     func loaddata() -> Void {
+        print("student locations", appDelegate.studentLocations.count)
+        titles.removeAll()
+        links.removeAll()
+        
         for dictionary in appDelegate.studentLocations {
-            let title = dictionary.fullName
-            /*let trimmedString = title.stringByTrimmingCharactersInSet(
-                NSCharacterSet.whitespaceAndNewlineCharacterSet()
-            )
-            
-            if(trimmedString.characters.count > 0 && !self.titles.contains(trimmedString)){*/
-                self.titles.append(title)
-                self.links.append(dictionary.mediaURL)
-            //}
+            self.titles.append(dictionary.fullName)
+            self.links.append(dictionary.mediaURL)
         }
         self.reloadTable()
     }
     
     override func viewWillAppear(animated: Bool) {
-        
+         loaddata()
     }
     
     func reloadTable() ->Void {
         print("reloadTable")
         dispatch_async(dispatch_get_main_queue()) {
+            
             self.tableView.reloadData()
         }
     }
