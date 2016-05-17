@@ -72,15 +72,6 @@ struct Constants {
     
     //Response Keys
     struct ParseResponseKeys {
-        static let Title = "title"
-        static let ID = "id"
-        static let PosterPath = "poster_path"
-        static let StatusCode = "status_code"
-        static let StatusMessage = "status_message"
-        static let SessionID = "session_id"
-        static let RequestToken = "request_token"
-        static let Success = "success"
-        static let UserID = "id"
         static let Results = "results"
     }
     

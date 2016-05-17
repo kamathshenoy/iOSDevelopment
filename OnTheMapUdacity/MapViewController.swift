@@ -12,7 +12,7 @@ import MapKit
 
 class MapViewController: CommonMapViewController, MKMapViewDelegate {
 
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    var appDelegate = MapUtility.sharedInstance().appDelegate
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
         mapView.removeAnnotations(self.appDelegate.studentLocations)
 
         mapView.addAnnotations(self.appDelegate.studentLocations)
-        reloadView() 
+        //reloadView()
     }
     
     func reloadView() ->Void {

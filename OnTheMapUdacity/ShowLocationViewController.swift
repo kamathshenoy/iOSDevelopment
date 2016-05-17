@@ -86,15 +86,18 @@ class ShowLocationViewController: UIViewController, MKMapViewDelegate {
                     self.showAlertErrorMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
                     return
                 }else{
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                    
-                    appDelegate.studentLocations.removeAll()
-                    MapUtility.sharedInstance().getStudentLocations { (locations, error) in
-                        if error == nil {
-                            MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
-                        }
-                    }
-                    
+                    let appDelegate = MapUtility.sharedInstance().appDelegate
+                   
+                    //print("appDelegate.studentLocations", appDelegate.studentLocations.count)
+                    let first =  appDelegate.udacityUserInformation?.firstName
+                    let last = appDelegate.udacityUserInformation?.lastName
+                    let fullName = "\(first) \(last)"
+                    let annotation = StudentLocation(coordinate: self.coor, fullName: (fullName), mediaURL: link)
+                    annotation.coordinate = self.coor
+                    annotation.title = "\(first!) \(last!)"
+                    annotation.subtitle = link
+                    appDelegate.studentLocations.append(annotation)
+                    //print("appDelegate.studentLocations now", appDelegate.studentLocations.count)
                     let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabViewController") as! UITabBarController
                     self.presentViewController(controller, animated: true, completion: nil)
                     

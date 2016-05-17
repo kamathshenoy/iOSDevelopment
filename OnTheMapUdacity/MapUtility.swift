@@ -12,7 +12,7 @@ import MapKit
 
 class MapUtility: NSObject {
     
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
  
     func getStudentLocations(completionHandlerForLocations: (result: [[String:AnyObject]]?, error: NSError?) -> Void) {
         
@@ -112,12 +112,12 @@ class MapUtility: NSObject {
         request.addValue(Constants.Student.ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(Constants.Student.RestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         
-        var username = appDelegate.udacityUserInformation?.firstName
-        var lastname = appDelegate.udacityUserInformation?.lastName
+        let username = appDelegate.udacityUserInformation?.firstName
+        let lastname = appDelegate.udacityUserInformation?.lastName
         let key = appDelegate.udacityUserInformation?.key
         print("key ",key!," fname", username!, "lname", lastname!)
-        username = "danny"
-        lastname = "smith"
+        //username = "Wilma"
+        //lastname = "Nancy Perez"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let str = "{\"uniqueKey\": \"\(key!)\", \"firstName\": \"\(username!)\", \"lastName\": \"\(lastname!)\",\"mapString\": \"\(address)\", \"mediaURL\": \"\(link)\",\"latitude\": \(coor.latitude), \"longitude\": \(coor.longitude)}"
         print(str)
@@ -220,8 +220,8 @@ class MapUtility: NSObject {
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let username = /*username*/"sheethal.shenoy@gmail.com"
-        let password = /*password*/"Sriram123"
+        //let username = username
+        //let password = password
         let str = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}"
         
         

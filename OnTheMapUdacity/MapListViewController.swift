@@ -12,7 +12,7 @@ import MapKit
 
 class MapListViewController: CommonMapViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    var appDelegate = MapUtility.sharedInstance().appDelegate
     var titles: [String] = [String]()
     var links: [String] = [String]()
     
