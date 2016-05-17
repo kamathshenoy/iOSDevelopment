@@ -116,8 +116,8 @@ class MapUtility: NSObject {
         var lastname = appDelegate.udacityUserInformation?.lastName
         let key = appDelegate.udacityUserInformation?.key
         print("key ",key!," fname", username!, "lname", lastname!)
-        username = "Samuel"
-        lastname = "lina"
+        username = "danny"
+        lastname = "smith"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let str = "{\"uniqueKey\": \"\(key!)\", \"firstName\": \"\(username!)\", \"lastName\": \"\(lastname!)\",\"mapString\": \"\(address)\", \"mediaURL\": \"\(link)\",\"latitude\": \(coor.latitude), \"longitude\": \(coor.longitude)}"
         print(str)

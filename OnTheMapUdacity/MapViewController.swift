@@ -21,7 +21,10 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
+        mapView.removeAnnotations(self.appDelegate.studentLocations)
+
         mapView.addAnnotations(self.appDelegate.studentLocations)
+        reloadView() 
     }
     
     func reloadView() ->Void {
