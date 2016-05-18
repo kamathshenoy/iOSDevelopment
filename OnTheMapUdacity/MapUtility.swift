@@ -86,12 +86,12 @@ class MapUtility: NSObject {
         request.addValue(Constants.APIHEADERANDKEYS.ApplicationID_Key, forHTTPHeaderField: Constants.APIHEADERANDKEYS.ApplicationID_HeaderField)
         request.addValue(Constants.APIHEADERANDKEYS.RestAPI_Key, forHTTPHeaderField: Constants.APIHEADERANDKEYS.RestAPIKey_HeaderField)
         
-        var username = appDelegate.udacityUserInformation?.firstName
-        var lastname = appDelegate.udacityUserInformation?.lastName
+        let username = appDelegate.udacityUserInformation?.firstName
+        let lastname = appDelegate.udacityUserInformation?.lastName
         let key = appDelegate.udacityUserInformation?.key
         print("key ",key!," fname", username!, "lname", lastname!)
-         username = "Mille"//appDelegate.udacityUserInformation?.firstName
-         lastname = "Bushman"//appDelegate.udacityUserInformation?.lastName
+       //  username = "Jessica"//appDelegate.udacityUserInformation?.firstName
+        // lastname = "Alba"//appDelegate.udacityUserInformation?.lastName
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let str = "{\"uniqueKey\": \"\(key!)\", \"firstName\": \"\(username!)\", \"lastName\": \"\(lastname!)\",\"mapString\": \"\(address)\", \"mediaURL\": \"\(link)\",\"latitude\": \(coor.latitude), \"longitude\": \(coor.longitude)}"
         print(str)
@@ -194,8 +194,8 @@ class MapUtility: NSObject {
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let username = "sheethal.shenoy@gmail.com"
-        let password = "Sriram123"
+       // let username = username!
+        //let password = password!
         let str = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}"
         
         
