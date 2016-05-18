@@ -22,7 +22,7 @@ class MapUtility: NSObject {
             
             /* . Send the desired value(s) to completion handler */
                 if let _ = error {
-                    completionHandlerForLocations(result: nil, error: NSError(domain: "getStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not get getStudentLocations"]))
+                    completionHandlerForLocations(result: nil, error: NSError(domain: "getStudentLocations parsing", code: 0, userInfo: error?.userInfo))
                 } else {
                 
                     if let results = results![Constants.ParseResponseKeys.Results] as? [[String:AnyObject]]! {
@@ -30,63 +30,37 @@ class MapUtility: NSObject {
                         completionHandlerForLocations(result: results, error: nil)
                     } else {
                         
-                        completionHandlerForLocations(result: nil, error: NSError(domain: "getStudentLocations parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not get getStudentLocations"]))
+                        completionHandlerForLocations(result: nil, error: NSError(domain: "getStudentLocations parsing", code: 0, userInfo: error?.userInfo))
                     }
                 }
             }
         }
     }
     
-    func populateStudentLocations(locations :[[String:AnyObject]]?, error: NSError?)->Void{
-        var stuLocs = appDelegate.studentLocations
-        if let locations = locations {
-            for dictionary in locations {
-                
-                let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-                let long = CLLocationDegrees(dictionary["longitude"] as! Double)
-                
-                // The lat and long are used to create a CLLocationCoordinates2D instance.
-                let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                
-                let first = dictionary["firstName"] as! String
-                let last = dictionary["lastName"] as! String
-                let mediaURL = dictionary["mediaURL"] as! String
-                let fullName = "\(first) \(last)"
-
-                // Here we create the annotation and set its coordiate, title, and subtitle properties
-                let annotation = StudentLocation(coordinate: coordinate, fullName: (fullName), mediaURL: mediaURL)
-                annotation.coordinate = coordinate
-                annotation.title = "\(first) \(last)"
-                annotation.subtitle = mediaURL
-                stuLocs.append(annotation)
-                
-            }
-            appDelegate.studentLocations = stuLocs
-            
-        }else{
-            print("Unable to get student locations", error)
-        }
-    }
-    
- 
     
    func taskForGETData(completionHandlerForGET: (data: AnyObject?, error: NSError?) -> Void) -> NSURLSessionTask {
-        let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().parseURLFromParameters([String:AnyObject](), withPathExtension: Constants.Student.StudentLocation))
-        
-       // let request = NSMutableURLRequest(URL:  NSURL(string:filePath)!)
-        request.addValue(Constants.Student.ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue(Constants.Student.RestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+    
+        let methodParameters = [
+        Constants.APIHEADERANDKEYS.Order_Key : Constants.APIHEADERANDKEYS.UpdatedAt_Value]
+    
+        let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().parseURLFromParameters(methodParameters, withPathExtension: [Constants.Student.StudentLocation]))
+    
+        request.addValue(Constants.APIHEADERANDKEYS.ApplicationID_Key, forHTTPHeaderField: Constants.APIHEADERANDKEYS.ApplicationID_HeaderField)
+        request.addValue(Constants.APIHEADERANDKEYS.RestAPI_Key, forHTTPHeaderField: Constants.APIHEADERANDKEYS.RestAPIKey_HeaderField)
+    
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             
             guard (error == nil) else {
                 print("There was an error with your request: \(error)")
+                completionHandlerForGET(data: nil, error: NSError(domain: "taskForGETData ", code: 0, userInfo: [NSLocalizedDescriptionKey: Constants.ErrorMsgs.ConnectivityrrorMsg]))
                 return
             }
             
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
                 print("Your request returned a status code other than 2xx!")
+                completionHandlerForGET(data: nil, error: NSError(domain: "taskForGETData ", code: 0, userInfo: [NSLocalizedDescriptionKey: Constants.ErrorMsgs.NetworkErrorMsg]))
                 return
             }
             
@@ -107,16 +81,17 @@ class MapUtility: NSObject {
     }
     
     func submitData(coor:CLLocationCoordinate2D, link: String, address:String, completionHandlerForSubmit: (data: AnyObject?, error: NSError?) -> Void) -> Void {
-        let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().parseURLFromParameters([String:AnyObject](), withPathExtension: Constants.Student.StudentLocation))
+        let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().parseURLFromParameters([String:AnyObject](), withPathExtension: [Constants.Student.StudentLocation]))
         request.HTTPMethod = "POST"
-        request.addValue(Constants.Student.ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue(Constants.Student.RestAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue(Constants.APIHEADERANDKEYS.ApplicationID_Key, forHTTPHeaderField: Constants.APIHEADERANDKEYS.ApplicationID_HeaderField)
+        request.addValue(Constants.APIHEADERANDKEYS.RestAPI_Key, forHTTPHeaderField: Constants.APIHEADERANDKEYS.RestAPIKey_HeaderField)
         
-        let username = appDelegate.udacityUserInformation?.firstName
-        let lastname = appDelegate.udacityUserInformation?.lastName
+        var username = appDelegate.udacityUserInformation?.firstName
+        var lastname = appDelegate.udacityUserInformation?.lastName
         let key = appDelegate.udacityUserInformation?.key
         print("key ",key!," fname", username!, "lname", lastname!)
-        
+         username = "Mille"//appDelegate.udacityUserInformation?.firstName
+         lastname = "Bushman"//appDelegate.udacityUserInformation?.lastName
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let str = "{\"uniqueKey\": \"\(key!)\", \"firstName\": \"\(username!)\", \"lastName\": \"\(lastname!)\",\"mapString\": \"\(address)\", \"mediaURL\": \"\(link)\",\"latitude\": \(coor.latitude), \"longitude\": \(coor.longitude)}"
         print(str)
@@ -219,19 +194,26 @@ class MapUtility: NSObject {
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        //let username = username
-        //let password = password
+        let username = "sheethal.shenoy@gmail.com"
+        let password = "Sriram123"
         let str = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}"
         
         
         request.HTTPBody = str.dataUsingEncoding(NSUTF8StringEncoding)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
+            
             if error != nil { // Handle error…
-                //self.showAlertMsg( "Username or Password not correct.")
-                let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.LoginErrorMsg]
-                completionHandlerForLogin(result: nil, error: NSError(domain: "completionHandlerForLogin", code: 1, userInfo: info))
-                return
+                /*if error!.domain == NSURLErrorDomain && error!.code == NSURLErrorNotConnectedToInternet {
+                    let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.ConnectivityrrorMsg]
+                    completionHandlerForLogin(result: nil, error: NSError(domain: "completionHandlerForLogin",  code: 1, userInfo: info))
+                    return
+                }else{*/
+                print("NO INTERNET CONNECTION")
+                    let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.NetworkErrorMsg]
+                    completionHandlerForLogin(result: nil, error: NSError(domain: "completionHandlerForLogin",  code: 1, userInfo: info))
+                    return
+               // }
                 
             }
            
@@ -240,9 +222,9 @@ class MapUtility: NSObject {
             
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.NetworkErrorMsg]
+                let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.LoginErrorMsg]
                 completionHandlerForLogin(result: nil, error: NSError(domain: "completionHandlerForLogin", code: 1, userInfo: info))
-                //self.showAlertMsg("Your request returned a status code other than 2xx")
+                
                 return
             }
             
@@ -257,12 +239,14 @@ class MapUtility: NSObject {
             
             guard let sessionResult = parsedResult[Constants.Login.Account] as? [String:AnyObject] else {
                 print(" See error code and message \(parsedResult)")
+                completionHandlerForLogin(result: nil, error: NSError(domain: "taskForGETData ", code: 0, userInfo: [NSLocalizedDescriptionKey: Constants.ErrorMsgs.LoginErrorMsg]))
                 return
             }
             
             /* GUARD: Is userID "success" key in parsedResult? */
             guard let userid = sessionResult[Constants.Login.Key] as? String else {
                 print("Cannot find key 'session id ")
+                completionHandlerForLogin(result: nil, error: NSError(domain: "taskForGETData ", code: 0, userInfo: [NSLocalizedDescriptionKey: Constants.ErrorMsgs.LoginErrorMsg]))
                 return
             }
             completionHandlerForLogin(result: userid, error: nil)
@@ -272,16 +256,28 @@ class MapUtility: NSObject {
         
     }
     
+    func convertStudentDataIntoAnnotation(data:[StudentData]) ->  [MKPointAnnotation] {
+        var annotations = [MKPointAnnotation]()
+        for element in data {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = element.getCoordinates()
+            annotation.title = element.getFullname()
+            annotation.subtitle = element.getMediaURL()
+            annotations.append(annotation)
+        }
+        print("annotations.size",annotations.count)
+        return annotations
+    }
     
+    //I understand that I have over engineered this method here. It could just return an array of String(like was mentioned in the code review). I was trying to get myself some practice with Closures(they are not easy!). I guess I have used Closures everwhere very liberally  and in some places, like this, it was unnecessary ! But on the brighter side, I feel little comfortable with Closures now.
     func getRequestTokenFromUdacity(key: String, completionHandlerForRequestToken: (result: AnyObject?, error: NSError?) -> Void){
-        
         
         let request = NSMutableURLRequest(URL:MapUtility.sharedInstance().udacityURLFromParameters([String:AnyObject](), withPathExtension: [Constants.Login.Userdata, key]))
         
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…
-                let info = [NSLocalizedDescriptionKey : "Unable to get userdata."]
+                let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.ConnectivityrrorMsg]
                 completionHandlerForRequestToken(result: nil, error: NSError(domain: "completionHandlerForRequestToken", code: 1, userInfo: info))
                 return
             }
@@ -306,17 +302,23 @@ class MapUtility: NSObject {
             }
             guard let user = parsedResult[Constants.Login.user] as? [String:AnyObject] else {
                 print(" Can't find the user in \(parsedResult)")
+                let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.LoginErrorMsg]
+                completionHandlerForRequestToken(result: nil, error: NSError(domain: "completionHandlerForRequestToken", code: 1, userInfo: info))
                 return
             }
             
             guard let firstName = user[Constants.Login.FirstName] as? String else {
                 print(" Can't find the firstname in \(parsedResult)")
+                let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.LoginErrorMsg]
+                completionHandlerForRequestToken(result: nil, error: NSError(domain: "completionHandlerForRequestToken", code: 1, userInfo: info))
                 return
             }
             
             /* GUARD: Is firstName "success" key in parsedResult? */
             guard let lastName = user[Constants.Login.LastName] as? String else {
                 print(" Can't find the lastname in \(parsedResult)")
+                let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.LoginErrorMsg]
+                completionHandlerForRequestToken(result: nil, error: NSError(domain: "completionHandlerForRequestToken", code: 1, userInfo: info))
                 return
             }
             completionHandlerForRequestToken(result: [firstName,lastName], error: nil)
@@ -344,11 +346,24 @@ class MapUtility: NSObject {
     
     
     // create a URL from parameters
-    func parseURLFromParameters(parameters: [String:AnyObject], withPathExtension: String? = nil) -> NSURL {
+    func parseURLFromParameters(parameters: [String:AnyObject],  withPathExtension: [String]? = nil) -> NSURL {
         let components = NSURLComponents()
         components.scheme = Constants.Student.ApiScheme
         components.host = Constants.Student.ApiHost
-        components.path = Constants.Student.ApiPath + (withPathExtension ?? "")
+        var path = Constants.Student.ApiPath //+ (withPathExtension ?? "")
+        for (extn) in withPathExtension! {
+            path = path + "/"+extn ?? ""
+        }
+        components.path = path
+        
+        components.queryItems = [NSURLQueryItem]()
+        
+        for (key, value) in parameters {
+            let queryItem = NSURLQueryItem(name: key, value: "\(value)")
+            components.queryItems!.append(queryItem)
+        }
+
+       // print("URL:",components.URL?.absoluteString)
         return components.URL!
     }
 

@@ -48,7 +48,7 @@ class ShowLocationViewController: UIViewController, MKMapViewDelegate {
     
     
     @IBAction func onSubmit(sender: AnyObject) {
-        activityController.hidden = false
+       // activityController.hidden = false
         activityController.startAnimating()
         let link = linkTextField.text!
         
@@ -86,18 +86,16 @@ class ShowLocationViewController: UIViewController, MKMapViewDelegate {
                     self.showAlertErrorMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
                     return
                 }else{
-                    let appDelegate = MapUtility.sharedInstance().appDelegate
+                    //let appDelegate = MapUtility.sharedInstance().appDelegate
                    
-                    //print("appDelegate.studentLocations", appDelegate.studentLocations.count)
-                    let first =  appDelegate.udacityUserInformation?.firstName
+                   /* let first =  appDelegate.udacityUserInformation?.firstName
                     let last = appDelegate.udacityUserInformation?.lastName
-                    let fullName = "\(first) \(last)"
-                    let annotation = StudentLocation(coordinate: self.coor, fullName: (fullName), mediaURL: link)
-                    annotation.coordinate = self.coor
-                    annotation.title = "\(first!) \(last!)"
-                    annotation.subtitle = link
-                    appDelegate.studentLocations.append(annotation)
-                    //print("appDelegate.studentLocations now", appDelegate.studentLocations.count)
+                    
+                    let dict = [Constants.ParseResponseKeys.FirstName : first, Constants.ParseResponseKeys.LastName : last, Constants.ParseResponseKeys.MediaURL :link]
+                    
+                    appDelegate.studentLocations.append(StudentData(dictionary: dict))*/
+                    StudentLocation.sharedInstance().removeAll()
+                    
                     let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabViewController") as! UITabBarController
                     self.presentViewController(controller, animated: true, completion: nil)
                     

@@ -27,13 +27,13 @@ class MapListViewController: CommonMapViewController, UITableViewDelegate, UITab
     }
     
     func loaddata() -> Void {
-        print("student locations", appDelegate.studentLocations.count)
+        print("student locations", StudentLocation.sharedInstance().getStudentData().count)
         titles.removeAll()
         links.removeAll()
         
-        for dictionary in appDelegate.studentLocations {
-            self.titles.append(dictionary.fullName)
-            self.links.append(dictionary.mediaURL)
+        for element in StudentLocation.sharedInstance().getStudentData() {
+            self.titles.append(element.getFullname())
+            self.links.append(element.getMediaURL())
         }
         self.reloadTable()
     }
@@ -51,10 +51,10 @@ class MapListViewController: CommonMapViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func refresh(){
-        appDelegate.studentLocations.removeAll()
+        StudentLocation.sharedInstance().removeAll()
         MapUtility.sharedInstance().getStudentLocations { (locations, error) in
             if error == nil {
-                MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
+                StudentLocation.sharedInstance().setStudentData(StudentData.studentsFromResults(locations!))
                 self.loaddata()
                 
             }else{

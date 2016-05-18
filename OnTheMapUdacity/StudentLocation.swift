@@ -7,17 +7,30 @@
 //
 
 import Foundation
-import MapKit
 
-class StudentLocation:  MKPointAnnotation {
-    let coordinates: CLLocationCoordinate2D
-    let fullName: String
-  
-    let mediaURL: String
+
+class StudentLocation:  NSObject {
+    private var studentData = [StudentData]()
     
-    init(coordinate: CLLocationCoordinate2D, fullName: String, mediaURL : String) {
-        self.coordinates = coordinate
-        self.fullName = fullName
-        self.mediaURL = mediaURL
+    
+    func setStudentData(data:[StudentData]) ->Void {
+        studentData = data
     }
+    
+    
+    func getStudentData() ->[StudentData] {
+        return studentData
+    }
+    
+    func removeAll() ->Void {
+        studentData.removeAll()
+    }
+    
+    class func sharedInstance() -> StudentLocation {
+        struct Singleton {
+            static var sharedInstance = StudentLocation()
+        }
+        return Singleton.sharedInstance
+    }
+
 }

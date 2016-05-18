@@ -14,23 +14,48 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
 
     var appDelegate = MapUtility.sharedInstance().appDelegate
     @IBOutlet weak var mapView: MKMapView!
+    var annotations = [MKPointAnnotation]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getStudentLocations()
+        mapView.addAnnotations(annotations)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        mapView.removeAnnotations(self.appDelegate.studentLocations)
+    private func getStudentLocations(){
+        
+        MapUtility.sharedInstance().getStudentLocations { (locations, error) in
+            if error == nil {
+                StudentLocation.sharedInstance().setStudentData(StudentData.studentsFromResults(locations!))
+                self.annotations = MapUtility.sharedInstance().convertStudentDataIntoAnnotation(StudentLocation.sharedInstance().getStudentData())
+                 self.reloadView()
+            }else{
+                dispatch_async(dispatch_get_main_queue()){
+                    self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
+                    return
+                }
+            }
+        }
+    }
+    
 
-        mapView.addAnnotations(self.appDelegate.studentLocations)
-        //reloadView()
+    
+    override func viewWillAppear(animated: Bool) {
+        //get fresh data if coming back to this scene aftre posting location
+        print("StudentLocation.sharedInstance().getStudentData().count",StudentLocation.sharedInstance().getStudentData().count)
+        if(StudentLocation.sharedInstance().getStudentData().count == 0){
+            mapView.removeAnnotations(annotations)
+            //print("get student locs")
+            getStudentLocations()
+            
+        }
+        
     }
     
     func reloadView() ->Void {
         print("reloadTable")
         dispatch_async(dispatch_get_main_queue()) {
-            
+            self.mapView.addAnnotations(self.annotations)
             self.mapView.reloadInputViews()
         }
     }
@@ -38,17 +63,9 @@ class MapViewController: CommonMapViewController, MKMapViewDelegate {
     
     @IBAction func refresh(sender: AnyObject) {
         
-        mapView.removeAnnotations(self.appDelegate.studentLocations)
-        appDelegate.studentLocations.removeAll()
-        MapUtility.sharedInstance().getStudentLocations { (locations, error) in
-            if error == nil {
-                MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
-                self.mapView.addAnnotations(self.appDelegate.studentLocations)
-                self.reloadView()
-            }else{
-                self.showAlertMsg("Unable to refresh data. Try again!")
-            }
-        }
+        mapView.removeAnnotations(annotations)
+        StudentLocation.sharedInstance().removeAll()
+        getStudentLocations()
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {

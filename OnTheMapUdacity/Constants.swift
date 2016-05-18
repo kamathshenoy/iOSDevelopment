@@ -38,23 +38,31 @@ struct Constants {
         static let FacebookError = "Feature not implemented. Please upgrade to next version!"
         static let AddLinkErrorMsg = "Please enter a valid link."
         static let AddLinkSuccessMsg = "Your post was successful."
-        static let LoginErrorMsg = "Username or Password empty or incorrect."
+        static let LoginErrorMsg = "Username or Password incorrect. Unable to login!"
+        static let ConnectivityrrorMsg = "Please check for connectivity to internet!"
         static let LocationErrorMsg = "Please enter a valid location"
         static let ReloadErrorMsg = "Unable to refresh data. Try again!"
         static let URLErrorMsg = "Invalid URL. Try some other URL!"
-        static let NetworkErrorMsg = "Your request returned a status code other than 2xx. Please check for internet connectivity"
+        static let NetworkErrorMsg = "Your request returned a status code other than 2xx. Unable to fulfill your request. Please try again! "
+        static let StudentLocationError = "Unable to fetch student location information. Please refresh"
     }
     
     struct Student {
         static let ApiScheme = "https"
         static let ApiHost = "api.parse.com"
-        static let ApiPath = "/1/classes/"
+        static let ApiPath = "/1/classes"
         static let StudentLocation = "StudentLocation"
+       // static let Order = "order=-updatedAt"
         //        static let StudentsURL = "https://api.parse.com/1/classes/StudentLocation"
-        
-        static let ApplicationID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
-        static let RestAPIKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
-     
+    }
+    
+    struct APIHEADERANDKEYS {
+        static let ApplicationID_HeaderField = "X-Parse-Application-Id"
+        static let RestAPIKey_HeaderField = "X-Parse-REST-API-Key"
+        static let ApplicationID_Key = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
+        static let RestAPI_Key = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
+        static let Order_Key = "order"
+        static let UpdatedAt_Value = "-updatedAt"
     }
     
     struct StudentLocation {
@@ -73,6 +81,14 @@ struct Constants {
     //Response Keys
     struct ParseResponseKeys {
         static let Results = "results"
+        static let Coordinates = "Coordinates"
+        static let Latitude = "latitude"
+        static let Longitude = "longitude"
+        static let LastName = "lastName"
+        static let FirstName = "firstName"
+
+        static let MediaURL = "mediaURL"
+        static let Fullname = "Fullname"
     }
     
     // MARK: UI

@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 class CommonMapViewController:  UIViewController{
+    
+    
     @IBAction func addLocation(){
         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddLocationViewController")
         self.presentViewController(controller, animated: true, completion: nil)

@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityController.hidden = true
+      //  activityController.hidden = true
         // get the app delegate
         appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
@@ -40,7 +40,7 @@ class LoginViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        activityController.hidden = true
+        //activityController.hidden = true
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -60,7 +60,7 @@ class LoginViewController: UIViewController {
             setUIEnabled(true)
         } else {
             setUIEnabled(false)
-            activityController.hidden = false
+           // activityController.hidden = false
             activityController.startAnimating()
             getRequestToken()
         }
@@ -87,6 +87,7 @@ class LoginViewController: UIViewController {
         MapUtility.sharedInstance().loginUdacity( self.usernameTextField.text!,  password: self.passwordTextField.text!) { (data, error) in
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue()){
+                        self.activityController.stopAnimating()
                         self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
                         return
                     }
@@ -115,12 +116,13 @@ class LoginViewController: UIViewController {
         MapUtility.sharedInstance().getRequestTokenFromUdacity(key) { (data, error) in
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue()){
+                        self.activityController.stopAnimating()
                         self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
                         return
                     }
                 }else{
                     self.appDelegate.udacityUserInformation = UdacityClientStore(key: key, fName:  data![0] as! String, lName:  data![1] as! String)
-                    self.getStudentLocations()
+                    self.completeLogin()
                 }
             }
     }
@@ -132,21 +134,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func getStudentLocations(){
-        appDelegate.studentLocations.removeAll()
-        MapUtility.sharedInstance().getStudentLocations { (locations, error) in
-            if error == nil {
-                MapUtility.sharedInstance().populateStudentLocations(locations, error: error)
-                self.completeLogin()
-            }else{
-                dispatch_async(dispatch_get_main_queue()){
-                    self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
-                    return
-                }
-            }
-        }
-    }
-
     
    }
 
