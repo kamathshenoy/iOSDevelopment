@@ -10,7 +10,7 @@ import Foundation
 
 
 class StudentLocation:  NSObject {
-    private var studentData = [StudentData]()
+    var studentData = [StudentData]()
     
     
     func setStudentData(data:[StudentData]) ->Void {

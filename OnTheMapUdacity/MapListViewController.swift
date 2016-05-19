@@ -13,9 +13,6 @@ import MapKit
 class MapListViewController: CommonMapViewController, UITableViewDelegate, UITableViewDataSource {
     
     var appDelegate = MapUtility.sharedInstance().appDelegate
-    var titles: [String] = [String]()
-    var links: [String] = [String]()
-    
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var logoutBtn: UIBarButtonItem!
@@ -26,37 +23,18 @@ class MapListViewController: CommonMapViewController, UITableViewDelegate, UITab
        
     }
     
-    func loaddata() -> Void {
-        print("student locations", StudentLocation.sharedInstance().getStudentData().count)
-        titles.removeAll()
-        links.removeAll()
-        
-        for element in StudentLocation.sharedInstance().getStudentData() {
-            self.titles.append(element.getFullname())
-            self.links.append(element.getMediaURL())
-        }
-        self.reloadTable()
-    }
-    
     override func viewWillAppear(animated: Bool) {
-         loaddata()
-    }
-    
-    func reloadTable() ->Void {
-        print("reloadTable")
         dispatch_async(dispatch_get_main_queue()) {
-            
             self.tableView.reloadData()
         }
     }
+    
     
     @IBAction func refresh(){
         StudentLocation.sharedInstance().removeAll()
         MapUtility.sharedInstance().getStudentLocations { (locations, error) in
             if error == nil {
                 StudentLocation.sharedInstance().setStudentData(StudentData.studentsFromResults(locations!))
-                self.loaddata()
-                
             }else{
                 self.showAlertMsg(Constants.ErrorMsgs.ReloadErrorMsg)
             }
@@ -73,7 +51,7 @@ extension MapListViewController {
         
         // get cell type
         let cellReuseIdentifier = "StudentsCell"
-        let title = titles[indexPath.row]
+        let title = StudentLocation.sharedInstance().studentData[indexPath.row].getFullname()
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
         
         // set cell defaults
@@ -82,12 +60,12 @@ extension MapListViewController {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.titles.count
+        return StudentLocation.sharedInstance().getStudentData().count
     }
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let toOpen =  links[indexPath.row]
+        let toOpen = StudentLocation.sharedInstance().studentData[indexPath.row].getMediaURL()
         if MapUtility.sharedInstance().validateUrl(toOpen) {
             UIApplication.sharedApplication().openURL(NSURL(string: toOpen)!)
         } else {
@@ -95,6 +73,5 @@ extension MapListViewController {
         }
 
     }
-   
-
+ 
 }

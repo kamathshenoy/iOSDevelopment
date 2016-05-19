@@ -17,8 +17,6 @@ struct Constants {
         static let ApiScheme = "https"
         static let ApiHost = "www.udacity.com"
         static let ApiPath = "/api"
-        //static let loginURL = "https://www.udacity.com/api/"
-        //static let UserData = "https://www.udacity.com/api/users/"
         static let Userdata = "users"
         static let Session = "session"
         static let Registered = "registered"
@@ -37,13 +35,13 @@ struct Constants {
         static let AddressErrorMsg = "Please enter a valid location."
         static let FacebookError = "Feature not implemented. Please upgrade to next version!"
         static let AddLinkErrorMsg = "Please enter a valid link."
-        static let AddLinkSuccessMsg = "Your post was successful."
+        static let SubmitLinkErrorMsg = "Your request could not be fulfilled. Please try again."
         static let LoginErrorMsg = "Username or Password incorrect. Unable to login!"
-        static let ConnectivityrrorMsg = "Please check for connectivity to internet!"
-        static let LocationErrorMsg = "Please enter a valid location"
+    
+        static let LocationErrorMsg = "Unable to find the location. Please check your internet connectivity."
         static let ReloadErrorMsg = "Unable to refresh data. Try again!"
         static let URLErrorMsg = "Invalid URL. Try some other URL!"
-        static let NetworkErrorMsg = "Your request returned a status code other than 2xx. Unable to fulfill your request. Please try again! "
+        static let NetworkErrorMsg = "Unable to connect to the internet. Please fix the issue and try again! "
         static let StudentLocationError = "Unable to fetch student location information. Please refresh"
     }
     
@@ -52,8 +50,6 @@ struct Constants {
         static let ApiHost = "api.parse.com"
         static let ApiPath = "/1/classes"
         static let StudentLocation = "StudentLocation"
-       // static let Order = "order=-updatedAt"
-        //        static let StudentsURL = "https://api.parse.com/1/classes/StudentLocation"
     }
     
     struct APIHEADERANDKEYS {

@@ -53,7 +53,7 @@ class MapUtility: NSObject {
             
             guard (error == nil) else {
                 print("There was an error with your request: \(error)")
-                completionHandlerForGET(data: nil, error: NSError(domain: "taskForGETData ", code: 0, userInfo: [NSLocalizedDescriptionKey: Constants.ErrorMsgs.ConnectivityrrorMsg]))
+                completionHandlerForGET(data: nil, error: NSError(domain: "taskForGETData ", code: 0, userInfo: [NSLocalizedDescriptionKey: Constants.ErrorMsgs.NetworkErrorMsg]))
                 return
             }
             
@@ -100,7 +100,7 @@ class MapUtility: NSObject {
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…
-                let info = [NSLocalizedDescriptionKey : "Error occured, Please try again!"]
+                let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.NetworkErrorMsg]
                 completionHandlerForSubmit(data: nil, error: NSError(domain: "completionHandlerForSubmit", code: 1, userInfo: info))
                 
                 return
@@ -112,7 +112,7 @@ class MapUtility: NSObject {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
             } catch {
                 print("Could not parse the data as JSON: '\(data)'")
-                let info = [NSLocalizedDescriptionKey : "Error occured, Please try again!"]
+                let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.SubmitLinkErrorMsg]
                 completionHandlerForSubmit(data: nil, error: NSError(domain: "completionHandlerForSubmit", code: 1, userInfo: info))
 
                 return
@@ -120,7 +120,7 @@ class MapUtility: NSObject {
             
             guard let objectID = parsedResult[Constants.Login.ObjectID] as? String else {
                 print(" See error code and message in \(parsedResult)")
-                let info = [NSLocalizedDescriptionKey : "Error occured, Please try again!"]
+                let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.SubmitLinkErrorMsg]
                 completionHandlerForSubmit(data: nil, error: NSError(domain: "completionHandlerForSubmit", code: 1, userInfo: info))
                 return
             }
@@ -132,7 +132,6 @@ class MapUtility: NSObject {
     }
     
     
-    // given raw JSON, return a usable Foundation object
     private func convertDataWithCompletionHandler(data: NSData, completionHandlerForConvertData: (result: AnyObject!, error: NSError?) -> Void) {
         
         var parsedResult: AnyObject!
@@ -160,7 +159,7 @@ class MapUtility: NSObject {
         if let xsrfCookie = xsrfCookie {
             request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
         }
-        //print(request.URL?.path)
+        
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…
@@ -194,10 +193,8 @@ class MapUtility: NSObject {
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-       // let username = username!
-        //let password = password!
+
         let str = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}"
-        
         
         request.HTTPBody = str.dataUsingEncoding(NSUTF8StringEncoding)
         let session = NSURLSession.sharedSession()
@@ -277,7 +274,7 @@ class MapUtility: NSObject {
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…
-                let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.ConnectivityrrorMsg]
+                let info = [NSLocalizedDescriptionKey : Constants.ErrorMsgs.NetworkErrorMsg]
                 completionHandlerForRequestToken(result: nil, error: NSError(domain: "completionHandlerForRequestToken", code: 1, userInfo: info))
                 return
             }
@@ -339,7 +336,7 @@ class MapUtility: NSObject {
         for (extn) in withPathExtension! {
             path = path + "/"+extn ?? ""
         }
-        components.path = path//Constants.Login.ApiPath + (withPathExtension[0] ?? "")
+        components.path = path
        
         return components.URL!
     }
@@ -363,7 +360,7 @@ class MapUtility: NSObject {
             components.queryItems!.append(queryItem)
         }
 
-       // print("URL:",components.URL?.absoluteString)
+       
         return components.URL!
     }
 

@@ -428,22 +428,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="YeB-qh-EqF"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="gUF-8o-3pk"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" red="0.25066556470000001" green="0.46550060059999998" blue="0.69968913610000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="gUF-8o-3pk"/>
-                                            </mask>
-                                        </variation>
                                         <variation key="widthClass=compact">
                                             <fontDescription key="fontDescription" name="Georgia-Italic" family="Georgia" pointSize="19"/>
-                                            <mask key="constraints">
-                                                <include reference="gUF-8o-3pk"/>
-                                            </mask>
                                         </variation>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cZA-RM-CJu">
@@ -451,41 +442,34 @@
                                         <color key="backgroundColor" red="0.25066556470000001" green="0.46550060059999998" blue="0.69968913610000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="210" id="P7c-CB-aVS"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="230" id="sVD-Yg-Xi7"/>
                                         </constraints>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="sVD-Yg-Xi7"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="widthClass=compact">
-                                            <mask key="constraints">
-                                                <include reference="sVD-Yg-Xi7"/>
-                                            </mask>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="130" width="360" height="332"/>
                                         </variation>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFA-He-Yzw">
-                                        <rect key="frame" x="0.0" y="350" width="560" height="112"/>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="iUV-Yf-Pif">
+                                        <rect key="frame" x="-10" y="-10" width="20" height="20"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="70" id="MWn-tL-SpZ"/>
+                                            <constraint firstAttribute="height" constant="70" id="HIB-7Q-3cH"/>
+                                            <constraint firstAttribute="width" constant="360" id="If9-sk-TW3"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="MWn-tL-SpZ"/>
+                                                <exclude reference="HIB-7Q-3cH"/>
+                                                <exclude reference="If9-sk-TW3"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="467" width="360" height="0.0"/>
                                             <mask key="constraints">
-                                                <include reference="MWn-tL-SpZ"/>
+                                                <include reference="HIB-7Q-3cH"/>
+                                                <include reference="If9-sk-TW3"/>
                                             </mask>
                                         </variation>
-                                    </label>
+                                    </activityIndicatorView>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5R-Rv-mXF">
                                         <rect key="frame" x="0.0" y="472" width="560" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -516,22 +500,16 @@
                                 <color key="backgroundColor" red="1" green="0.39385270760000002" blue="0.21396886570000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="cZA-RM-CJu" firstAttribute="top" secondItem="Lpv-wI-4rs" secondAttribute="bottom" id="7Z6-3M-Lq5"/>
-                                    <constraint firstItem="IFA-He-Yzw" firstAttribute="top" secondItem="cZA-RM-CJu" secondAttribute="bottom" id="Jp4-Ct-S8p"/>
-                                    <constraint firstItem="E5R-Rv-mXF" firstAttribute="top" secondItem="IFA-He-Yzw" secondAttribute="bottom" id="stA-SQ-IVk"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="7Z6-3M-Lq5"/>
-                                        <exclude reference="Jp4-Ct-S8p"/>
-                                        <exclude reference="stA-SQ-IVk"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="20" y="53" width="360" height="512"/>
                                     <mask key="constraints">
                                         <include reference="7Z6-3M-Lq5"/>
-                                        <include reference="Jp4-Ct-S8p"/>
-                                        <include reference="stA-SQ-IVk"/>
                                     </mask>
                                 </variation>
                             </stackView>
@@ -584,8 +562,8 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityController" destination="iUV-Yf-Pif" id="8C9-8z-VVe"/>
                         <outlet property="addressTextField" destination="cZA-RM-CJu" id="sy8-Ra-BDN"/>
-                        <outlet property="debugTextLabel" destination="IFA-He-Yzw" id="6MF-7g-zi3"/>
                         <outlet property="findButton" destination="E5R-Rv-mXF" id="nkk-aa-V9u"/>
                     </connections>
                 </viewController>

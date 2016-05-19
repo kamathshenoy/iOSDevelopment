@@ -12,15 +12,15 @@ import AddressBookUI
 
 class AddLocationViewController: UIViewController {
    
+    @IBOutlet weak var activityController: UIActivityIndicatorView!
     var keyboardOnScreen = false
     
     @IBOutlet weak var addressTextField: UITextField!
     
-    @IBOutlet weak var debugTextLabel: UILabel!
-    
     @IBOutlet weak var findButton: UIButton!
 
     @IBAction func findLocation(sender: AnyObject) {
+        activityController.startAnimating()
         let location = addressTextField.text!
         guard location.characters.count > 0   else {
             print("address is nil")
@@ -53,6 +53,7 @@ class AddLocationViewController: UIViewController {
     
     private func findLocation(address: String) {
         CLGeocoder().geocodeAddressString(address, completionHandler: { (placemarks, error) in
+            self.activityController.stopAnimating()
                 if error != nil {
                     print(error)
                     self.showAlertMsg(Constants.ErrorMsgs.LocationErrorMsg)
@@ -140,7 +141,7 @@ extension AddLocationViewController {
     private func setUIEnabled(enabled: Bool) {
         addressTextField.enabled = enabled
         findButton.enabled = enabled
-        debugTextLabel.text = ""
+        
         // adjust login button alpha
         if enabled {
             findButton.alpha = 1.0

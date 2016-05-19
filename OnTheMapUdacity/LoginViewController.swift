@@ -59,8 +59,6 @@ class LoginViewController: UIViewController {
             passwordTextField.text = ""
             setUIEnabled(true)
         } else {
-            setUIEnabled(false)
-           // activityController.hidden = false
             activityController.startAnimating()
             getRequestToken()
         }
@@ -89,6 +87,7 @@ class LoginViewController: UIViewController {
                     dispatch_async(dispatch_get_main_queue()){
                         self.activityController.stopAnimating()
                         self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
+                        self.setUIEnabled(true)
                         return
                     }
                 }else{
