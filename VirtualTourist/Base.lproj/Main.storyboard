@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BI6-h2-bbQ">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--ImagesViewController-->
+        <scene sceneID="MHF-lu-1IS">
+            <objects>
+                <viewController storyboardIdentifier="ImagesViewController" title="ImagesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="U5W-3U-ENw" customClass="ImagesViewController" customModule="VirtualTourist" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wuc-8Y-xBw"/>
+                        <viewControllerLayoutGuide type="bottom" id="z69-rt-LqI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Wiu-mK-AN2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nPi-xo-EUm">
+                                <rect key="frame" x="0.0" y="-53" width="600" height="614"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JLU-Cb-5Ur">
+                                    <size key="itemSize" width="168" height="151"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="boi-VI-26h" customClass="ImageCell" customModule="VirtualTourist">
+                                        <rect key="frame" x="0.0" y="0.0" width="168" height="151"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="168" height="151"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hv9-ay-kih">
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <variation key="widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="160" height="143"/>
+                                                    </variation>
+                                                </imageView>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="vfn-uj-CPS">
+                                                    <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                                                    <variation key="widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="62" y="53" width="20" height="20"/>
+                                                    </variation>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="0.33909970239999998" green="0.33909970239999998" blue="0.33909970239999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="hv9-ay-kih"/>
+                                                <exclude reference="vfn-uj-CPS"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="subviews">
+                                                <include reference="hv9-ay-kih"/>
+                                                <include reference="vfn-uj-CPS"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <outlet property="activityIndicator" destination="vfn-uj-CPS" id="KMH-Xg-Rur"/>
+                                            <outlet property="imageCollectionViewCellImage" destination="hv9-ay-kih" id="gss-or-w2m"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="209" width="400" height="342"/>
+                                </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="U5W-3U-ENw" id="BgG-YE-Aoe"/>
+                                    <outlet property="delegate" destination="U5W-3U-ENw" id="xqY-UU-AiB"/>
+                                </connections>
+                            </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xAB-oJ-Rxv">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="XM6-ZL-b90"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="cIG-Sj-qC1"/>
+                                    <barButtonItem title="New Collection" id="SXf-Mg-DIC">
+                                        <connections>
+                                            <action selector="reloadCollection:" destination="U5W-3U-ENw" id="ycA-vr-jc5"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem id="ygC-HX-y1W">
+                                        <connections>
+                                            <action selector="reloadCollection:" destination="U5W-3U-ENw" id="NWP-gR-qjB"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="3bT-kJ-Rbo"/>
+                                </items>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="556" width="392" height="44"/>
+                                </variation>
+                            </toolbar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1uh-IA-GgT">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="55" width="400" height="157"/>
+                                </variation>
+                            </mapView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Azu-FY-oZ0">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Album" id="iAq-1W-gJ7">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="qcD-zy-D75">
+                                            <color key="tintColor" red="1" green="0.1238534204" blue="0.066175699259999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="goBack:" destination="U5W-3U-ENw" id="gi8-Ch-3sn"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="11" width="400" height="44"/>
+                                </variation>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="z69-rt-LqI" firstAttribute="top" secondItem="xAB-oJ-Rxv" secondAttribute="bottom" id="93n-pr-QQj"/>
+                            <constraint firstItem="xAB-oJ-Rxv" firstAttribute="leading" secondItem="Wiu-mK-AN2" secondAttribute="leadingMargin" constant="-16" id="Isz-mp-9EG"/>
+                            <constraint firstItem="nPi-xo-EUm" firstAttribute="top" secondItem="Wiu-mK-AN2" secondAttribute="topMargin" constant="212" id="Mif-yu-0wm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xAB-oJ-Rxv" secondAttribute="trailing" constant="-16" id="Pml-xs-04h"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="nPi-xo-EUm" secondAttribute="bottom" id="egA-ks-0IQ"/>
+                            <constraint firstItem="nPi-xo-EUm" firstAttribute="leading" secondItem="Wiu-mK-AN2" secondAttribute="leadingMargin" constant="-16" id="i7i-h3-9Pt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nPi-xo-EUm" secondAttribute="trailing" constant="-16" id="zkj-1t-Kzs"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="1uh-IA-GgT"/>
+                                <exclude reference="Azu-FY-oZ0"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="1uh-IA-GgT"/>
+                                <include reference="Azu-FY-oZ0"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="BNK-qd-pay"/>
+                    <connections>
+                        <outlet property="backButton" destination="qcD-zy-D75" id="GXF-as-XDi"/>
+                        <outlet property="collectionView" destination="nPi-xo-EUm" id="yp2-Gt-acM"/>
+                        <outlet property="mapView" destination="1uh-IA-GgT" id="Tbr-Bl-Aut"/>
+                        <outlet property="newCollection" destination="SXf-Mg-DIC" id="jXS-Bj-UwU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="70B-DL-FYx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="774" y="-380"/>
+        </scene>
+        <!--MapViewController-->
+        <scene sceneID="CAI-Cb-XuS">
+            <objects>
+                <viewController storyboardIdentifier="MapViewController" title="MapViewController" hidesBottomBarWhenPushed="YES" id="BI6-h2-bbQ" customClass="MapViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="d6I-eL-rkb"/>
+                        <viewControllerLayoutGuide type="bottom" id="7Pw-va-WPN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HjF-od-u8c">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nwR-kw-czt">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="64" width="400" height="601"/>
+                                </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="BI6-h2-bbQ" id="GPl-oX-6vL"/>
+                                </connections>
+                            </mapView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aqG-Zf-ffn">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Virtual Tourist" id="TLa-lF-Fa6">
+                                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Edit" id="q2t-ow-2hS">
+                                            <color key="tintColor" red="1" green="0.1238534204" blue="0.066175699259999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="toggleEditMode:" destination="BI6-h2-bbQ" id="L23-W9-Xuc"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="20" width="380" height="44"/>
+                                </variation>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="nwR-kw-czt"/>
+                                <exclude reference="aqG-Zf-ffn"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="nwR-kw-czt"/>
+                                <include reference="aqG-Zf-ffn"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <connections>
+                        <outlet property="editButton" destination="q2t-ow-2hS" id="riq-Dp-sDe"/>
+                        <outlet property="mapView" destination="nwR-kw-czt" id="Vs9-Aj-YWf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5dU-7H-IFu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="213" y="-1202"/>
+        </scene>
+    </scenes>
+</document>
