@@ -17,7 +17,6 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     var selectedPin:Pin!
     var lastAddedPin:Pin? = nil
     var inEditMode = false
-   // @IBOutlet weak var taptoDeleteView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,10 +48,6 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         editButton.enabled = annotations.count > 0 ? true : false
     }
     
-    override func viewWillAppear(animated: Bool) {
-        //taptoDeleteView.backgroundColor = UIColor.redColor()
-        //taptoDeleteView.hidden = true
-    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

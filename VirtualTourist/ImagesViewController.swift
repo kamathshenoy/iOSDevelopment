@@ -12,21 +12,17 @@ import MapKit
 
 
 class ImagesViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate {
+    
     var pinInTopic: Pin!
     
-    @IBOutlet weak var backButton: UIBarButtonItem!
     var selectedIndexes = [NSIndexPath]()
-    
-    @IBOutlet weak var newCollection: UIBarButtonItem!
     var insertedIndexPaths: [NSIndexPath]!
     var deletedIndexPaths: [NSIndexPath]!
     var updatedIndexPaths: [NSIndexPath]!
     
-    
+    @IBOutlet weak var newCollection: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
-        
-    var cancelButton: UIBarButtonItem!
-    
     @IBOutlet weak var mapView: MKMapView!
     
     var sharedContext = CoreDataStackManager.sharedInstance().managedObjectContext
@@ -42,16 +38,10 @@ class ImagesViewController: UIViewController, UICollectionViewDataSource, UIColl
         annotation.coordinate = CLLocationCoordinate2D(latitude: (pinInTopic.latitude as? Double)!, longitude: (pinInTopic.longitude as? Double)!)
          mapView.addAnnotation(annotation)
     
-        // Start the fetched results controller
-        var error: NSError?
         do {
             try fetchedResultsController.performFetch()
-        } catch let error1 as NSError {
-            error = error1
-        }
-        
-        if let error = error {
-            print("Error performing initial fetch: \(error)")
+        } catch let error as NSError {
+            print(error.localizedDescription)
         }
         //if the photos are cached, enable the button right away
         if(pinInTopic.pintoPhoto?.count > 0) {
@@ -181,8 +171,8 @@ class ImagesViewController: UIViewController, UICollectionViewDataSource, UIColl
         for photo in fetchedResultsController.fetchedObjects as! [Photo] {
             print("deleting photos")
             sharedContext.deleteObject(photo)
-            CoreDataStackManager.sharedInstance().saveContext()
         }
+        CoreDataStackManager.sharedInstance().saveContext()
     }
     
     func deleteSelectedPhotos() {
@@ -203,7 +193,7 @@ class ImagesViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     func configureCell(cell: ImageCell, atIndexPath indexPath: NSIndexPath) {
         
-        var imageForCell = UIImage(named: "NoImage")
+        var imageForCell = UIImage(named: "noImage")
         
         cell.imageCollectionViewCellImage.image = nil
         
