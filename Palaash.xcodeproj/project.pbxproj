@@ -1,0 +1,524 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		334732B71D2CAFBB001966F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334732B61D2CAFBB001966F2 /* AppDelegate.swift */; };
+		334732B91D2CAFBB001966F2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334732B81D2CAFBB001966F2 /* ViewController.swift */; };
+		334732BC1D2CAFBB001966F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334732BA1D2CAFBB001966F2 /* Main.storyboard */; };
+		334732BF1D2CAFBB001966F2 /* Palaash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 334732BD1D2CAFBB001966F2 /* Palaash.xcdatamodeld */; };
+		334732C11D2CAFBB001966F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 334732C01D2CAFBB001966F2 /* Assets.xcassets */; };
+		334732C41D2CAFBB001966F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334732C21D2CAFBB001966F2 /* LaunchScreen.storyboard */; };
+		334732CF1D2CAFBB001966F2 /* PalaashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334732CE1D2CAFBB001966F2 /* PalaashTests.swift */; };
+		334732DA1D2CAFBB001966F2 /* PalaashUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334732D91D2CAFBB001966F2 /* PalaashUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		334732CB1D2CAFBB001966F2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 334732AB1D2CAFBB001966F2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 334732B21D2CAFBB001966F2;
+			remoteInfo = Palaash;
+		};
+		334732D61D2CAFBB001966F2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 334732AB1D2CAFBB001966F2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 334732B21D2CAFBB001966F2;
+			remoteInfo = Palaash;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		334732B31D2CAFBB001966F2 /* Palaash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Palaash.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		334732B61D2CAFBB001966F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		334732B81D2CAFBB001966F2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		334732BB1D2CAFBB001966F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		334732BE1D2CAFBB001966F2 /* Palaash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Palaash.xcdatamodel; sourceTree = "<group>"; };
+		334732C01D2CAFBB001966F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		334732C31D2CAFBB001966F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		334732C51D2CAFBB001966F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		334732CA1D2CAFBB001966F2 /* PalaashTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PalaashTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		334732CE1D2CAFBB001966F2 /* PalaashTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalaashTests.swift; sourceTree = "<group>"; };
+		334732D01D2CAFBB001966F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		334732D51D2CAFBB001966F2 /* PalaashUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PalaashUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		334732D91D2CAFBB001966F2 /* PalaashUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalaashUITests.swift; sourceTree = "<group>"; };
+		334732DB1D2CAFBB001966F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		334732B01D2CAFBB001966F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		334732C71D2CAFBB001966F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		334732D21D2CAFBB001966F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		334732AA1D2CAFBB001966F2 = {
+			isa = PBXGroup;
+			children = (
+				334732B51D2CAFBB001966F2 /* Palaash */,
+				334732CD1D2CAFBB001966F2 /* PalaashTests */,
+				334732D81D2CAFBB001966F2 /* PalaashUITests */,
+				334732B41D2CAFBB001966F2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		334732B41D2CAFBB001966F2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				334732B31D2CAFBB001966F2 /* Palaash.app */,
+				334732CA1D2CAFBB001966F2 /* PalaashTests.xctest */,
+				334732D51D2CAFBB001966F2 /* PalaashUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		334732B51D2CAFBB001966F2 /* Palaash */ = {
+			isa = PBXGroup;
+			children = (
+				334732B61D2CAFBB001966F2 /* AppDelegate.swift */,
+				334732B81D2CAFBB001966F2 /* ViewController.swift */,
+				334732BA1D2CAFBB001966F2 /* Main.storyboard */,
+				334732C01D2CAFBB001966F2 /* Assets.xcassets */,
+				334732C21D2CAFBB001966F2 /* LaunchScreen.storyboard */,
+				334732C51D2CAFBB001966F2 /* Info.plist */,
+				334732BD1D2CAFBB001966F2 /* Palaash.xcdatamodeld */,
+			);
+			path = Palaash;
+			sourceTree = "<group>";
+		};
+		334732CD1D2CAFBB001966F2 /* PalaashTests */ = {
+			isa = PBXGroup;
+			children = (
+				334732CE1D2CAFBB001966F2 /* PalaashTests.swift */,
+				334732D01D2CAFBB001966F2 /* Info.plist */,
+			);
+			path = PalaashTests;
+			sourceTree = "<group>";
+		};
+		334732D81D2CAFBB001966F2 /* PalaashUITests */ = {
+			isa = PBXGroup;
+			children = (
+				334732D91D2CAFBB001966F2 /* PalaashUITests.swift */,
+				334732DB1D2CAFBB001966F2 /* Info.plist */,
+			);
+			path = PalaashUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		334732B21D2CAFBB001966F2 /* Palaash */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 334732DE1D2CAFBB001966F2 /* Build configuration list for PBXNativeTarget "Palaash" */;
+			buildPhases = (
+				334732AF1D2CAFBB001966F2 /* Sources */,
+				334732B01D2CAFBB001966F2 /* Frameworks */,
+				334732B11D2CAFBB001966F2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Palaash;
+			productName = Palaash;
+			productReference = 334732B31D2CAFBB001966F2 /* Palaash.app */;
+			productType = "com.apple.product-type.application";
+		};
+		334732C91D2CAFBB001966F2 /* PalaashTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 334732E11D2CAFBB001966F2 /* Build configuration list for PBXNativeTarget "PalaashTests" */;
+			buildPhases = (
+				334732C61D2CAFBB001966F2 /* Sources */,
+				334732C71D2CAFBB001966F2 /* Frameworks */,
+				334732C81D2CAFBB001966F2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				334732CC1D2CAFBB001966F2 /* PBXTargetDependency */,
+			);
+			name = PalaashTests;
+			productName = PalaashTests;
+			productReference = 334732CA1D2CAFBB001966F2 /* PalaashTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		334732D41D2CAFBB001966F2 /* PalaashUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 334732E41D2CAFBB001966F2 /* Build configuration list for PBXNativeTarget "PalaashUITests" */;
+			buildPhases = (
+				334732D11D2CAFBB001966F2 /* Sources */,
+				334732D21D2CAFBB001966F2 /* Frameworks */,
+				334732D31D2CAFBB001966F2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				334732D71D2CAFBB001966F2 /* PBXTargetDependency */,
+			);
+			name = PalaashUITests;
+			productName = PalaashUITests;
+			productReference = 334732D51D2CAFBB001966F2 /* PalaashUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		334732AB1D2CAFBB001966F2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Sheethal Shenoy";
+				TargetAttributes = {
+					334732B21D2CAFBB001966F2 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					334732C91D2CAFBB001966F2 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 334732B21D2CAFBB001966F2;
+					};
+					334732D41D2CAFBB001966F2 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 334732B21D2CAFBB001966F2;
+					};
+				};
+			};
+			buildConfigurationList = 334732AE1D2CAFBB001966F2 /* Build configuration list for PBXProject "Palaash" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 334732AA1D2CAFBB001966F2;
+			productRefGroup = 334732B41D2CAFBB001966F2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				334732B21D2CAFBB001966F2 /* Palaash */,
+				334732C91D2CAFBB001966F2 /* PalaashTests */,
+				334732D41D2CAFBB001966F2 /* PalaashUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		334732B11D2CAFBB001966F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				334732C41D2CAFBB001966F2 /* LaunchScreen.storyboard in Resources */,
+				334732C11D2CAFBB001966F2 /* Assets.xcassets in Resources */,
+				334732BC1D2CAFBB001966F2 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		334732C81D2CAFBB001966F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		334732D31D2CAFBB001966F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		334732AF1D2CAFBB001966F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				334732BF1D2CAFBB001966F2 /* Palaash.xcdatamodeld in Sources */,
+				334732B91D2CAFBB001966F2 /* ViewController.swift in Sources */,
+				334732B71D2CAFBB001966F2 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		334732C61D2CAFBB001966F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				334732CF1D2CAFBB001966F2 /* PalaashTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		334732D11D2CAFBB001966F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				334732DA1D2CAFBB001966F2 /* PalaashUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		334732CC1D2CAFBB001966F2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 334732B21D2CAFBB001966F2 /* Palaash */;
+			targetProxy = 334732CB1D2CAFBB001966F2 /* PBXContainerItemProxy */;
+		};
+		334732D71D2CAFBB001966F2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 334732B21D2CAFBB001966F2 /* Palaash */;
+			targetProxy = 334732D61D2CAFBB001966F2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		334732BA1D2CAFBB001966F2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				334732BB1D2CAFBB001966F2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		334732C21D2CAFBB001966F2 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				334732C31D2CAFBB001966F2 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		334732DC1D2CAFBB001966F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		334732DD1D2CAFBB001966F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		334732DF1D2CAFBB001966F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Palaash/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "http---sheethal.Palaash";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		334732E01D2CAFBB001966F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Palaash/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "http---sheethal.Palaash";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		334732E21D2CAFBB001966F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = PalaashTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "http---sheethal.PalaashTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Palaash.app/Palaash";
+			};
+			name = Debug;
+		};
+		334732E31D2CAFBB001966F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = PalaashTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "http---sheethal.PalaashTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Palaash.app/Palaash";
+			};
+			name = Release;
+		};
+		334732E51D2CAFBB001966F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PalaashUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "http---sheethal.PalaashUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Palaash;
+			};
+			name = Debug;
+		};
+		334732E61D2CAFBB001966F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = PalaashUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "http---sheethal.PalaashUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Palaash;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		334732AE1D2CAFBB001966F2 /* Build configuration list for PBXProject "Palaash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				334732DC1D2CAFBB001966F2 /* Debug */,
+				334732DD1D2CAFBB001966F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		334732DE1D2CAFBB001966F2 /* Build configuration list for PBXNativeTarget "Palaash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				334732DF1D2CAFBB001966F2 /* Debug */,
+				334732E01D2CAFBB001966F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		334732E11D2CAFBB001966F2 /* Build configuration list for PBXNativeTarget "PalaashTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				334732E21D2CAFBB001966F2 /* Debug */,
+				334732E31D2CAFBB001966F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		334732E41D2CAFBB001966F2 /* Build configuration list for PBXNativeTarget "PalaashUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				334732E51D2CAFBB001966F2 /* Debug */,
+				334732E61D2CAFBB001966F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		334732BD1D2CAFBB001966F2 /* Palaash.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				334732BE1D2CAFBB001966F2 /* Palaash.xcdatamodel */,
+			);
+			currentVersion = 334732BE1D2CAFBB001966F2 /* Palaash.xcdatamodel */;
+			path = Palaash.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 334732AB1D2CAFBB001966F2 /* Project object */;
+}
