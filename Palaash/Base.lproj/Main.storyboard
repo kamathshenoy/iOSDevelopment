@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BlN-Yk-1Ml">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--LoginViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" title="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Palaash" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +17,583 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neG-jo-nzV">
+                                <rect key="frame" x="228" y="175" width="168" height="30"/>
+                                <state key="normal" title="Login with Facebook"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="130" y="172" width="168" height="30"/>
+                                </variation>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COa-Am-ftG">
+                                <rect key="frame" x="238" y="235" width="158" height="30"/>
+                                <state key="normal" title="Login with Google"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="130" y="291" width="158" height="30"/>
+                                </variation>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-1548" y="-188"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Y7n-UF-x2q">
+            <objects>
+                <tabBarController id="BlN-Yk-1Ml" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="W0y-Wa-92n">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="74c-dh-Rpz" kind="relationship" relationship="viewControllers" id="FGP-2C-1Vb"/>
+                        <segue destination="rYf-ma-Gil" kind="relationship" relationship="viewControllers" id="3z4-ql-PTh"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1m8-RN-6Kf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-670.5" y="-202"/>
+        </scene>
+        <!--Favorites-->
+        <scene sceneID="YbC-kW-swy">
+            <objects>
+                <navigationController id="74c-dh-Rpz" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorites" image="Hearts-48.png" id="Eke-gm-Bt6"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8au-SC-k4r">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="09u-b5-U4I" kind="relationship" relationship="rootViewController" id="bbJ-HO-uYS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w5g-kl-fHQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="304.5" y="-607"/>
+        </scene>
+        <!--ListRecipeViewController-->
+        <scene sceneID="jXg-nN-gwG">
+            <objects>
+                <viewController storyboardIdentifier="ListRecipeViewController" title="ListRecipeViewController" id="yQH-RU-sch" customClass="ListRecipeViewController" customModule="Palaash" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="x2C-ds-g3h"/>
+                        <viewControllerLayoutGuide type="bottom" id="dkl-ji-pnz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Rzi-47-qug">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhB-tp-LyK">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="7Wn-CB-isj"/>
+                                </constraints>
+                                <color key="barTintColor" red="0.18312870940000001" green="0.53004335729999996" blue="0.002453731385" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Recipes" id="dT0-m9-B45">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="G9j-pZ-pTx">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="dismissVC:" destination="yQH-RU-sch" id="o8d-04-g2I"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="7Wn-CB-isj"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="37" width="400" height="45"/>
+                                    <mask key="constraints">
+                                        <include reference="7Wn-CB-isj"/>
+                                    </mask>
+                                </variation>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h2O-ze-dyQ">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.76868404379800381" green="1" blue="0.73441168846796678" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexTrackingBackgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Recipe" textLabel="viX-mI-0pK" imageView="wbv-x0-aJd" rowHeight="90" style="IBUITableViewCellStyleDefault" id="mdB-uq-71V">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mdB-uq-71V" id="15j-PL-Adz">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="viX-mI-0pK">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="tintColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Hearts-48.png" id="wbv-x0-aJd">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <color key="backgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="tintColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.91844357387404785" green="1" blue="0.96911456988260902" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="82" width="400" height="523"/>
+                                </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="yQH-RU-sch" id="orY-7V-Oey"/>
+                                    <outlet property="delegate" destination="yQH-RU-sch" id="Oem-DG-gd1"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="h2O-ze-dyQ" firstAttribute="leading" secondItem="Rzi-47-qug" secondAttribute="leadingMargin" id="B0p-Kw-NJ7"/>
+                            <constraint firstItem="h2O-ze-dyQ" firstAttribute="top" secondItem="x2C-ds-g3h" secondAttribute="bottom" constant="45" id="EFD-xy-vca"/>
+                            <constraint firstItem="h2O-ze-dyQ" firstAttribute="top" secondItem="nhB-tp-LyK" secondAttribute="bottom" id="VmP-pG-7DF"/>
+                            <constraint firstItem="nhB-tp-LyK" firstAttribute="leading" secondItem="Rzi-47-qug" secondAttribute="leadingMargin" id="gRf-Bs-SZh"/>
+                            <constraint firstItem="dkl-ji-pnz" firstAttribute="top" secondItem="h2O-ze-dyQ" secondAttribute="bottom" constant="1" id="l0d-bR-9iN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nhB-tp-LyK" secondAttribute="trailing" id="uwN-9S-Yry"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="h2O-ze-dyQ" secondAttribute="trailing" id="yAi-hA-1yw"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="nhB-tp-LyK"/>
+                                <exclude reference="h2O-ze-dyQ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="gRf-Bs-SZh"/>
+                                <exclude reference="uwN-9S-Yry"/>
+                                <exclude reference="B0p-Kw-NJ7"/>
+                                <exclude reference="EFD-xy-vca"/>
+                                <exclude reference="VmP-pG-7DF"/>
+                                <exclude reference="yAi-hA-1yw"/>
+                                <exclude reference="l0d-bR-9iN"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="nhB-tp-LyK"/>
+                                <include reference="h2O-ze-dyQ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="gRf-Bs-SZh"/>
+                                <include reference="uwN-9S-Yry"/>
+                                <include reference="B0p-Kw-NJ7"/>
+                                <include reference="EFD-xy-vca"/>
+                                <include reference="VmP-pG-7DF"/>
+                                <include reference="yAi-hA-1yw"/>
+                                <include reference="l0d-bR-9iN"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="cancel" destination="G9j-pZ-pTx" id="InW-sk-glP"/>
+                        <outlet property="tableView" destination="h2O-ze-dyQ" id="6yn-s0-J4l"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eRO-nq-Xce" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1245" y="963"/>
+        </scene>
+        <!--Recipes-->
+        <scene sceneID="mnO-mY-sqY">
+            <objects>
+                <navigationController id="rYf-ma-Gil" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Recipes" image="Saving Book-50.png" id="YH1-cc-vuH"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="z4O-mW-cFk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Hhf-uL-G8V" kind="relationship" relationship="rootViewController" id="AxU-hD-odK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t1e-AW-SOT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="265.5" y="231"/>
+        </scene>
+        <!--RecipeDetailViewController-->
+        <scene sceneID="k9c-cI-MNo">
+            <objects>
+                <viewController storyboardIdentifier="RecipeDetailViewController" title="RecipeDetailViewController" id="xC7-oe-wOp" customClass="RecipeDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vTR-jA-V84"/>
+                        <viewControllerLayoutGuide type="bottom" id="uBI-MY-HIO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rXK-xU-H6Z">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGp-vu-wLh">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <color key="barTintColor" red="0.18312870940000001" green="0.53004335729999996" blue="0.002453731385" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Recipe Details" id="NAB-sI-y50">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="Evi-aR-aGt">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="goBack:" destination="xC7-oe-wOp" id="6PI-gO-Fcb"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" image="Hearts-50.png" id="cxz-Co-2iQ">
+                                            <color key="tintColor" red="1" green="0.1238534204" blue="0.066175699259999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="newFav:" destination="xC7-oe-wOp" id="6vC-7M-Jkz"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="36" width="400" height="44"/>
+                                </variation>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="awb-Cm-O3G">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="80" width="400" height="224"/>
+                                </variation>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vCh-8Q-wRr">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="305" width="400" height="295"/>
+                                </variation>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="awb-Cm-O3G" secondAttribute="trailing" id="5CO-Vb-Gzu"/>
+                            <constraint firstItem="awb-Cm-O3G" firstAttribute="leading" secondItem="rXK-xU-H6Z" secondAttribute="leadingMargin" id="Fbp-wR-Dkb"/>
+                            <constraint firstItem="vCh-8Q-wRr" firstAttribute="top" secondItem="awb-Cm-O3G" secondAttribute="bottom" constant="1" id="GDV-3p-qbB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vCh-8Q-wRr" secondAttribute="trailing" id="IIw-rh-QcA"/>
+                            <constraint firstItem="awb-Cm-O3G" firstAttribute="top" secondItem="CGp-vu-wLh" secondAttribute="bottom" id="QMf-vN-V97"/>
+                            <constraint firstItem="vCh-8Q-wRr" firstAttribute="top" secondItem="awb-Cm-O3G" secondAttribute="bottom" constant="1" id="XAr-4p-QOh"/>
+                            <constraint firstItem="uBI-MY-HIO" firstAttribute="top" secondItem="vCh-8Q-wRr" secondAttribute="bottom" id="cS0-ww-l8T"/>
+                            <constraint firstItem="vCh-8Q-wRr" firstAttribute="leading" secondItem="rXK-xU-H6Z" secondAttribute="leadingMargin" id="r75-Q4-938"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="CGp-vu-wLh"/>
+                                <exclude reference="awb-Cm-O3G"/>
+                                <exclude reference="vCh-8Q-wRr"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="5CO-Vb-Gzu"/>
+                                <exclude reference="Fbp-wR-Dkb"/>
+                                <exclude reference="QMf-vN-V97"/>
+                                <exclude reference="GDV-3p-qbB"/>
+                                <exclude reference="IIw-rh-QcA"/>
+                                <exclude reference="XAr-4p-QOh"/>
+                                <exclude reference="r75-Q4-938"/>
+                                <exclude reference="cS0-ww-l8T"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="CGp-vu-wLh"/>
+                                <include reference="awb-Cm-O3G"/>
+                                <include reference="vCh-8Q-wRr"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="5CO-Vb-Gzu"/>
+                                <include reference="Fbp-wR-Dkb"/>
+                                <include reference="QMf-vN-V97"/>
+                                <include reference="GDV-3p-qbB"/>
+                                <include reference="IIw-rh-QcA"/>
+                                <include reference="XAr-4p-QOh"/>
+                                <include reference="r75-Q4-938"/>
+                                <include reference="cS0-ww-l8T"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="awb-Cm-O3G" id="aeh-pp-8dW"/>
+                        <outlet property="makeFav" destination="cxz-Co-2iQ" id="6NT-r8-T9J"/>
+                        <outlet property="textView" destination="vCh-8Q-wRr" id="uI3-Fi-zFv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Npe-ko-zhm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="265.5" y="963"/>
+        </scene>
+        <!--FavoriteViewController-->
+        <scene sceneID="4Jt-vb-bLy">
+            <objects>
+                <tableViewController storyboardIdentifier="FavoriteViewController" title="FavoriteViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="09u-b5-U4I" customClass="lFavoriteViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FavoriteViewController" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="EYn-6y-JkN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" restorationIdentifier="FavoriteRecipe" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteRecipe" textLabel="FGY-F6-wQU" imageView="fCq-J4-KiY" style="IBUITableViewCellStyleDefault" id="o9J-RX-B70">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o9J-RX-B70" id="DgY-I1-qH6">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FGY-F6-wQU">
+                                            <rect key="frame" x="62" y="0.0" width="523" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Hearts-48.png" id="fCq-J4-KiY">
+                                            <rect key="frame" x="15" y="5" width="32" height="32"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="09u-b5-U4I" id="f2p-K5-fl6"/>
+                            <outlet property="delegate" destination="09u-b5-U4I" id="fva-dB-YbX"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Favorite Recipes" id="aRi-h8-QV7">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="o4E-KV-VdK">
+                            <connections>
+                                <action selector="logout" destination="09u-b5-U4I" id="hIz-ku-TJZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kFp-jO-FuR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1206" y="-607"/>
+        </scene>
+        <!--Search Recipes-->
+        <scene sceneID="i7x-Fm-IUQ">
+            <objects>
+                <viewController storyboardIdentifier="SearchRecipeViewController" title="SearchRecipeViewController" id="Hhf-uL-G8V" userLabel="Search Recipes" customClass="SearchRecipeViewController" customModule="Palaash" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XNz-my-ray"/>
+                        <viewControllerLayoutGuide type="bottom" id="ese-Qr-54W"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0Xe-Gt-Whq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hoU-hF-7Hm">
+                                <rect key="frame" x="20" y="55" width="560" height="527"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7KQ-FX-1mp">
+                                        <rect key="frame" x="0.0" y="297" width="560" height="220"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="J9N-4b-FkY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="J9N-4b-FkY"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="J9N-4b-FkY"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" text="Add the Ingredients" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btX-Cf-TAx">
+                                        <rect key="frame" x="0.0" y="70" width="560" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="AgO-iQ-F2J"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cuisine" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n9R-3W-wH1">
+                                        <rect key="frame" x="0.0" y="120" width="560" height="32"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="340" id="eoe-5B-23t"/>
+                                            <constraint firstAttribute="height" constant="32" id="gQ7-39-WpL"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="eoe-5B-23t"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="eoe-5B-23t"/>
+                                            </mask>
+                                        </variation>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ingredients (example -broccoli,rice,beans)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gqx-rE-sqM">
+                                        <rect key="frame" x="0.0" y="120" width="560" height="32"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="CCu-rF-bnh"/>
+                                            <constraint firstAttribute="width" constant="340" id="UOC-TX-HKV"/>
+                                        </constraints>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="UOC-TX-HKV"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="UOC-TX-HKV"/>
+                                            </mask>
+                                        </variation>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type of recipes" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kBd-tH-dsj">
+                                        <rect key="frame" x="0.0" y="162" width="560" height="32"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="340" id="1aZ-SI-HEA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="yes" spellCheckingType="yes"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="1aZ-SI-HEA"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="1aZ-SI-HEA"/>
+                                            </mask>
+                                        </variation>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GDF-Zk-RF0">
+                                        <rect key="frame" x="0.0" y="204" width="560" height="44"/>
+                                        <color key="backgroundColor" red="0.23136101138149168" green="0.66964577879581144" blue="0.0030999933146193307" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Nza-KL-R4D"/>
+                                            <constraint firstAttribute="width" constant="340" id="Prq-Zf-EQ7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <color key="tintColor" red="0.23136101140000001" green="0.66964577879999998" blue="0.0030999933150000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Search Recipes">
+                                            <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Prq-Zf-EQ7"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="Prq-Zf-EQ7"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="searchRecipes:" destination="Hhf-uL-G8V" eventType="touchUpInside" id="CO9-aH-jTI"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gd7-79-Mzk">
+                                        <rect key="frame" x="0.0" y="297" width="560" height="220"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="29h-Nd-Dgh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="29h-Nd-Dgh"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="29h-Nd-Dgh"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.63559658470000002" green="1" blue="0.65433668310000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.63559658470000002" green="1" blue="0.65433668310000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="gqx-rE-sqM" firstAttribute="height" secondItem="n9R-3W-wH1" secondAttribute="height" id="1qQ-5g-TtA"/>
+                                    <constraint firstItem="kBd-tH-dsj" firstAttribute="height" secondItem="gqx-rE-sqM" secondAttribute="height" id="gUd-dN-5xO"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="7KQ-FX-1mp"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="1qQ-5g-TtA"/>
+                                        <exclude reference="gUd-dN-5xO"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="53" width="360" height="483"/>
+                                    <mask key="subviews">
+                                        <include reference="7KQ-FX-1mp"/>
+                                        <include reference="n9R-3W-wH1"/>
+                                        <include reference="kBd-tH-dsj"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="1qQ-5g-TtA"/>
+                                        <include reference="gUd-dN-5xO"/>
+                                    </mask>
+                                </variation>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.18312870940274623" green="0.53004335732984287" blue="0.0024537313848758267" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.63559658470000002" green="1" blue="0.65433668310000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="hoU-hF-7Hm" secondAttribute="trailing" id="6wM-T0-drK"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="hoU-hF-7Hm" secondAttribute="bottom" constant="18" id="8yy-am-Xe9"/>
+                            <constraint firstItem="hoU-hF-7Hm" firstAttribute="leading" secondItem="0Xe-Gt-Whq" secondAttribute="leadingMargin" id="9zf-TC-CpX"/>
+                            <constraint firstItem="hoU-hF-7Hm" firstAttribute="top" secondItem="XNz-my-ray" secondAttribute="bottom" constant="35" id="mfF-aE-nQx"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="jaH-aJ-uF5" appends="YES" id="0zd-Ii-jw6"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" id="yY2-qF-2HQ"/>
+                    <connections>
+                        <outlet property="cuisine" destination="n9R-3W-wH1" id="Ogg-yH-fTd"/>
+                        <outlet property="ingredient1" destination="gqx-rE-sqM" id="jY8-wl-luT"/>
+                        <outlet property="instructionLabel" destination="Gd7-79-Mzk" id="gDg-bE-wWr"/>
+                        <outlet property="typeOfRecipe" destination="kBd-tH-dsj" id="6sA-EJ-Jfa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xVC-sb-pr8" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="jaH-aJ-uF5"/>
+            </objects>
+            <point key="canvasLocation" x="1194" y="223"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Hearts-48.png" width="35" height="35"/>
+        <image name="Hearts-50.png" width="50" height="50"/>
+        <image name="Saving Book-50.png" width="35" height="35"/>
+    </resources>
 </document>
