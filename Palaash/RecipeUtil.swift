@@ -39,8 +39,8 @@ class RecipeUtil: NSObject {
         
         //let stringRepresentation = [ingredient1, ingredient2].description
         let methodParameters = [
-            RecipeConstants.MashapeQuery.Cuisine : "american",
-            RecipeConstants.MashapeQuery.includeIngreidents : "carrot",
+            RecipeConstants.MashapeQuery.Cuisine : "indian",
+            RecipeConstants.MashapeQuery.includeIngreidents : "green beans",
            // RecipeConstants.MashapeQuery.query : RecipeConstants.MashapeQuery.query_value,
             RecipeConstants.MashapeQuery.limitLicense : RecipeConstants.MashapeQuery.limitLicense_value,
             RecipeConstants.MashapeQuery.type : "main course",
@@ -203,46 +203,59 @@ class RecipeUtil: NSObject {
                 return
             }
             print("+++++++++++++++++++")
-            
            
-            let firstElement : AnyObject! = nil
-            if(parsedResult != nil){
-                let firstElement = parsedResult[0]
-                 print(parsedResult[0])
-            }else{
-                completionHandlerForInstructions(ingredients : [String](), steps: [String](), error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
-                return
-
-            }
-            guard let results = firstElement else{
-                completionHandlerForInstructions(ingredients : [String](), steps: [String](), error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
-                return
-            }
-            
-            guard let sessionResult = results["steps"] as? [[String:AnyObject]] else {
-                print(" See error code and message \(parsedResult)")
-                completionHandlerForInstructions(ingredients : [String](), steps: [String](), error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
-                return
-            }
-            print("+++++++++++++++++++")
-            let numberOfSteps = sessionResult.count
-            var count:Int = 0
-            var ingredients = [String]()
-            var instruction = [String]()
-            print("+++++++++++++++++++", numberOfSteps)
-            for result in sessionResult {
-                count += 1
-                var stepNumber = result["number"] as? Int
-                instruction.append((result["step"] as? String)!)
-                var ings = result["ingredients"] as? [AnyObject]
-                for i in ings! {
-                    ingredients.append((i["name"] as? String)!)
+          
+            var firstElement : AnyObject!
+            do {
+                if  (parsedResult?.count ?? 0) > 0 {
+                    firstElement = parsedResult[0]
+                    print("response contains first element")
+                }else{
+                    print("empty results -  no content")
+                    completionHandlerForInstructions(ingredients : [String](), steps: [String](), error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
+                    return
                 }
-                if(count == numberOfSteps){
-                    completionHandlerForInstructions(ingredients: ingredients, steps: instruction, error: nil )
+            } catch {
+                print(" first element does not exist")
+                completionHandlerForInstructions(ingredients : [String](), steps: [String](), error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
+                return
+            }
+
+            
+                guard let results = firstElement else{
+                    completionHandlerForInstructions(ingredients : [String](), steps: [String](), error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
+                    return
                 }
                 
-            }
+                guard let sessionResult = results["steps"] as? [[String:AnyObject]] else {
+                    print(" See error code and message \(parsedResult)")
+                    completionHandlerForInstructions(ingredients : [String](), steps: [String](), error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
+                    return
+                }
+                print("+++++++++++++++++++")
+                let numberOfSteps = sessionResult.count
+                var count:Int = 0
+                var ingredients = [String]()
+                var instruction = [String]()
+                print("+++++++++++++++++++", numberOfSteps)
+                for result in sessionResult {
+                    count += 1
+                    var s = String(result["number"] as! Int)
+                    s.appendContentsOf(".")
+                    s.appendContentsOf((result["step"] as? String)!)
+                    instruction.append(s)
+                    let ings = result["ingredients"] as? [AnyObject]
+                    for i in ings! {
+                        ingredients.append((i["name"] as? String)!)
+                    }
+                    if(count == numberOfSteps){
+                        completionHandlerForInstructions(ingredients: ingredients, steps: instruction, error: nil )
+                    }
+                    
+                }
+                
+          
+            
         }
         task.resume()
             

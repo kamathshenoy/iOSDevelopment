@@ -10,22 +10,25 @@ import Foundation
 import CoreData
 import UIKit
 class RecipeDetailViewController: UIViewController, NSFetchedResultsControllerDelegate  {
-    @IBOutlet weak var makeFav: UIBarButtonItem!
+    
     var isFavMode = false
     var sharedContext = CoreDataStackManager.sharedInstance().managedObjectContext
-   
     var instructions:[String] = []
     var ingredients:[String] = []
-    @IBOutlet weak var textView: UITextView!
+    var isFavRecipe = false
     @IBOutlet weak var imageView: UIImageView!
-    
+    @IBOutlet weak var makeFav: UIBarButtonItem!
+    @IBOutlet weak var instructionsTextView: UITextView!
     
     @IBAction func newFav(sender: AnyObject) {
+        print("mode",isFavMode)
+        print("isfav recipe",isFavRecipe)
+
         if(!isFavMode){
-            makeFav.image = UIImage(contentsOfFile: "Hearts-48.png")
+            makeFav.image = UIImage(named: "Hearts-48.png")
             isFavMode = true
         }else{
-            makeFav.image = UIImage(contentsOfFile: "Hearts-50.png")
+            makeFav.image = UIImage(named: "Hearts-50.png")
             isFavMode = false
         }
     }
@@ -37,7 +40,15 @@ class RecipeDetailViewController: UIViewController, NSFetchedResultsControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.text =   "work in progress"
+        print("THE IMAGE",imageView.image)
+        instructionsTextView.text = "Ingredients and Instructions\n\n"
+        instructionsTextView.text.appendContentsOf(ingredients.joinWithSeparator(", "))
+        instructionsTextView.text.appendContentsOf("\n\n")
+        instructionsTextView.text.appendContentsOf(instructions.joinWithSeparator("\n"))
+       
         
+        makeFav.image = isFavRecipe ? UIImage(named: "Hearts-48.png") : UIImage(named: "Hearts-50.png")
+        print("THE IMAGE FAV",makeFav.image)
+       
     }
 }

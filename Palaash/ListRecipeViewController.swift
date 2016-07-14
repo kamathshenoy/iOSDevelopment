@@ -60,9 +60,7 @@ class ListRecipeViewController: UIViewController, UITableViewDelegate, UITableVi
         _ = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
         let recipe = recipeData[indexPath.row] as!  RecipeData
         print("recipe id", recipe.recipeID)
-        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("RecipeDetailViewController") as? RecipeDetailViewController
-            
-            
+        print("image", recipe.image)
         RecipeUtil.sharedInstance().getInstructions((recipe.recipeID)){ (ingredients,instructions, error) in
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue()){
@@ -72,13 +70,20 @@ class ListRecipeViewController: UIViewController, UITableViewDelegate, UITableVi
                 }else{
                     print("recieved instructins")
                     dispatch_async(dispatch_get_main_queue()){
-                        controller?.imageView.image = recipe.image
                         print("+++++++++++++++++++++")
-                        print(ingredients)
-                        print(instructions)
-                        controller?.instructions = instructions
-                        controller?.ingredients = ingredients
-                        self.presentViewController(controller!, animated: true, completion: nil)
+                        print("INGREDIENTS ",ingredients)
+                        print("INSTRUCTIONS",instructions)
+                        
+                        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("RecipeDetailViewController") as! RecipeDetailViewController
+                        controller.instructions = instructions
+                        controller.ingredients = ingredients
+                        let imgView: UIImageView = controller.imageView!
+                        imgView.image = recipe.image
+
+                        controller.imageView?.image = recipe.image
+                        controller.isFavRecipe = false
+                        
+                        self.presentViewController(controller, animated: true, completion: nil)
                     }
                 }
         }

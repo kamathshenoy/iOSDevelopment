@@ -158,7 +158,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="h2O-ze-dyQ" firstAttribute="leading" secondItem="Rzi-47-qug" secondAttribute="leadingMargin" id="B0p-Kw-NJ7"/>
                             <constraint firstItem="h2O-ze-dyQ" firstAttribute="top" secondItem="x2C-ds-g3h" secondAttribute="bottom" constant="45" id="EFD-xy-vca"/>
@@ -228,7 +228,7 @@
         <!--RecipeDetailViewController-->
         <scene sceneID="k9c-cI-MNo">
             <objects>
-                <viewController storyboardIdentifier="RecipeDetailViewController" title="RecipeDetailViewController" id="xC7-oe-wOp" customClass="RecipeDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecipeDetailViewController" title="RecipeDetailViewController" id="xC7-oe-wOp" customClass="RecipeDetailViewController" customModule="Palaash" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vTR-jA-V84"/>
                         <viewControllerLayoutGuide type="bottom" id="uBI-MY-HIO"/>
@@ -247,7 +247,7 @@
                                                 <action selector="goBack:" destination="xC7-oe-wOp" id="6PI-gO-Fcb"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="Hearts-50.png" id="cxz-Co-2iQ">
+                                        <barButtonItem key="rightBarButtonItem" id="cxz-Co-2iQ">
                                             <color key="tintColor" red="1" green="0.1238534204" blue="0.066175699259999998" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
                                                 <action selector="newFav:" destination="xC7-oe-wOp" id="6vC-7M-Jkz"/>
@@ -255,37 +255,52 @@
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
-                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="0.0" y="36" width="400" height="44"/>
                                 </variation>
                             </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="awb-Cm-O3G">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="224" id="7Xc-2C-R0f"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="7Xc-2C-R0f"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="0.0" y="80" width="400" height="224"/>
+                                    <mask key="constraints">
+                                        <include reference="7Xc-2C-R0f"/>
+                                    </mask>
                                 </variation>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vCh-8Q-wRr">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="0.0" y="305" width="400" height="295"/>
                                 </variation>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="awb-Cm-O3G" secondAttribute="trailing" id="5CO-Vb-Gzu"/>
                             <constraint firstItem="awb-Cm-O3G" firstAttribute="leading" secondItem="rXK-xU-H6Z" secondAttribute="leadingMargin" id="Fbp-wR-Dkb"/>
                             <constraint firstItem="vCh-8Q-wRr" firstAttribute="top" secondItem="awb-Cm-O3G" secondAttribute="bottom" constant="1" id="GDV-3p-qbB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vCh-8Q-wRr" secondAttribute="trailing" id="IIw-rh-QcA"/>
                             <constraint firstItem="awb-Cm-O3G" firstAttribute="top" secondItem="CGp-vu-wLh" secondAttribute="bottom" id="QMf-vN-V97"/>
+                            <constraint firstItem="CGp-vu-wLh" firstAttribute="top" secondItem="vTR-jA-V84" secondAttribute="bottom" constant="20" id="TZn-ys-h9W"/>
+                            <constraint firstItem="CGp-vu-wLh" firstAttribute="leading" secondItem="rXK-xU-H6Z" secondAttribute="leadingMargin" id="X2Y-c6-Byp"/>
                             <constraint firstItem="vCh-8Q-wRr" firstAttribute="top" secondItem="awb-Cm-O3G" secondAttribute="bottom" constant="1" id="XAr-4p-QOh"/>
-                            <constraint firstItem="uBI-MY-HIO" firstAttribute="top" secondItem="vCh-8Q-wRr" secondAttribute="bottom" id="cS0-ww-l8T"/>
+                            <constraint firstItem="uBI-MY-HIO" firstAttribute="top" secondItem="vCh-8Q-wRr" secondAttribute="bottom" constant="133" id="bBn-OC-Trs"/>
+                            <constraint firstItem="awb-Cm-O3G" firstAttribute="top" secondItem="CGp-vu-wLh" secondAttribute="bottom" id="qhs-dl-r0S"/>
                             <constraint firstItem="vCh-8Q-wRr" firstAttribute="leading" secondItem="rXK-xU-H6Z" secondAttribute="leadingMargin" id="r75-Q4-938"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CGp-vu-wLh" secondAttribute="trailing" id="zmG-Tx-53z"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -294,14 +309,18 @@
                                 <exclude reference="vCh-8Q-wRr"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="TZn-ys-h9W"/>
+                                <exclude reference="X2Y-c6-Byp"/>
+                                <exclude reference="zmG-Tx-53z"/>
                                 <exclude reference="5CO-Vb-Gzu"/>
                                 <exclude reference="Fbp-wR-Dkb"/>
                                 <exclude reference="QMf-vN-V97"/>
+                                <exclude reference="qhs-dl-r0S"/>
                                 <exclude reference="GDV-3p-qbB"/>
                                 <exclude reference="IIw-rh-QcA"/>
                                 <exclude reference="XAr-4p-QOh"/>
                                 <exclude reference="r75-Q4-938"/>
-                                <exclude reference="cS0-ww-l8T"/>
+                                <exclude reference="bBn-OC-Trs"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -311,21 +330,25 @@
                                 <include reference="vCh-8Q-wRr"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="TZn-ys-h9W"/>
+                                <include reference="X2Y-c6-Byp"/>
+                                <include reference="zmG-Tx-53z"/>
                                 <include reference="5CO-Vb-Gzu"/>
                                 <include reference="Fbp-wR-Dkb"/>
                                 <include reference="QMf-vN-V97"/>
+                                <include reference="qhs-dl-r0S"/>
                                 <include reference="GDV-3p-qbB"/>
                                 <include reference="IIw-rh-QcA"/>
                                 <include reference="XAr-4p-QOh"/>
                                 <include reference="r75-Q4-938"/>
-                                <include reference="cS0-ww-l8T"/>
+                                <include reference="bBn-OC-Trs"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="awb-Cm-O3G" id="aeh-pp-8dW"/>
+                        <outlet property="instructionsTextView" destination="vCh-8Q-wRr" id="4bG-jc-JSc"/>
                         <outlet property="makeFav" destination="cxz-Co-2iQ" id="6NT-r8-T9J"/>
-                        <outlet property="textView" destination="vCh-8Q-wRr" id="uI3-Fi-zFv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Npe-ko-zhm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -372,7 +395,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Favorite Recipes" id="aRi-h8-QV7">
+                    <navigationItem key="navigationItem" title="LiveGreen Favorite Recipes" id="aRi-h8-QV7">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="o4E-KV-VdK">
                             <connections>
                                 <action selector="logout" destination="09u-b5-U4I" id="hIz-ku-TJZ"/>
@@ -425,7 +448,6 @@
                                             <constraint firstAttribute="height" constant="40" id="AgO-iQ-F2J"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cuisine" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n9R-3W-wH1">
@@ -521,7 +543,6 @@
                                             <constraint firstAttribute="height" constant="60" id="29h-Nd-Dgh"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -564,7 +585,7 @@
                                 </variation>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.18312870940274623" green="0.53004335732984287" blue="0.0024537313848758267" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.76868404379999999" green="1" blue="0.73441168850000005" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.63559658470000002" green="1" blue="0.65433668310000004" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
@@ -577,7 +598,7 @@
                             <outletCollection property="gestureRecognizers" destination="jaH-aJ-uF5" appends="YES" id="0zd-Ii-jw6"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="yY2-qF-2HQ"/>
+                    <navigationItem key="navigationItem" title="Search Green Recipes" id="yY2-qF-2HQ"/>
                     <connections>
                         <outlet property="cuisine" destination="n9R-3W-wH1" id="Ogg-yH-fTd"/>
                         <outlet property="ingredient1" destination="gqx-rE-sqM" id="jY8-wl-luT"/>
@@ -593,7 +614,6 @@
     </scenes>
     <resources>
         <image name="Hearts-48.png" width="35" height="35"/>
-        <image name="Hearts-50.png" width="50" height="50"/>
         <image name="Saving Book-50.png" width="35" height="35"/>
     </resources>
 </document>
