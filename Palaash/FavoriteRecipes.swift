@@ -23,11 +23,14 @@ class FavoriteRecipes: NSManagedObject {
     }
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context : NSManagedObjectContext?) {
+        print("saving a favorite recipe..1")
+
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
     
     // Recipe object init with support for our managedObjectContext
     init(dictionary: [String: AnyObject], context: NSManagedObjectContext) {
+        print("saving a favorite recipe..2")
         let entity = NSEntityDescription.entityForName("FavoriteRecipes", inManagedObjectContext: context)!
         super.init(entity: entity, insertIntoManagedObjectContext: context)
         process = dictionary[Keys.Process] as? String

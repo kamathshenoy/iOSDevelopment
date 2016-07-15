@@ -75,14 +75,11 @@ class ListRecipeViewController: UIViewController, UITableViewDelegate, UITableVi
                         print("INSTRUCTIONS",instructions)
                         
                         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("RecipeDetailViewController") as! RecipeDetailViewController
-                        controller.instructions = instructions
-                        controller.ingredients = ingredients
-                        let imgView: UIImageView = controller.imageView!
-                        imgView.image = recipe.image
-
-                        controller.imageView?.image = recipe.image
+                        controller.instructions = instructions.joinWithSeparator("\n")
+                        controller.ingredients = ingredients.joinWithSeparator(", ")
+                       // controller.image = recipe.image
                         controller.isFavRecipe = false
-                        
+                        controller.recipe = recipe
                         self.presentViewController(controller, animated: true, completion: nil)
                     }
                 }

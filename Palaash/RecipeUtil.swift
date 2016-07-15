@@ -133,32 +133,7 @@ class RecipeUtil: NSObject {
     }
    
     
-  /*  func recipeDataFromResults(results: [[String:AnyObject]], completionHandlerForRecipeData: (result: [RecipeData], error: NSError?) -> Void)  {
-        
-        var rdata = [RecipeData]()
-        
-        for result in results {
-            _ =  RecipeUtil.sharedInstance().getImage(result["image"]  as! String) { (data, error) in
-                
-                if error != nil {
-                    print("Error downloading image for the recipe .ignore it")
-                } else {
-                    if let data = data {
-                        
-                        let recipeData = RecipeData(dictionary: result, image:data)
-                        print("adding to the recipe data", result["title"])
-                        rdata.append(recipeData)
-                        print("rdata",rdata.count)
-                    }
-                }
-                
-            }
-        }
-        
-        print("rdata final ",rdata.isEmpty)
-        
-    }*/
-
+ 
     
     func getInstructions(id: Int, completionHandlerForInstructions: (ingredients: [String], steps: [String], error: NSError?) -> Void){
        

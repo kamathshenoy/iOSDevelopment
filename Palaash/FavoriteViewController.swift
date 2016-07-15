@@ -16,11 +16,23 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
-        
+      
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+          fetchedResultsController.delegate = self
     }
     
-    
+    func showAlertMsg(msg:String)->Void {
+        let alert = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        return
+    }
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
         
@@ -28,7 +40,7 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
         let fetchRequest = NSFetchRequest(entityName: "FavoriteRecipes")
         
         //Add a sort descriptor
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "ID", ascending: true)]
         
         // Fetch only photos from the selected pin
         //let predicate = NSPredicate(format: "photoToPin == %@", self.)
@@ -41,6 +53,36 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
         return fetchedResultsController
         
     }()
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        // This invocation prepares the table to recieve a number of changes. It will store them up
+        // until it receives endUpdates(), and then perform them all at once.
+        self.tableView.beginUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        // Our project does not use sections. So we can ignore these invocations.
+    }
+    
+    //
+    // This is the most important method. It adds and removes rows in the table, in response to changes in the data.
+    //
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch type {
+        case .Insert:
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        default:
+            return
+        }
+    }
+    
+    // When endUpdates() is invoked, the table makes the changes visible.
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.endUpdates()
+    }
 
     
     
@@ -73,7 +115,28 @@ extension FavoriteViewController {
         let cellReuseIdentifier = "FavoriteRecipe"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
         let recipes = self.fetchedResultsController.objectAtIndexPath(indexPath) as?  FavoriteRecipes
+        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("RecipeDetailViewController") as! RecipeDetailViewController
+        controller.instructions = (recipes?.process)!
+        controller.ingredients = (recipes?.ingredients)!
+        // controller.image = recipes?.image
+        controller.isFavRecipe = true
+        let recipeData = RecipeData(dictionary: [RecipeData.Keys.recipeID : (recipes?.id)!,
+                                                 RecipeData.Keys.title : (recipes?.name)!],
+                                                image: UIImage(data: (recipes?.image)!)!)
+        controller.recipe = recipeData
+        self.presentViewController(controller, animated: true, completion: nil)
     }
     
+     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if editingStyle == .Delete {
+            let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! FavoriteRecipes
+            sharedContext.deleteObject(event)
+            
+            CoreDataStackManager.sharedInstance().saveContext()
+        }
+    }
+
+
 }
 

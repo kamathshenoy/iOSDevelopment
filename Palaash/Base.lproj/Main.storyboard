@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -85,6 +86,7 @@
                         <viewControllerLayoutGuide type="bottom" id="dkl-ji-pnz"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Rzi-47-qug">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhB-tp-LyK">
@@ -108,8 +110,7 @@
                                         <exclude reference="7Wn-CB-isj"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="37" width="400" height="45"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="7Wn-CB-isj"/>
                                     </mask>
@@ -126,9 +127,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mdB-uq-71V" id="15j-PL-Adz">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="viX-mI-0pK">
+                                                    <rect key="frame" x="65" y="0.0" width="160" height="89.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="tintColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
@@ -137,6 +140,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Hearts-48.png" id="wbv-x0-aJd">
+                                                    <rect key="frame" x="15" y="27" width="35" height="35"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <color key="backgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="tintColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
@@ -149,9 +153,6 @@
                                         <color key="tintColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                 </prototypes>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="82" width="400" height="523"/>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="yQH-RU-sch" id="orY-7V-Oey"/>
                                     <outlet property="delegate" destination="yQH-RU-sch" id="Oem-DG-gd1"/>
@@ -174,13 +175,13 @@
                                 <exclude reference="h2O-ze-dyQ"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="l0d-bR-9iN"/>
                                 <exclude reference="gRf-Bs-SZh"/>
                                 <exclude reference="uwN-9S-Yry"/>
                                 <exclude reference="B0p-Kw-NJ7"/>
                                 <exclude reference="EFD-xy-vca"/>
                                 <exclude reference="VmP-pG-7DF"/>
                                 <exclude reference="yAi-hA-1yw"/>
-                                <exclude reference="l0d-bR-9iN"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -189,13 +190,13 @@
                                 <include reference="h2O-ze-dyQ"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="l0d-bR-9iN"/>
                                 <include reference="gRf-Bs-SZh"/>
                                 <include reference="uwN-9S-Yry"/>
                                 <include reference="B0p-Kw-NJ7"/>
                                 <include reference="EFD-xy-vca"/>
                                 <include reference="VmP-pG-7DF"/>
                                 <include reference="yAi-hA-1yw"/>
-                                <include reference="l0d-bR-9iN"/>
                             </mask>
                         </variation>
                     </view>
@@ -234,6 +235,7 @@
                         <viewControllerLayoutGuide type="bottom" id="uBI-MY-HIO"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rXK-xU-H6Z">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGp-vu-wLh">
@@ -255,9 +257,6 @@
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="36" width="400" height="44"/>
-                                </variation>
                             </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="awb-Cm-O3G">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -269,8 +268,7 @@
                                         <exclude reference="7Xc-2C-R0f"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="80" width="400" height="224"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="7Xc-2C-R0f"/>
                                     </mask>
@@ -282,9 +280,6 @@
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="305" width="400" height="295"/>
-                                </variation>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
@@ -309,6 +304,7 @@
                                 <exclude reference="vCh-8Q-wRr"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="bBn-OC-Trs"/>
                                 <exclude reference="TZn-ys-h9W"/>
                                 <exclude reference="X2Y-c6-Byp"/>
                                 <exclude reference="zmG-Tx-53z"/>
@@ -320,7 +316,6 @@
                                 <exclude reference="IIw-rh-QcA"/>
                                 <exclude reference="XAr-4p-QOh"/>
                                 <exclude reference="r75-Q4-938"/>
-                                <exclude reference="bBn-OC-Trs"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -330,6 +325,7 @@
                                 <include reference="vCh-8Q-wRr"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="bBn-OC-Trs"/>
                                 <include reference="TZn-ys-h9W"/>
                                 <include reference="X2Y-c6-Byp"/>
                                 <include reference="zmG-Tx-53z"/>
@@ -341,7 +337,6 @@
                                 <include reference="IIw-rh-QcA"/>
                                 <include reference="XAr-4p-QOh"/>
                                 <include reference="r75-Q4-938"/>
-                                <include reference="bBn-OC-Trs"/>
                             </mask>
                         </variation>
                     </view>
@@ -372,7 +367,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FGY-F6-wQU">
-                                            <rect key="frame" x="62" y="0.0" width="523" height="43.5"/>
+                                            <rect key="frame" x="65" y="0.0" width="520" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -382,7 +377,7 @@
                                             </variation>
                                         </label>
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Hearts-48.png" id="fCq-J4-KiY">
-                                            <rect key="frame" x="15" y="5" width="32" height="32"/>
+                                            <rect key="frame" x="15" y="4" width="35" height="35"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
                                     </subviews>
@@ -396,11 +391,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="LiveGreen Favorite Recipes" id="aRi-h8-QV7">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="o4E-KV-VdK">
-                            <connections>
-                                <action selector="logout" destination="09u-b5-U4I" id="hIz-ku-TJZ"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="V5F-M7-8FU"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
@@ -420,10 +411,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hoU-hF-7Hm">
-                                <rect key="frame" x="20" y="55" width="560" height="527"/>
+                            <stackView contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hoU-hF-7Hm">
+                                <rect key="frame" x="20" y="55" width="560" height="483"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7KQ-FX-1mp">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7KQ-FX-1mp">
                                         <rect key="frame" x="0.0" y="297" width="560" height="220"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="J9N-4b-FkY"/>
@@ -442,16 +433,16 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" text="Add the Ingredients" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btX-Cf-TAx">
-                                        <rect key="frame" x="0.0" y="70" width="560" height="40"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" misplaced="YES" text="Add the Ingredients" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btX-Cf-TAx">
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="AgO-iQ-F2J"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cuisine" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n9R-3W-wH1">
-                                        <rect key="frame" x="0.0" y="120" width="560" height="32"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cuisine" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n9R-3W-wH1">
+                                        <rect key="frame" x="0.0" y="50" width="560" height="32"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="340" id="eoe-5B-23t"/>
@@ -471,8 +462,8 @@
                                             </mask>
                                         </variation>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ingredients (example -broccoli,rice,beans)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gqx-rE-sqM">
-                                        <rect key="frame" x="0.0" y="120" width="560" height="32"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ingredients (example -broccoli,rice,beans)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gqx-rE-sqM">
+                                        <rect key="frame" x="0.0" y="92" width="560" height="32"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="CCu-rF-bnh"/>
@@ -492,8 +483,8 @@
                                             </mask>
                                         </variation>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type of recipes" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kBd-tH-dsj">
-                                        <rect key="frame" x="0.0" y="162" width="560" height="32"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type of recipes" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kBd-tH-dsj">
+                                        <rect key="frame" x="0.0" y="134" width="560" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="340" id="1aZ-SI-HEA"/>
@@ -511,8 +502,8 @@
                                             </mask>
                                         </variation>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GDF-Zk-RF0">
-                                        <rect key="frame" x="0.0" y="204" width="560" height="44"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GDF-Zk-RF0">
+                                        <rect key="frame" x="0.0" y="174" width="560" height="44"/>
                                         <color key="backgroundColor" red="0.23136101138149168" green="0.66964577879581144" blue="0.0030999933146193307" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Nza-KL-R4D"/>
@@ -537,8 +528,8 @@
                                             <action selector="searchRecipes:" destination="Hhf-uL-G8V" eventType="touchUpInside" id="CO9-aH-jTI"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gd7-79-Mzk">
-                                        <rect key="frame" x="0.0" y="297" width="560" height="220"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gd7-79-Mzk">
+                                        <rect key="frame" x="0.0" y="228" width="560" height="255"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="29h-Nd-Dgh"/>
                                         </constraints>
@@ -585,8 +576,8 @@
                                 </variation>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.76868404379999999" green="1" blue="0.73441168850000005" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="tintColor" red="0.63559658470000002" green="1" blue="0.65433668310000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="hoU-hF-7Hm" secondAttribute="trailing" id="6wM-T0-drK"/>

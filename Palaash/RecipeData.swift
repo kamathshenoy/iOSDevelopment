@@ -10,11 +10,26 @@ import Foundation
 import UIKit
 
 struct RecipeData {
+    
+    struct Keys {
+        static let recipeID = "recipeID"
+        static let imageURL = "imageURL"
+        static let title = "title"
+        static let image = "image"
+    }
+    
+    
     var recipeID: Int 
     var imageURL: String = ""
     var title: String = ""
     var image : UIImage
    
+    init(){
+        title = ""
+        recipeID = 0
+        imageURL = ""
+        self.image = UIImage(named: "noImage")!
+    }
     
     init(dictionary: [String:AnyObject], image: UIImage) {
         
