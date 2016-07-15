@@ -12,7 +12,7 @@ import UIKit
 struct RecipeData {
     
     struct Keys {
-        static let recipeID = "recipeID"
+        static let recipeID = "id"
         static let imageURL = "imageURL"
         static let title = "title"
         static let image = "image"
@@ -33,9 +33,9 @@ struct RecipeData {
     
     init(dictionary: [String:AnyObject], image: UIImage) {
         
-        title = dictionary["title"] as! String
-        recipeID = dictionary["id"] as! Int
-        imageURL = dictionary["image"] as! String
+        title = dictionary[Keys.title] as! String
+        recipeID = dictionary[Keys.recipeID] as! Int
+        imageURL = dictionary[Keys.image] as! String
         self.image = image
         
     }

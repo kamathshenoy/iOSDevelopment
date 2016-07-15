@@ -35,7 +35,7 @@ class FavoriteRecipes: NSManagedObject {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
         process = dictionary[Keys.Process] as? String
         ingredients = dictionary[Keys.Ingredients] as? String
-        id = dictionary[Keys.ID] as? String
+        id = dictionary[Keys.ID] as? NSNumber
         name = dictionary[Keys.Name] as? String
         image = dictionary[Keys.Image] as? NSData
     }

@@ -14,7 +14,7 @@ import CoreData
 
 extension FavoriteRecipes {
 
-    @NSManaged var id: String?
+    @NSManaged var id: NSNumber?
     @NSManaged var image: NSData?
     @NSManaged var ingredients: String?
     @NSManaged var name: String?

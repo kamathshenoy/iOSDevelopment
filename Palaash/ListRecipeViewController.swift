@@ -22,7 +22,6 @@ class ListRecipeViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("recipedata", recipeData.count)
     }
     
     
@@ -40,13 +39,11 @@ class ListRecipeViewController: UIViewController, UITableViewDelegate, UITableVi
         let recipe = recipeData[indexPath.row]
         let imgView: UIImageView = cell.imageView!
         imgView.image = recipe.image
-        print("cell.frame.size.width",cell.frame.size.width)
         imgView.frame =  CGRectMake(0, 0, cell.frame.size.width, 80);
         cell.contentView.addSubview(imgView)
         
 
         cell.textLabel!.text = recipe.title
-        print("recipe.title", recipe.title)
         return cell
     }
     
@@ -70,15 +67,15 @@ class ListRecipeViewController: UIViewController, UITableViewDelegate, UITableVi
                 }else{
                     print("recieved instructins")
                     dispatch_async(dispatch_get_main_queue()){
-                        print("+++++++++++++++++++++")
+                       /* print("+++++++++++++++++++++")
                         print("INGREDIENTS ",ingredients)
-                        print("INSTRUCTIONS",instructions)
+                        print("INSTRUCTIONS",instructions)*/
                         
                         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("RecipeDetailViewController") as! RecipeDetailViewController
                         controller.instructions = instructions.joinWithSeparator("\n")
                         controller.ingredients = ingredients.joinWithSeparator(", ")
                        // controller.image = recipe.image
-                        controller.isFavRecipe = false
+                       // controller.isFavRecipe = false
                         controller.recipe = recipe
                         self.presentViewController(controller, animated: true, completion: nil)
                     }

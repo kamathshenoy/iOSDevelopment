@@ -15,41 +15,79 @@ class RecipeDetailViewController: UIViewController, NSFetchedResultsControllerDe
     var sharedContext = CoreDataStackManager.sharedInstance().managedObjectContext
     var instructions:String = ""
     var ingredients:String = ""
-    var isFavRecipe = false
+   // var isFavRecipe = false
     var recipe = RecipeData()
-   // var image : UIImage!
+ 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var makeFav: UIBarButtonItem!
     @IBOutlet weak var instructionsTextView: UITextView!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        var isFavRecipe = false
+        instructionsTextView.text = "Ingredients and Instructions\n\n"
+        instructionsTextView.text.appendContentsOf(ingredients)
+        instructionsTextView.text.appendContentsOf("\n\n")
+        instructionsTextView.text.appendContentsOf(instructions)
+        do {
+            print("RecipeDetailViewController ..2")
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("ERROR FETCHING DATA- RecipeDetailViewController", error.localizedDescription)
+        }
+        fetchedResultsController.delegate = self
+
+        if let favoriteRecipes = fetchedResultsController.fetchedObjects as? [FavoriteRecipes]{
+            print("got the favs")
+            for fav in favoriteRecipes {
+                if(fav.id! == recipe.recipeID){
+                    isFavRecipe = true
+                    print("this is aleady a fav recipe")
+                    isFavMode = true
+                }else{
+                    print("this is not a fav recipe")
+                    isFavMode = false
+                }
+            }
+        }else{
+            print("No favs")
+        }
+        makeFav.image = isFavRecipe ? UIImage(named: "Hearts-48.png") : UIImage(named: "Hearts-50.png")
+        
+        imageView.image = recipe.image
+       
+    }
     
     @IBAction func newFav(sender: AnyObject) {
         if(!isFavMode){
             makeFav.image = UIImage(named: "Hearts-48.png")
             isFavMode = true
-            
-            for fav in fetchedResultsController.fetchedObjects as! FavoriteRecipes {
-                print("deleting photos")
-                if(fav.Id == recipe.recipeID){
-                    sharedContext.deleteObject(fav)
-                }
-            }
-            print("MADE FAv")
-
-        }else{
-            makeFav.image = UIImage(named: "Hearts-50.png")
-            isFavMode = false
+            let imageData : NSData = UIImagePNGRepresentation(recipe.image)!
             let recipedata = [FavoriteRecipes.Keys.ID : recipe.recipeID,
-                              FavoriteRecipes.Keys.Image : recipe.image,
+                              FavoriteRecipes.Keys.Image : imageData ,
                               FavoriteRecipes.Keys.Ingredients : ingredients,
                               FavoriteRecipes.Keys.Process : instructions,
                               FavoriteRecipes.Keys.Name : recipe.title]
             _ = FavoriteRecipes(dictionary: recipedata, context: self.sharedContext)
+            
+            print("MADE FAV")
+            
+        }else{
+            // sharedContext.deleteObject(recipe.recipeID)
+            for fav in fetchedResultsController.fetchedObjects as! [FavoriteRecipes] {
+                print("deleting photos")
+                if(fav.id! == recipe.recipeID){
+                    sharedContext.deleteObject(fav)
+                }
+            }
+            makeFav.image = UIImage(named: "Hearts-50.png")
+            isFavMode = false
             print("MADE NONFAV")
             
         }
         CoreDataStackManager.sharedInstance().saveContext()
     }
-    
     
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
@@ -58,38 +96,20 @@ class RecipeDetailViewController: UIViewController, NSFetchedResultsControllerDe
         let fetchRequest = NSFetchRequest(entityName: "FavoriteRecipes")
         
         //Add a sort descriptor
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "ID", ascending: true)]
-        
-        // Fetch only photos from the selected pin
-      /*  let predicate = NSPredicate(format: "ID == %@", self.recipe.recipeID)
-        fetchRequest.predicate = predicate*/
-        
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         //Create the Fetched Results Controller
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
+        
         //Return the fetched results controller
+        print("fetched results", fetchedResultsController.sections)
         return fetchedResultsController
         
     }()
-
-       
+    
+    
     @IBAction func goBack(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("THE IMAGE",imageView.image)
-        instructionsTextView.text = "Ingredients and Instructions\n\n"
-        instructionsTextView.text.appendContentsOf(ingredients)
-        instructionsTextView.text.appendContentsOf("\n\n")
-        instructionsTextView.text.appendContentsOf(instructions)
-       
-        
-        makeFav.image = isFavRecipe ? UIImage(named: "Hearts-48.png") : UIImage(named: "Hearts-50.png")
-        
-        imageView.image = recipe.image
-       
-    }
 }

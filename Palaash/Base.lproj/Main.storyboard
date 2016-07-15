@@ -70,7 +70,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="09u-b5-U4I" kind="relationship" relationship="rootViewController" id="bbJ-HO-uYS"/>
+                        <segue destination="Bdm-mf-4gZ" kind="relationship" relationship="rootViewController" id="R68-fT-fiX"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w5g-kl-fHQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -348,56 +348,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Npe-ko-zhm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="265.5" y="963"/>
-        </scene>
-        <!--FavoriteViewController-->
-        <scene sceneID="4Jt-vb-bLy">
-            <objects>
-                <tableViewController storyboardIdentifier="FavoriteViewController" title="FavoriteViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="09u-b5-U4I" customClass="lFavoriteViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="FavoriteViewController" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="EYn-6y-JkN">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" restorationIdentifier="FavoriteRecipe" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteRecipe" textLabel="FGY-F6-wQU" imageView="fCq-J4-KiY" style="IBUITableViewCellStyleDefault" id="o9J-RX-B70">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o9J-RX-B70" id="DgY-I1-qH6">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FGY-F6-wQU">
-                                            <rect key="frame" x="65" y="0.0" width="520" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="widthClass=compact">
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            </variation>
-                                        </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Hearts-48.png" id="fCq-J4-KiY">
-                                            <rect key="frame" x="15" y="4" width="35" height="35"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </imageView>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="09u-b5-U4I" id="f2p-K5-fl6"/>
-                            <outlet property="delegate" destination="09u-b5-U4I" id="fva-dB-YbX"/>
-                        </connections>
-                    </tableView>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="LiveGreen Favorite Recipes" id="aRi-h8-QV7">
-                        <barButtonItem key="leftBarButtonItem" title="Edit" id="V5F-M7-8FU"/>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kFp-jO-FuR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1206" y="-607"/>
+            <point key="canvasLocation" x="334.5" y="995"/>
         </scene>
         <!--Search Recipes-->
         <scene sceneID="i7x-Fm-IUQ">
@@ -427,21 +378,25 @@
                                                 <exclude reference="J9N-4b-FkY"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="0.0" width="360" height="100"/>
                                             <mask key="constraints">
                                                 <include reference="J9N-4b-FkY"/>
                                             </mask>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" misplaced="YES" text="Add the Ingredients" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btX-Cf-TAx">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" text="Add the Ingredients" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="btX-Cf-TAx">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="AgO-iQ-F2J"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="110" width="360" height="40"/>
+                                        </variation>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cuisine" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n9R-3W-wH1">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cuisine" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n9R-3W-wH1">
                                         <rect key="frame" x="0.0" y="50" width="560" height="32"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -456,13 +411,14 @@
                                                 <exclude reference="eoe-5B-23t"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="160" width="360" height="32"/>
                                             <mask key="constraints">
                                                 <include reference="eoe-5B-23t"/>
                                             </mask>
                                         </variation>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ingredients (example -broccoli,rice,beans)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gqx-rE-sqM">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ingredients (example -broccoli,rice,beans)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gqx-rE-sqM">
                                         <rect key="frame" x="0.0" y="92" width="560" height="32"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -477,7 +433,8 @@
                                                 <exclude reference="UOC-TX-HKV"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="202" width="360" height="32"/>
                                             <mask key="constraints">
                                                 <include reference="UOC-TX-HKV"/>
                                             </mask>
@@ -496,7 +453,8 @@
                                                 <exclude reference="1aZ-SI-HEA"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="244" width="360" height="32"/>
                                             <mask key="constraints">
                                                 <include reference="1aZ-SI-HEA"/>
                                             </mask>
@@ -519,7 +477,8 @@
                                                 <exclude reference="Prq-Zf-EQ7"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="286" width="360" height="44"/>
                                             <mask key="constraints">
                                                 <include reference="Prq-Zf-EQ7"/>
                                             </mask>
@@ -540,7 +499,8 @@
                                                 <exclude reference="29h-Nd-Dgh"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact">
+                                        <variation key="widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="340" width="360" height="143"/>
                                             <mask key="constraints">
                                                 <include reference="29h-Nd-Dgh"/>
                                             </mask>
@@ -601,6 +561,109 @@
                 <tapGestureRecognizer id="jaH-aJ-uF5"/>
             </objects>
             <point key="canvasLocation" x="1194" y="223"/>
+        </scene>
+        <!--FavoriteViewController-->
+        <scene sceneID="C8f-gT-Nzc">
+            <objects>
+                <viewController storyboardIdentifier="FavoriteViewController" title="FavoriteViewController" id="Bdm-mf-4gZ" customClass="FavoriteViewController" customModule="Palaash" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="13O-B7-vB5"/>
+                        <viewControllerLayoutGuide type="bottom" id="hYC-Es-Lfy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xeD-uy-JO6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="97" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FiM-N5-jxe">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.76868404379999999" green="1" blue="0.73441168850000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexTrackingBackgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteRecipe" textLabel="cSw-c8-wvy" imageView="k4F-Nj-C0i" rowHeight="97" style="IBUITableViewCellStyleDefault" id="u0p-E0-1DD">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u0p-E0-1DD" id="vaX-zS-vAu">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="89.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cSw-c8-wvy">
+                                                    <rect key="frame" x="65" y="0.0" width="160" height="89.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="tintColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="Hearts-48.png" id="k4F-Nj-C0i">
+                                                    <rect key="frame" x="15" y="27" width="35" height="35"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <color key="backgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="tintColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="20" width="400" height="579"/>
+                                </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="Bdm-mf-4gZ" id="1ia-4m-BMM"/>
+                                    <outlet property="delegate" destination="Bdm-mf-4gZ" id="u7c-TQ-Rap"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.91844357389999998" green="1" blue="0.9691145699" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="FiM-N5-jxe" secondAttribute="trailing" id="LuQ-y1-f9X"/>
+                            <constraint firstItem="FiM-N5-jxe" firstAttribute="leading" secondItem="xeD-uy-JO6" secondAttribute="leadingMargin" id="X8s-5F-6wF"/>
+                            <constraint firstItem="FiM-N5-jxe" firstAttribute="top" secondItem="13O-B7-vB5" secondAttribute="bottom" constant="45" id="xgu-DG-QIm"/>
+                            <constraint firstItem="hYC-Es-Lfy" firstAttribute="top" secondItem="FiM-N5-jxe" secondAttribute="bottom" constant="1" id="zCz-zg-QBa"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="FiM-N5-jxe"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="zCz-zg-QBa"/>
+                                <exclude reference="X8s-5F-6wF"/>
+                                <exclude reference="xgu-DG-QIm"/>
+                                <exclude reference="LuQ-y1-f9X"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="FiM-N5-jxe"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="zCz-zg-QBa"/>
+                                <include reference="X8s-5F-6wF"/>
+                                <include reference="xgu-DG-QIm"/>
+                                <include reference="LuQ-y1-f9X"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="LiveGreen Favorite Recipes" id="CGk-Gv-xU0">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="9ac-eO-HrU">
+                            <connections>
+                                <action selector="editItems:" destination="Bdm-mf-4gZ" id="xda-aX-tl4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="FiM-N5-jxe" id="0No-To-DUq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d6g-ZI-cKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1278" y="-607"/>
         </scene>
     </scenes>
     <resources>

@@ -14,15 +14,22 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
     @IBOutlet var tableView: UITableView!
 
     
+    @IBAction func editItems(sender: AnyObject) {
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        
+        print("step ..1")
+
       
         do {
+            print("step ..2")
             try fetchedResultsController.performFetch()
+            print("fetched results that are saved")
         } catch let error as NSError {
-            print(error.localizedDescription)
+            print("ERROR FETCHING DATA", error.localizedDescription)
         }
           fetchedResultsController.delegate = self
     }
@@ -40,7 +47,7 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
         let fetchRequest = NSFetchRequest(entityName: "FavoriteRecipes")
         
         //Add a sort descriptor
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "ID", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         
         // Fetch only photos from the selected pin
         //let predicate = NSPredicate(format: "photoToPin == %@", self.)
@@ -49,7 +56,9 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
         //Create the Fetched Results Controller
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
+        //fetchedResultsController.
         //Return the fetched results controller
+        print("fetched results", fetchedResultsController.sections)
         return fetchedResultsController
         
     }()
@@ -57,10 +66,12 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         // This invocation prepares the table to recieve a number of changes. It will store them up
         // until it receives endUpdates(), and then perform them all at once.
+        print("controllerWillChangeContent")
         self.tableView.beginUpdates()
     }
     
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+         print("didChangeSection")
         // Our project does not use sections. So we can ignore these invocations.
     }
     
@@ -69,6 +80,7 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
     //
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        print("didChangeObject")
         switch type {
         case .Insert:
             tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
@@ -82,26 +94,26 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
     // When endUpdates() is invoked, the table makes the changes visible.
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
+        print("controllerDidChangeContent")
     }
 
     
-    
-}
-
-
-extension FavoriteViewController {
-    
-    @objc func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // get cell type
         let cellReuseIdentifier = "FavoriteRecipe"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
         let recipes = self.fetchedResultsController.objectAtIndexPath(indexPath) as?  FavoriteRecipes
-        _ = recipes!.image
-        cell.textLabel!.text = recipes!.name
+        let imgView: UIImageView = cell.imageView!
+        if let recipes = recipes {
+            imgView.image = UIImage(data: recipes.image!)
+            imgView.frame =  CGRectMake(0, 0, cell.frame.size.width, 80);
+            cell.contentView.addSubview(imgView)
+            cell.textLabel!.text = recipes.name
+        }
         return cell
     }
     
-     @objc func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sections = fetchedResultsController.sections {
             let currentSection = sections[section]
             print("currentSection.numberOfObjects",currentSection.numberOfObjects)
@@ -118,12 +130,13 @@ extension FavoriteViewController {
         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("RecipeDetailViewController") as! RecipeDetailViewController
         controller.instructions = (recipes?.process)!
         controller.ingredients = (recipes?.ingredients)!
-        // controller.image = recipes?.image
-        controller.isFavRecipe = true
-        let recipeData = RecipeData(dictionary: [RecipeData.Keys.recipeID : (recipes?.id)!,
-                                                 RecipeData.Keys.title : (recipes?.name)!],
+        //controller.isFavRecipe = true
+        let recipeData = RecipeData(dictionary: [RecipeData.Keys.recipeID : Int((recipes?.id)!),
+                                                 RecipeData.Keys.title : (recipes?.name)!,
+                                                RecipeData.Keys.image : "not signficant"],
                                                 image: UIImage(data: (recipes?.image)!)!)
         controller.recipe = recipeData
+        //controller.favRecipe = (recipes)!
         self.presentViewController(controller, animated: true, completion: nil)
     }
     
