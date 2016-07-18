@@ -125,18 +125,19 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cellReuseIdentifier = "FavoriteRecipe"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
+        _ = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
         let recipes = self.fetchedResultsController.objectAtIndexPath(indexPath) as?  FavoriteRecipes
         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("RecipeDetailViewController") as! RecipeDetailViewController
-        controller.instructions = (recipes?.process)!
-        controller.ingredients = (recipes?.ingredients)!
-        //controller.isFavRecipe = true
-        let recipeData = RecipeData(dictionary: [RecipeData.Keys.recipeID : Int((recipes?.id)!),
-                                                 RecipeData.Keys.title : (recipes?.name)!,
-                                                RecipeData.Keys.image : "not signficant"],
-                                                image: UIImage(data: (recipes?.image)!)!)
+        //controller.instructions = (recipes?.process)!
+       // controller.ingredients = (recipes?.ingredients)!
+        controller.isFavMode = true
+        let recipeData = RecipeData(title: (recipes?.name)!,
+                                    recipeID: Int((recipes?.id)!),
+                                    image: UIImage(data: (recipes?.image)!)!,
+                                    ingredients : (recipes?.ingredients)!,
+                                    instructions: (recipes?.process)! )
         controller.recipe = recipeData
-        //controller.favRecipe = (recipes)!
+        
         self.presentViewController(controller, animated: true, completion: nil)
     }
     

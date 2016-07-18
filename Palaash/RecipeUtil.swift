@@ -30,20 +30,20 @@ class RecipeUtil: NSObject {
                 components.queryItems!.append(queryItem)
             }
         }
-        print("components.URL", components.URL)
+        print("\n\ncomponents.URL", components.URL)
         return components.URL!
     }
     
     
-    func serachRecipeForIngredients(ingredients:String, cuisine:String, typeOfRecipe:String, completionHandlerForSearch: (result: [RecipeData]?, error: NSError?) -> Void){
+    func searchRecipeForIngredients(ingredients:String, cuisine:String, typeOfRecipe:String, completionHandlerForSearch: (result: [[String:String]], error: NSError?) -> Void){
+        print("\n\n GET THE RECIPES")
         
-        //let stringRepresentation = [ingredient1, ingredient2].description
         let methodParameters = [
-            RecipeConstants.MashapeQuery.Cuisine : "indian",
-            RecipeConstants.MashapeQuery.includeIngreidents : "green beans",
+            RecipeConstants.MashapeQuery.Cuisine : "italian",
+            RecipeConstants.MashapeQuery.includeIngreidents : "peas",
            // RecipeConstants.MashapeQuery.query : RecipeConstants.MashapeQuery.query_value,
             RecipeConstants.MashapeQuery.limitLicense : RecipeConstants.MashapeQuery.limitLicense_value,
-            RecipeConstants.MashapeQuery.type : "main course",
+            RecipeConstants.MashapeQuery.type : "side dish",
             RecipeConstants.MashapeQuery.diet :  RecipeConstants.MashapeQuery.diet_value
         ];
         
@@ -57,21 +57,16 @@ class RecipeUtil: NSObject {
         let task = session.dataTaskWithRequest(request) { data, response, error in
             
             if error != nil { // Handle error…
-                
                 print("NO INTERNET CONNECTION")
                 let info = [NSLocalizedDescriptionKey : RecipeConstants.Messages.NetworkErrorMsg]
-                completionHandlerForSearch(result: nil, error: NSError(domain: "completionHandlerForSearch",  code: 1, userInfo: info))
+                completionHandlerForSearch(result: [[String:String]](), error: NSError(domain: "completionHandlerForSearch",  code: 1, userInfo: info))
                 return
-                
             }
             
-            // let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
             let info = [NSLocalizedDescriptionKey : RecipeConstants.Messages.Failure]
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode == 200 && statusCode <= 299 else {
-                
-                completionHandlerForSearch(result: nil, error: NSError(domain: "completionHandlerForSearch", code: 1, userInfo: info))
-                
+                completionHandlerForSearch(result: [[String:String]](), error: NSError(domain: "completionHandlerForSearch", code: 1, userInfo: info))
                 return
             }
             
@@ -79,9 +74,9 @@ class RecipeUtil: NSObject {
             let parsedResult: AnyObject!
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
-                  print("===========")
+                 /* print("===========")
                     print(parsedResult)
-                  print("===========")
+                  print("===========")*/
             } catch {
                 print("Could not parse the data as JSON: '\(data)'")
                 return
@@ -89,53 +84,90 @@ class RecipeUtil: NSObject {
             
             guard let totalResults = parsedResult["totalResults"] as? Int else {
                 print(" Could not get the totalReults \(parsedResult)")
-                completionHandlerForSearch(result: nil, error: NSError(domain: "completionHandlerForSearch", code: 1, userInfo: info))
+                completionHandlerForSearch(result: [[String:String]](), error: NSError(domain: "completionHandlerForSearch", code: 1, userInfo: info))
                 return
             }
             
-            guard let offset = parsedResult["offset"] as? Int else {
+            print("\nTOTAL RECIPES RETRIEVED", totalResults)
+            
+          /*  guard let offset = parsedResult["offset"] as? Int else {
                 print(" Could not get the totalReults \(parsedResult)")
                 completionHandlerForSearch(result: nil, error: NSError(domain: "completionHandlerForSearch", code: 1, userInfo: info))
                 return
-            }
+            }*/
             
             guard let sessionResult = parsedResult["results"] as? [[String:AnyObject]] else {
                 print(" See error code and message \(parsedResult)")
-                completionHandlerForSearch(result: nil, error: NSError(domain: "completionHandlerForSearch", code: 1, userInfo: info))
+                completionHandlerForSearch(result: [[String:String]](), error: NSError(domain: "completionHandlerForSearch", code: 1, userInfo: info))
                 return
             }
             
-            var rdata = [RecipeData]()
-            var countOfResultsProcessed:Int = 0
+            var myNewDictArray = [[String:String]]()
+            var countOfResultsProcessedFetchDetails = 0
             for result in sessionResult {
-                _ =  RecipeUtil.sharedInstance().getImage(result["image"]  as! String) { (data, error) in
-                    countOfResultsProcessed += 1
+            //get the detailed instructions and ingredients list for each recipe
+                print("\n\nFetching the details for recipe", result["id"]!)
+                self.getInstructions(result["id"] as! Int){ (ingredients,instructions, error) in
+                    countOfResultsProcessedFetchDetails += 1
                     if error != nil {
-                        print("Error downloading image for the recipe .ignore it")
-                    } else {
-                        if let data = data {
-                            let recipeData = RecipeData(dictionary: result, image:data)
-                                print("adding to the recipe data", result["title"])
-                                rdata.append(recipeData)
-                                if(countOfResultsProcessed == totalResults){
-                                    completionHandlerForSearch(result: rdata, error: nil)
-                                }
-                            }
-                    
+                        print("Detailed instructions can't be retrieved. Ignore the recipe", result["id"]!)
+                        if(totalResults == countOfResultsProcessedFetchDetails){
+                            completionHandlerForSearch(result:myNewDictArray, error: nil)
+                        }
+                    }else{
+                        print("Recieved instructions", result["id"]!)
+                        myNewDictArray.append( [TempKeys.goodRecipe : String(result["id"]!),
+                            TempKeys.goodRecipesIngredients : ingredients,
+                            TempKeys.goodRecipesInstructions : instructions,
+                            TempKeys.image : result["image"] as! String,
+                            TempKeys.title : result["title"] as! String])
+                        if(totalResults == countOfResultsProcessedFetchDetails){
+                            completionHandlerForSearch(result:myNewDictArray, error: nil)
+                        }
                     }
                 }
             }
-
-            
         }
         task.resume()
-        
     }
    
     
+    func getImagesForRecipes(myNewDictArray : [[String:String]], completionHandlerForSearchRecipes: (result: [RecipeData]?, error: NSError?) -> Void){
+        print("\n\n GET THE IMAGES", myNewDictArray.count )
+        var rdata = [RecipeData]()
+        var countOfResultsProcessedFetchImage = 0
+        for aGoodRecipe in myNewDictArray {
+            let recipeID:Int = Int(aGoodRecipe[TempKeys.goodRecipe]!)!
+            _ =  RecipeUtil.sharedInstance().getImage((aGoodRecipe[TempKeys.image]!  as String)) { (data, error) in
+                countOfResultsProcessedFetchImage += 1
+                if error != nil {
+                    print("Error downloading image for the recipe .ignore the recipe", recipeID)
+                    if(myNewDictArray.count == countOfResultsProcessedFetchImage){
+                        completionHandlerForSearchRecipes(result:rdata, error: nil)
+                    }
+                } else {
+                    if let data = data {
+                        let recipeData = RecipeData(title: aGoodRecipe[TempKeys.title]!,
+                                                    recipeID: recipeID,
+                                                    image:data,
+                                                    ingredients: aGoodRecipe[TempKeys.goodRecipesIngredients]!,
+                                                    instructions: aGoodRecipe[TempKeys.goodRecipesInstructions]!)
+                        
+                        print("Downloaded the image..adding to the recipe data", aGoodRecipe[TempKeys.goodRecipe]!)
+                        rdata.append(recipeData)
+                        if(myNewDictArray.count  == countOfResultsProcessedFetchImage){
+                            completionHandlerForSearchRecipes(result:rdata, error: nil)
+                        }
+                    }
+                }//end of else
+            }//end of getImage
+            
+        }//end of for loop
+        
+    }
  
     
-    func getInstructions(id: Int, completionHandlerForInstructions: (ingredients: [String], steps: [String], error: NSError?) -> Void){
+    func getInstructions(id: Int, completionHandlerForInstructions: (ingredients: String, steps: String, error: NSError?) -> Void){
        
         let request2 = NSMutableURLRequest(URL:parseURLFromParameters([String: AnyObject]() , withPathExtension: [String(id), RecipeConstants.SearchRecipe.AnalyzedInstructions]))
         request2.HTTPMethod = "GET"
@@ -147,21 +179,16 @@ class RecipeUtil: NSObject {
         let task = session.dataTaskWithRequest(request2) { data, response, error in
             
             if error != nil { // Handle error…
-                
                 print("NO INTERNET CONNECTION")
                 let info = [NSLocalizedDescriptionKey : RecipeConstants.Messages.NetworkErrorMsg]
-                completionHandlerForInstructions(ingredients : [String](), steps: [String](), error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
+                completionHandlerForInstructions(ingredients : "", steps: "", error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
                 return
-                
             }
-            
            
             let info = [NSLocalizedDescriptionKey : RecipeConstants.Messages.InstructionFailure]
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode == 200 && statusCode <= 299 else {
-                
-                completionHandlerForInstructions(ingredients : [String](), steps: [String](), error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
-                
+                completionHandlerForInstructions(ingredients : "", steps: "", error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
                 return
             }
             
@@ -169,76 +196,68 @@ class RecipeUtil: NSObject {
             let parsedResult: AnyObject!
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
-                print("===========")
+              /*  print("===========")
                 print(parsedResult)
-                print("===========")
+                print("===========")*/
             } catch {
                 print("Could not parse the data as JSON: '\(data)'")
-                completionHandlerForInstructions(ingredients : [String](), steps: [String](), error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
+                completionHandlerForInstructions(ingredients : "", steps: "", error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
                 return
             }
-            print("+++++++++++++++++++")
-           
           
             var firstElement : AnyObject!
             do {
                 if  (parsedResult?.count ?? 0) > 0 {
                     firstElement = parsedResult[0]
-                    print("response contains first element")
+                    //print("response contains first element")
                 }else{
-                    print("empty results -  no content")
-                    completionHandlerForInstructions(ingredients : [String](), steps: [String](), error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
+                   // print("empty results -  no content")
+                    completionHandlerForInstructions(ingredients : "", steps: "", error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
                     return
                 }
             } catch {
-                print(" first element does not exist")
-                completionHandlerForInstructions(ingredients : [String](), steps: [String](), error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
+              //  print(" first element does not exist")
+                completionHandlerForInstructions(ingredients : "", steps: "", error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
                 return
             }
 
             
-                guard let results = firstElement else{
-                    completionHandlerForInstructions(ingredients : [String](), steps: [String](), error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
-                    return
-                }
+            guard let results = firstElement else{
+                completionHandlerForInstructions(ingredients : "", steps: "", error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
+                return
+            }
                 
-                guard let sessionResult = results["steps"] as? [[String:AnyObject]] else {
-                    print(" See error code and message \(parsedResult)")
-                    completionHandlerForInstructions(ingredients : [String](), steps: [String](), error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
-                    return
+            guard let sessionResult = results["steps"] as? [[String:AnyObject]] else {
+                print(" See error code and message \(parsedResult)")
+                completionHandlerForInstructions(ingredients : "", steps: "", error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
+                return
+            }
+            let numberOfSteps = sessionResult.count
+            var count:Int = 0
+            var ingredients :String = ""
+            var instruction :String = ""
+            for result in sessionResult {
+                count += 1
+                var s = "\n"
+                s.appendContentsOf(String(result["number"] as! Int))
+                s.appendContentsOf(".")
+                s.appendContentsOf((result["step"] as? String)!)
+                instruction.appendContentsOf(s)
+                let ings = result["ingredients"] as? [AnyObject]
+                for i in ings! {
+                    ingredients.appendContentsOf((i["name"] as? String)!)
+                    ingredients.appendContentsOf(",")
                 }
-                print("+++++++++++++++++++")
-                let numberOfSteps = sessionResult.count
-                var count:Int = 0
-                var ingredients = [String]()
-                var instruction = [String]()
-                print("+++++++++++++++++++", numberOfSteps)
-                for result in sessionResult {
-                    count += 1
-                    var s = String(result["number"] as! Int)
-                    s.appendContentsOf(".")
-                    s.appendContentsOf((result["step"] as? String)!)
-                    instruction.append(s)
-                    let ings = result["ingredients"] as? [AnyObject]
-                    for i in ings! {
-                        ingredients.append((i["name"] as? String)!)
-                    }
-                    if(count == numberOfSteps){
-                        completionHandlerForInstructions(ingredients: ingredients, steps: instruction, error: nil )
-                    }
+                if(count == numberOfSteps){
+                    completionHandlerForInstructions(ingredients: ingredients, steps: instruction, error: nil )
+                }
                     
-                }
-                
-          
-            
+            }
         }
         task.resume()
-            
-        
-        
     }
     
-    //FIX THIS
+    //FIX THIS with NO image
     func getImage(recipeImageURL:String, completionHandlerForSearchImage: (result: UIImage?, error: NSError?) -> Void){
         let session = NSURLSession.sharedSession()
         let url = NSURL(string: recipeImageURL)
@@ -257,8 +276,7 @@ class RecipeUtil: NSObject {
                 }
             }
         }
-         task.resume()
-       
+        task.resume()
     }
     
     
@@ -268,6 +286,16 @@ class RecipeUtil: NSObject {
         }
         return Singleton.sharedInstance
     }
+
+    
+    struct TempKeys {
+        static let goodRecipe  = "goodRecipe"
+        static let goodRecipesIngredients = "goodRecipesIngredients"
+        static let goodRecipesInstructions = "goodRecipesInstructions"
+        static let image = "image"
+        static let title = "title"
+    }
+    
 
 
 }

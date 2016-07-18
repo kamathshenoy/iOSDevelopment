@@ -30,7 +30,7 @@ class SearchRecipeViewController: UIViewController  {
             return
         }
         
-        RecipeUtil.sharedInstance().serachRecipeForIngredients(ingredient1.text!, cuisine: cuisine.text!, typeOfRecipe: typeOfRecipe.text!) { (data, error) in
+        RecipeUtil.sharedInstance().searchRecipeForIngredients(ingredient1.text!, cuisine: cuisine.text!, typeOfRecipe: typeOfRecipe.text!) { (data, error) in
             
             if error != nil {
                 dispatch_async(dispatch_get_main_queue()){
@@ -38,9 +38,19 @@ class SearchRecipeViewController: UIViewController  {
                     return
                 }
             }else{
-                    print("the count ",RecipeCollection.sharedInstance().recipeData.count)
-                    RecipeCollection.sharedInstance().recipeData = data!
-                    self.showNextScene()
+                RecipeUtil.sharedInstance().getImagesForRecipes(data) { (data, error) in
+                    if error != nil {
+                        dispatch_async(dispatch_get_main_queue()){
+                            self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
+                            return
+                        }
+                    }else{
+                        print("the count ",data!.count)
+                        RecipeCollection.sharedInstance().recipeData = data!
+                        self.showNextScene()
+                    }
+                }
+                
             }
 
         }

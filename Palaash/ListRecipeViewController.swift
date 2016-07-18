@@ -55,10 +55,16 @@ class ListRecipeViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cellReuseIdentifier = "Recipe"
         _ = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
-        let recipe = recipeData[indexPath.row] as!  RecipeData
+        let recipe = recipeData[indexPath.row] 
         print("recipe id", recipe.recipeID)
-        print("image", recipe.image)
-        RecipeUtil.sharedInstance().getInstructions((recipe.recipeID)){ (ingredients,instructions, error) in
+        
+        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("RecipeDetailViewController") as! RecipeDetailViewController
+        controller.recipe = recipe
+        controller.isFavMode = false
+        self.presentViewController(controller, animated: true, completion: nil)
+        
+        
+       /* RecipeUtil.sharedInstance().getInstructions((recipe.recipeID)){ (ingredients,instructions, error) in
                 if error != nil {
                     dispatch_async(dispatch_get_main_queue()){
                         self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
@@ -67,19 +73,15 @@ class ListRecipeViewController: UIViewController, UITableViewDelegate, UITableVi
                 }else{
                     print("recieved instructins")
                     dispatch_async(dispatch_get_main_queue()){
-                       /* print("+++++++++++++++++++++")
-                        print("INGREDIENTS ",ingredients)
-                        print("INSTRUCTIONS",instructions)*/
-                        
                         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("RecipeDetailViewController") as! RecipeDetailViewController
                         controller.instructions = instructions.joinWithSeparator("\n")
                         controller.ingredients = ingredients.joinWithSeparator(", ")
-                       // controller.image = recipe.image
-                       // controller.isFavRecipe = false
+                       
+                        controller.isFavMode = false
                         controller.recipe = recipe
                         self.presentViewController(controller, animated: true, completion: nil)
                     }
                 }
-        }
+        }*/
     }
 }
