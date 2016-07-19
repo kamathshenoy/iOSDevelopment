@@ -279,6 +279,37 @@ class RecipeUtil: NSObject {
         task.resume()
     }
     
+    //borrowed from http://stackoverflow.com/questions/31451798/new-generated-image-quality-is-low-ios-swift
+    private func _resizeWithAspect_doResize(image: UIImage,size: CGSize)->UIImage{
+        if UIScreen.mainScreen().respondsToSelector(#selector(NSDecimalNumberBehaviors.scale)){
+            UIGraphicsBeginImageContextWithOptions(size,false,UIScreen.mainScreen().scale);
+        }
+        else
+        {
+            UIGraphicsBeginImageContext(size);
+        }
+        
+        image.drawInRect(CGRectMake(0, 0, size.width, size.height));
+        let newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        return newImage;
+    }
+    
+    func resizeImageWithAspect(image: UIImage,scaledToMaxWidth width:CGFloat,maxHeight height :CGFloat)->UIImage
+    {
+        let oldWidth = image.size.width;
+        let oldHeight = image.size.height;
+        
+        let scaleFactor = (oldWidth > oldHeight) ? width / oldWidth : height / oldHeight;
+        
+        let newHeight = oldHeight * scaleFactor;
+        let newWidth = oldWidth * scaleFactor;
+        let newSize = CGSizeMake(newWidth, newHeight);
+        
+        return self._resizeWithAspect_doResize(image, size: newSize);
+    }
+    
     
     class func sharedInstance() -> RecipeUtil {
         struct Singleton {

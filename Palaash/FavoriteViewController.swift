@@ -97,13 +97,13 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
         let recipes = self.fetchedResultsController.objectAtIndexPath(indexPath) as?  FavoriteRecipes
         let imgView: UIImageView = cell.imageView!
         if let recipes = recipes {
-            imgView.image = UIImage(data: recipes.image!)
-            imgView.frame =  CGRectMake(0, 0, cell.frame.size.width, 80);
-            cell.contentView.addSubview(imgView)
+            imgView.image = RecipeUtil.sharedInstance().resizeImageWithAspect(UIImage(data: recipes.image!)!,  scaledToMaxWidth: 80, maxHeight: 80)
             cell.textLabel!.text = recipes.name
         }
         return cell
     }
+   
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sections = fetchedResultsController.sections {
