@@ -12,20 +12,12 @@ import CoreData
 class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate  {
     var sharedContext = CoreDataStackManager.sharedInstance().managedObjectContext
     @IBOutlet var tableView: UITableView!
-
-    
-    @IBAction func editItems(sender: AnyObject) {
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        print("step ..1")
-
-      
+       // self.navigationItem.leftBarButtonItem = self.editButtonItem()
         do {
-            print("step ..2")
+           
             try fetchedResultsController.performFetch()
             print("fetched results that are saved")
         } catch let error as NSError {
@@ -128,8 +120,7 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
         _ = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
         let recipes = self.fetchedResultsController.objectAtIndexPath(indexPath) as?  FavoriteRecipes
         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("RecipeDetailViewController") as! RecipeDetailViewController
-        //controller.instructions = (recipes?.process)!
-       // controller.ingredients = (recipes?.ingredients)!
+
         controller.isFavMode = true
         let recipeData = RecipeData(title: (recipes?.name)!,
                                     recipeID: Int((recipes?.id)!),
@@ -146,7 +137,6 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
         if editingStyle == .Delete {
             let event = self.fetchedResultsController.objectAtIndexPath(indexPath) as! FavoriteRecipes
             sharedContext.deleteObject(event)
-            
             CoreDataStackManager.sharedInstance().saveContext()
         }
     }

@@ -12,6 +12,7 @@ import UIKit
 class SearchRecipeViewController: UIViewController  {
     var sharedContext = CoreDataStackManager.sharedInstance().managedObjectContext
     
+    @IBOutlet weak var activityController: UIActivityIndicatorView!
    // @IBOutlet weak var ingredient2: UITextField!
     @IBOutlet weak var ingredient1: UITextField!
     @IBOutlet weak var instructionLabel: UILabel!
@@ -25,6 +26,7 @@ class SearchRecipeViewController: UIViewController  {
     
     
     @IBAction func searchRecipes(sender: AnyObject) {
+        activityController.startAnimating()
         guard ingredient1.text != nil else {
             self.showAlertMsg(RecipeConstants.Messages.UserErorrMsg)
             return
@@ -33,11 +35,13 @@ class SearchRecipeViewController: UIViewController  {
         RecipeUtil.sharedInstance().searchRecipeForIngredients(ingredient1.text!, cuisine: cuisine.text!, typeOfRecipe: typeOfRecipe.text!) { (data, error) in
             
             if error != nil {
+                self.activityController.stopAnimating()
                 dispatch_async(dispatch_get_main_queue()){
                     self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
                     return
                 }
             }else{
+                self.activityController.stopAnimating()
                 RecipeUtil.sharedInstance().getImagesForRecipes(data) { (data, error) in
                     if error != nil {
                         dispatch_async(dispatch_get_main_queue()){
@@ -62,7 +66,6 @@ class SearchRecipeViewController: UIViewController  {
         dispatch_async(dispatch_get_main_queue()) {
             
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ListRecipeViewController") 
-        
             self.presentViewController(controller, animated: true, completion: nil)
         }
     }

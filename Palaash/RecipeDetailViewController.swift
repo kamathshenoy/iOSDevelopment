@@ -35,29 +35,13 @@ class RecipeDetailViewController: UIViewController, NSFetchedResultsControllerDe
             print("ERROR FETCHING DATA- RecipeDetailViewController", error.localizedDescription)
         }
         fetchedResultsController.delegate = self
-        setImages(isFavMode)
-        
-        /*
-        if fetchedResultsController.fetchedObjects?.count > 0 {
-            print("")
-            if let favoriteRecipes = fetchedResultsController.fetchedObjects as? [FavoriteRecipes]{
-           
-                for fav in favoriteRecipes {
-                    if(fav.id! == recipe.recipeID){
-                    //isFavRecipe = true
-                    print("this is aleady a fav recipe ",recipe.recipeID)
-                    isFavMode = true
-                    setImages(isFavMode)
-                    return
-                    }
-                }
+        for fav in fetchedResultsController.fetchedObjects as! [FavoriteRecipes] {
+            if(fav.id! == recipe.recipeID){
+                print(" This is already a favorite")
+                isFavMode = true
             }
-        }else{
-            print("this is not a fav recipe or fav recipe are not saved yet ", recipe.recipeID)
-            isFavMode = false
-            setImages(isFavMode)
-            return
-        }*/
+        }
+        setImages(isFavMode)
     }
     
     func setImages(isFavRecipe:Bool){

@@ -63,25 +63,5 @@ class ListRecipeViewController: UIViewController, UITableViewDelegate, UITableVi
         controller.isFavMode = false
         self.presentViewController(controller, animated: true, completion: nil)
         
-        
-       /* RecipeUtil.sharedInstance().getInstructions((recipe.recipeID)){ (ingredients,instructions, error) in
-                if error != nil {
-                    dispatch_async(dispatch_get_main_queue()){
-                        self.showAlertMsg((error?.userInfo[NSLocalizedDescriptionKey])! as! String)
-                        return
-                    }
-                }else{
-                    print("recieved instructins")
-                    dispatch_async(dispatch_get_main_queue()){
-                        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("RecipeDetailViewController") as! RecipeDetailViewController
-                        controller.instructions = instructions.joinWithSeparator("\n")
-                        controller.ingredients = ingredients.joinWithSeparator(", ")
-                       
-                        controller.isFavMode = false
-                        controller.recipe = recipe
-                        self.presentViewController(controller, animated: true, completion: nil)
-                    }
-                }
-        }*/
     }
 }
