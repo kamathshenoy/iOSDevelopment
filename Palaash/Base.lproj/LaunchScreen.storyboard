@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-App-83.5x83.5.png" translatesAutoresizingMaskIntoConstraints="NO" id="0tx-CZ-XWb">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Organic Food-96.png" translatesAutoresizingMaskIntoConstraints="NO" id="0tx-CZ-XWb">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="130" y="242" width="141" height="115"/>
@@ -55,6 +55,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon-App-83.5x83.5.png" width="83" height="83"/>
+        <image name="Organic Food-96.png" width="96" height="96"/>
     </resources>
 </document>

@@ -13,7 +13,6 @@ class SearchRecipeViewController: UIViewController  {
     var sharedContext = CoreDataStackManager.sharedInstance().managedObjectContext
     
     @IBOutlet weak var activityController: UIActivityIndicatorView!
-   // @IBOutlet weak var ingredient2: UITextField!
     @IBOutlet weak var ingredient1: UITextField!
    
     @IBOutlet weak var cuisine: UITextField!
@@ -25,16 +24,39 @@ class SearchRecipeViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         getLastSwitchValue()
+        if(vegtarianSwitch.on){
+            setSwitchMode(veganSwitch, mode: false)
+        }
+        if(veganSwitch.on){
+            setSwitchMode(vegtarianSwitch, mode: false)
+        }
+        activityController.hidesWhenStopped = true
+    }
+    
+    func setSwitchMode(swit: UISwitch!, mode:Bool){
+        swit.setOn(mode, animated: true)
     }
     
     
     @IBAction func setVeganOption(sender: AnyObject) {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("Vegan")
-        NSUserDefaults.standardUserDefaults().setObject(veganSwitch.on, forKey: "Vegan")
+        if(veganSwitch.on){
+            setSwitchMode(vegtarianSwitch, mode: false)
+        }
+        saveLastSwitchValue()
+        
     }
     
     @IBAction func setVegetarianOption(sender: AnyObject) {
+        if(vegtarianSwitch.on){
+            setSwitchMode(veganSwitch, mode: false)
+        }
+        saveLastSwitchValue()
+    }
+    
+    func saveLastSwitchValue(){
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("Vegan")
         NSUserDefaults.standardUserDefaults().removeObjectForKey("Vegetarian")
+        NSUserDefaults.standardUserDefaults().setObject(veganSwitch.on, forKey: "Vegan")
         NSUserDefaults.standardUserDefaults().setObject(vegtarianSwitch.on, forKey: "Vegetarian")
     }
     
@@ -56,8 +78,9 @@ class SearchRecipeViewController: UIViewController  {
             self.showAlertMsg(RecipeConstants.Messages.UserErorrMsg)
             return
         }
-        
-        RecipeUtil.sharedInstance().searchRecipeForIngredients(ingredient1.text!, cuisine: cuisine.text!, typeOfRecipe: typeOfRecipe.text!) { (data, error) in
+        print("is vegan switch", veganSwitch.on)
+        print("is vegetarian switch", vegtarianSwitch.on)
+        RecipeUtil.sharedInstance().searchRecipeForIngredients(ingredient1.text!, cuisine: cuisine.text!, typeOfRecipe: typeOfRecipe.text!, dietValue: veganSwitch.on ? "vegan" : "vegetarian" ) { (data, error) in
             
             if error != nil {
                 self.activityController.stopAnimating()

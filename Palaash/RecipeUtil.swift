@@ -35,7 +35,7 @@ class RecipeUtil: NSObject {
     }
     
     
-    func searchRecipeForIngredients(ingredients:String, cuisine:String, typeOfRecipe:String, completionHandlerForSearch: (result: [[String:String]], error: NSError?) -> Void){
+    func searchRecipeForIngredients(ingredients:String, cuisine:String, typeOfRecipe:String, dietValue: String, completionHandlerForSearch: (result: [[String:String]], error: NSError?) -> Void){
         print("\n\n GET THE RECIPES")
         var tor = typeOfRecipe
         if(typeOfRecipe.containsString("main") || typeOfRecipe.isEmpty){
@@ -49,7 +49,7 @@ class RecipeUtil: NSObject {
            // RecipeConstants.MashapeQuery.query : RecipeConstants.MashapeQuery.query_value,
             RecipeConstants.MashapeQuery.limitLicense : RecipeConstants.MashapeQuery.limitLicense_value,
             RecipeConstants.MashapeQuery.type : tor,
-            RecipeConstants.MashapeQuery.diet :  RecipeConstants.MashapeQuery.diet_value
+            RecipeConstants.MashapeQuery.diet :  dietValue
         ];
         
         let request = NSMutableURLRequest(URL:parseURLFromParameters(methodParameters , withPathExtension: [RecipeConstants.SearchRecipe.Extension]))
@@ -267,12 +267,11 @@ class RecipeUtil: NSObject {
     func getImage(recipeImageURL:String, completionHandlerForSearchImage: (result: UIImage?, error: NSError?) -> Void){
         let session = NSURLSession.sharedSession()
         let url = NSURL(string: recipeImageURL)
-    
-            let request =  NSURLRequest(URL: url!)
+        let request =  NSURLRequest(URL: url!)
         
-            let info = [NSLocalizedDescriptionKey : RecipeConstants.Messages.Failure]
-            var image = UIImage(named: "noImage")
-            let task = session.dataTaskWithRequest(request) {data, response, downloadError in
+        let info = [NSLocalizedDescriptionKey : RecipeConstants.Messages.Failure]
+        var image = UIImage(named: "noImage")
+        let task = session.dataTaskWithRequest(request) {data, response, downloadError in
                 if downloadError != nil {
                     print("Error downloading image for the recipe .ignore it")
                     completionHandlerForSearchImage(result: nil, error: NSError(domain: "completionHandlerForSearchImage", code: 1, userInfo: info))

@@ -42,6 +42,7 @@
 		334733271D328093001966F2 /* RecipeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334733261D328093001966F2 /* RecipeUtil.swift */; };
 		334733291D355D99001966F2 /* RecipeCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334733281D355D99001966F2 /* RecipeCollection.swift */; };
 		3347332B1D36A63D001966F2 /* Hearts-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 3347332A1D36A63D001966F2 /* Hearts-50.png */; };
+		337E22B51D401A3600AACCF2 /* Organic Food-96.png in Resources */ = {isa = PBXBuildFile; fileRef = 337E22B41D401A3600AACCF2 /* Organic Food-96.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		334733261D328093001966F2 /* RecipeUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeUtil.swift; sourceTree = "<group>"; };
 		334733281D355D99001966F2 /* RecipeCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCollection.swift; sourceTree = "<group>"; };
 		3347332A1D36A63D001966F2 /* Hearts-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Hearts-50.png"; sourceTree = "<group>"; };
+		337E22B41D401A3600AACCF2 /* Organic Food-96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Organic Food-96.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 				3347330E1D2D8843001966F2 /* View */,
 				3347330D1D2D883C001966F2 /* Model */,
 				334732C01D2CAFBB001966F2 /* Assets.xcassets */,
+				337E22B41D401A3600AACCF2 /* Organic Food-96.png */,
 				33214BEC1D38F82000A234F1 /* noImage.png */,
 				3347332A1D36A63D001966F2 /* Hearts-50.png */,
 				334732F31D2CC1BD001966F2 /* Icon-App-29x29@1x.png */,
@@ -354,6 +357,7 @@
 				3347330B1D2CC1BD001966F2 /* Icon-App-76x76@3x.png in Resources */,
 				3347330A1D2CC1BD001966F2 /* Icon-App-76x76@2x.png in Resources */,
 				334732EE1D2CBB8F001966F2 /* Saving Book-50.png in Resources */,
+				337E22B51D401A3600AACCF2 /* Organic Food-96.png in Resources */,
 				334733071D2CC1BD001966F2 /* Icon-App-60x60@2x.png in Resources */,
 				334733061D2CC1BD001966F2 /* Icon-App-60x60@1x.png in Resources */,
 				334733021D2CC1BD001966F2 /* Icon-App-29x29@3x.png in Resources */,
