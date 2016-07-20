@@ -216,7 +216,7 @@ class RecipeUtil: NSObject {
             }
           
             var firstElement : AnyObject!
-            do {
+            
                 if  (parsedResult?.count ?? 0) > 0 {
                     firstElement = parsedResult[0]
                     //print("response contains first element")
@@ -225,11 +225,7 @@ class RecipeUtil: NSObject {
                     completionHandlerForInstructions(ingredients : "", steps: "", error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
                     return
                 }
-            } catch {
-              //  print(" first element does not exist")
-                completionHandlerForInstructions(ingredients : "", steps: "", error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
-                return
-            }
+           
 
             
             guard let results = firstElement else{
@@ -267,25 +263,27 @@ class RecipeUtil: NSObject {
         task.resume()
     }
     
-    //FIX THIS with NO image
+    
     func getImage(recipeImageURL:String, completionHandlerForSearchImage: (result: UIImage?, error: NSError?) -> Void){
         let session = NSURLSession.sharedSession()
         let url = NSURL(string: recipeImageURL)
-       
-        let request = NSURLRequest(URL: url!)
-        let info = [NSLocalizedDescriptionKey : RecipeConstants.Messages.Failure]
-        var image = UIImage(named: "noImage")
-        let task = session.dataTaskWithRequest(request) {data, response, downloadError in
-            if downloadError != nil {
-                print("Error downloading image for the recipe .ignore it")
-                completionHandlerForSearchImage(result: nil, error: NSError(domain: "completionHandlerForSearchImage", code: 1, userInfo: info))
-            } else {
-                if let data = data {
+    
+            let request =  NSURLRequest(URL: url!)
+        
+            let info = [NSLocalizedDescriptionKey : RecipeConstants.Messages.Failure]
+            var image = UIImage(named: "noImage")
+            let task = session.dataTaskWithRequest(request) {data, response, downloadError in
+                if downloadError != nil {
+                    print("Error downloading image for the recipe .ignore it")
+                    completionHandlerForSearchImage(result: nil, error: NSError(domain: "completionHandlerForSearchImage", code: 1, userInfo: info))
+                } else {
+                    if let data = data {
                      image = UIImage(data: data)
-                    completionHandlerForSearchImage(result: image, error: nil)
-                }
+                        completionHandlerForSearchImage(result: image, error: nil)
+                    }
             }
         }
+            
         task.resume()
     }
     

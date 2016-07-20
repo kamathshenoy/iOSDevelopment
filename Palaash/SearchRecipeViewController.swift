@@ -15,15 +15,40 @@ class SearchRecipeViewController: UIViewController  {
     @IBOutlet weak var activityController: UIActivityIndicatorView!
    // @IBOutlet weak var ingredient2: UITextField!
     @IBOutlet weak var ingredient1: UITextField!
-    @IBOutlet weak var instructionLabel: UILabel!
+   
     @IBOutlet weak var cuisine: UITextField!
     @IBOutlet weak var typeOfRecipe: UITextField!
     
+    @IBOutlet weak var vegtarianSwitch: UISwitch!
+    @IBOutlet weak var veganSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        instructionLabel.text = "Here are some options for type of recipes - main course, side dish, dessert, appetizer, salad, bread, breakfast, soup, beverage, sauce, or drink. \n\n We search for vegan recipes only. Go Green!"
+        getLastSwitchValue()
     }
     
+    
+    @IBAction func setVeganOption(sender: AnyObject) {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("Vegan")
+        NSUserDefaults.standardUserDefaults().setObject(veganSwitch.on, forKey: "Vegan")
+    }
+    
+    @IBAction func setVegetarianOption(sender: AnyObject) {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("Vegetarian")
+        NSUserDefaults.standardUserDefaults().setObject(vegtarianSwitch.on, forKey: "Vegetarian")
+    }
+    
+    
+    func getLastSwitchValue() {
+        if let veggie = NSUserDefaults.standardUserDefaults().boolForKey("Vegetarian")  as? Bool{
+            self.vegtarianSwitch.setOn(veggie, animated: false)
+        }
+        
+        if let vegan = NSUserDefaults.standardUserDefaults().boolForKey("Vegan") as? Bool {
+            veganSwitch.setOn(vegan, animated: true)
+        }
+        
+    }
     
     @IBAction func searchRecipes(sender: AnyObject) {
         activityController.startAnimating()

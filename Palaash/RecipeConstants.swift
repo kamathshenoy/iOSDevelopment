@@ -31,7 +31,7 @@ struct RecipeConstants {
         static let diet = "diet"
         static let query = "query"
         static let query_value = "burger"
-        static let diet_value = "vegan"
+        static let diet_value = "vegetarian"
 
     }
     
