@@ -17,22 +17,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-App-60x60.png" translatesAutoresizingMaskIntoConstraints="NO" id="lSn-oU-KXk">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-App-83.5x83.5.png" translatesAutoresizingMaskIntoConstraints="NO" id="0tx-CZ-XWb">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="130" y="242" width="141" height="115"/>
                                 </variation>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.18312870940000001" green="0.53004335729999996" blue="0.002453731385" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="0tx-CZ-XWb" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="dft-kx-lFP"/>
+                            <constraint firstItem="0tx-CZ-XWb" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="xvK-47-5Sz"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="lSn-oU-KXk"/>
+                                <exclude reference="0tx-CZ-XWb"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="dft-kx-lFP"/>
+                                <exclude reference="xvK-47-5Sz"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="lSn-oU-KXk"/>
+                                <include reference="0tx-CZ-XWb"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="dft-kx-lFP"/>
+                                <include reference="xvK-47-5Sz"/>
                             </mask>
                         </variation>
                     </view>
@@ -43,6 +55,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon-App-60x60.png" width="60" height="60"/>
+        <image name="Icon-App-83.5x83.5.png" width="83" height="83"/>
     </resources>
 </document>

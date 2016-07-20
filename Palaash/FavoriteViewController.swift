@@ -13,13 +13,15 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
     var sharedContext = CoreDataStackManager.sharedInstance().managedObjectContext
     @IBOutlet var tableView: UITableView!
     
+  //  @IBOutlet weak var instructionLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       // self.navigationItem.leftBarButtonItem = self.editButtonItem()
+       // instructionLabel.text = "Tap on the recipe to change favorites."
         do {
            
             try fetchedResultsController.performFetch()
-            print("fetched results that are saved")
+            
         } catch let error as NSError {
             print("ERROR FETCHING DATA", error.localizedDescription)
         }
@@ -58,12 +60,10 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         // This invocation prepares the table to recieve a number of changes. It will store them up
         // until it receives endUpdates(), and then perform them all at once.
-        print("controllerWillChangeContent")
         self.tableView.beginUpdates()
     }
     
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-         print("didChangeSection")
         // Our project does not use sections. So we can ignore these invocations.
     }
     
@@ -72,7 +72,7 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
     //
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        print("didChangeObject")
+      
         switch type {
         case .Insert:
             tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
@@ -86,7 +86,6 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
     // When endUpdates() is invoked, the table makes the changes visible.
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
-        print("controllerDidChangeContent")
     }
 
     

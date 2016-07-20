@@ -37,14 +37,7 @@ class ListRecipeViewController: UIViewController, UITableViewDelegate, UITableVi
         let cellReuseIdentifier = "Recipe"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
         let recipe = recipeData[indexPath.row]
-        
-        //cell.textLabel!.text = recipe.name
-
         let imgView: UIImageView = cell.imageView!
-        /*imgView.image = recipe.image
-        imgView.frame =  CGRectMake(0, 0, cell.frame.size.width, 80);
-        cell.contentView.addSubview(imgView)*/
-        
         imgView.image = RecipeUtil.sharedInstance().resizeImageWithAspect(recipe.image,  scaledToMaxWidth: 80, maxHeight: 80)
         cell.textLabel!.text = recipe.title
         return cell
@@ -59,7 +52,6 @@ class ListRecipeViewController: UIViewController, UITableViewDelegate, UITableVi
         let cellReuseIdentifier = "Recipe"
         _ = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell!
         let recipe = recipeData[indexPath.row] 
-        print("recipe id", recipe.recipeID)
         
         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("RecipeDetailViewController") as! RecipeDetailViewController
         controller.recipe = recipe

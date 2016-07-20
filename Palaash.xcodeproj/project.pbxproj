@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		33214BED1D38F82000A234F1 /* noImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 33214BEC1D38F82000A234F1 /* noImage.png */; };
 		334732B71D2CAFBB001966F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334732B61D2CAFBB001966F2 /* AppDelegate.swift */; };
-		334732B91D2CAFBB001966F2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334732B81D2CAFBB001966F2 /* LoginViewController.swift */; };
 		334732BC1D2CAFBB001966F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334732BA1D2CAFBB001966F2 /* Main.storyboard */; };
 		334732BF1D2CAFBB001966F2 /* Palaash.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 334732BD1D2CAFBB001966F2 /* Palaash.xcdatamodeld */; };
 		334732C11D2CAFBB001966F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 334732C01D2CAFBB001966F2 /* Assets.xcassets */; };
@@ -18,7 +17,6 @@
 		334732DA1D2CAFBB001966F2 /* PalaashUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334732D91D2CAFBB001966F2 /* PalaashUITests.swift */; };
 		334732EC1D2CBB87001966F2 /* Hearts-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 334732EB1D2CBB87001966F2 /* Hearts-48.png */; };
 		334732EE1D2CBB8F001966F2 /* Saving Book-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 334732ED1D2CBB8F001966F2 /* Saving Book-50.png */; };
-		334732F21D2CBD83001966F2 /* Edit Property-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 334732F11D2CBD83001966F2 /* Edit Property-48.png */; };
 		334733001D2CC1BD001966F2 /* Icon-App-29x29@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 334732F31D2CC1BD001966F2 /* Icon-App-29x29@1x.png */; };
 		334733011D2CC1BD001966F2 /* Icon-App-29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 334732F41D2CC1BD001966F2 /* Icon-App-29x29@2x.png */; };
 		334733021D2CC1BD001966F2 /* Icon-App-29x29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 334732F51D2CC1BD001966F2 /* Icon-App-29x29@3x.png */; };
@@ -67,7 +65,6 @@
 		33214BEC1D38F82000A234F1 /* noImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noImage.png; sourceTree = "<group>"; };
 		334732B31D2CAFBB001966F2 /* Palaash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Palaash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		334732B61D2CAFBB001966F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		334732B81D2CAFBB001966F2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		334732BB1D2CAFBB001966F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		334732BE1D2CAFBB001966F2 /* Palaash.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Palaash.xcdatamodel; sourceTree = "<group>"; };
 		334732C01D2CAFBB001966F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -81,7 +78,6 @@
 		334732DB1D2CAFBB001966F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		334732EB1D2CBB87001966F2 /* Hearts-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Hearts-48.png"; path = "Assets.xcassets/Hearts-48.png"; sourceTree = "<group>"; };
 		334732ED1D2CBB8F001966F2 /* Saving Book-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Saving Book-50.png"; path = "Assets.xcassets/Saving Book-50.png"; sourceTree = "<group>"; };
-		334732F11D2CBD83001966F2 /* Edit Property-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Edit Property-48.png"; path = "Palaash/Assets.xcassets/Edit Property-48.png"; sourceTree = "<group>"; };
 		334732F31D2CC1BD001966F2 /* Icon-App-29x29@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-App-29x29@1x.png"; path = "Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png"; sourceTree = "<group>"; };
 		334732F41D2CC1BD001966F2 /* Icon-App-29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-App-29x29@2x.png"; path = "Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png"; sourceTree = "<group>"; };
 		334732F51D2CC1BD001966F2 /* Icon-App-29x29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-App-29x29@3x.png"; path = "Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png"; sourceTree = "<group>"; };
@@ -137,7 +133,6 @@
 		334732AA1D2CAFBB001966F2 = {
 			isa = PBXGroup;
 			children = (
-				334732F11D2CBD83001966F2 /* Edit Property-48.png */,
 				334732B51D2CAFBB001966F2 /* Palaash */,
 				334732CD1D2CAFBB001966F2 /* PalaashTests */,
 				334732D81D2CAFBB001966F2 /* PalaashUITests */,
@@ -230,7 +225,6 @@
 		3347330F1D2D8848001966F2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				334732B81D2CAFBB001966F2 /* LoginViewController.swift */,
 				334733101D2D8893001966F2 /* FavoriteViewController.swift */,
 				334733121D2D88B6001966F2 /* SearchRecipeViewController.swift */,
 				334733141D2D88D1001966F2 /* ListRecipeViewController.swift */,
@@ -361,7 +355,6 @@
 				3347330A1D2CC1BD001966F2 /* Icon-App-76x76@2x.png in Resources */,
 				334732EE1D2CBB8F001966F2 /* Saving Book-50.png in Resources */,
 				334733071D2CC1BD001966F2 /* Icon-App-60x60@2x.png in Resources */,
-				334732F21D2CBD83001966F2 /* Edit Property-48.png in Resources */,
 				334733061D2CC1BD001966F2 /* Icon-App-60x60@1x.png in Resources */,
 				334733021D2CC1BD001966F2 /* Icon-App-29x29@3x.png in Resources */,
 			);
@@ -394,7 +387,6 @@
 				334733131D2D88B6001966F2 /* SearchRecipeViewController.swift in Sources */,
 				334733291D355D99001966F2 /* RecipeCollection.swift in Sources */,
 				334733171D2D88F3001966F2 /* RecipeDetailViewController.swift in Sources */,
-				334732B91D2CAFBB001966F2 /* LoginViewController.swift in Sources */,
 				334733111D2D8893001966F2 /* FavoriteViewController.swift in Sources */,
 				334733151D2D88D1001966F2 /* ListRecipeViewController.swift in Sources */,
 				334732B71D2CAFBB001966F2 /* AppDelegate.swift in Sources */,

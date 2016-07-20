@@ -37,13 +37,18 @@ class RecipeUtil: NSObject {
     
     func searchRecipeForIngredients(ingredients:String, cuisine:String, typeOfRecipe:String, completionHandlerForSearch: (result: [[String:String]], error: NSError?) -> Void){
         print("\n\n GET THE RECIPES")
-        
+        var tor = typeOfRecipe
+        if(typeOfRecipe.containsString("main") || typeOfRecipe.isEmpty){
+            tor = "main dish"
+        }else if(typeOfRecipe.containsString("side") ){
+            tor = "side dish"
+        }
         let methodParameters = [
-            RecipeConstants.MashapeQuery.Cuisine : "italian",
-            RecipeConstants.MashapeQuery.includeIngreidents : "peas",
+            RecipeConstants.MashapeQuery.Cuisine : cuisine,
+            RecipeConstants.MashapeQuery.includeIngreidents : ingredients,
            // RecipeConstants.MashapeQuery.query : RecipeConstants.MashapeQuery.query_value,
             RecipeConstants.MashapeQuery.limitLicense : RecipeConstants.MashapeQuery.limitLicense_value,
-            RecipeConstants.MashapeQuery.type : "side dish",
+            RecipeConstants.MashapeQuery.type : tor,
             RecipeConstants.MashapeQuery.diet :  RecipeConstants.MashapeQuery.diet_value
         ];
         
@@ -89,6 +94,11 @@ class RecipeUtil: NSObject {
             }
             
             print("\nTOTAL RECIPES RETRIEVED", totalResults)
+            
+            if(totalResults == 0){
+                completionHandlerForSearch(result: [[String:String]](), error: NSError(domain: "completionHandlerForSearch", code: 1, userInfo: info))
+                return
+            }
             
           /*  guard let offset = parsedResult["offset"] as? Int else {
                 print(" Could not get the totalReults \(parsedResult)")
