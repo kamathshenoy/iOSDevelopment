@@ -267,9 +267,14 @@ class RecipeUtil: NSObject {
     func getImage(recipeImageURL:String, completionHandlerForSearchImage: (result: UIImage?, error: NSError?) -> Void){
         let session = NSURLSession.sharedSession()
         let url = NSURL(string: recipeImageURL)
+        let info = [NSLocalizedDescriptionKey : RecipeConstants.Messages.Failure]
+        if(url == nil){
+            completionHandlerForSearchImage(result: nil, error: NSError(domain: "completionHandlerForSearchImage", code: 1, userInfo: info))
+            return
+        }
         let request =  NSURLRequest(URL: url!)
         
-        let info = [NSLocalizedDescriptionKey : RecipeConstants.Messages.Failure]
+        
         var image = UIImage(named: "noImage")
         let task = session.dataTaskWithRequest(request) {data, response, downloadError in
                 if downloadError != nil {

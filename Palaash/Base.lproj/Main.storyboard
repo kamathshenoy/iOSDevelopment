@@ -431,16 +431,78 @@
                                             <constraint firstAttribute="height" constant="100" id="ip6-bC-0VL"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" text="Enter cuisine, ingredients and type of recipe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdz-YE-Pmk">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" text="Enter details below" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdz-YE-Pmk">
                                         <rect key="frame" x="0.0" y="70" width="560" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="RhE-zM-4A7"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <color key="shadowColor" red="1" green="0.39385270760000002" blue="0.21396886570000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gk5-Db-ALU">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="110"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vegan" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLr-Kf-qra">
+                                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H76-OQ-YFw">
+                                                <rect key="frame" x="-25" y="-15" width="51" height="31"/>
+                                                <variation key="widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="90" y="0.0" width="92" height="40"/>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="setVeganOption:" destination="8iv-ja-xEu" eventType="valueChanged" id="55S-L2-tGo"/>
+                                                </connections>
+                                            </switch>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vegetarian" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeF-Y7-I24">
+                                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Za8-l5-eaZ">
+                                                <rect key="frame" x="-25" y="-15" width="51" height="31"/>
+                                                <variation key="widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="270" y="0.0" width="92" height="40"/>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="setVegetarianOption:" destination="8iv-ja-xEu" eventType="valueChanged" id="4fj-ab-NSf"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="H76-OQ-YFw" firstAttribute="width" secondItem="SLr-Kf-qra" secondAttribute="width" id="Rbe-Uf-pc8"/>
+                                            <constraint firstItem="Za8-l5-eaZ" firstAttribute="width" secondItem="SLr-Kf-qra" secondAttribute="width" id="aP8-HN-AR6"/>
+                                            <constraint firstItem="YeF-Y7-I24" firstAttribute="width" secondItem="SLr-Kf-qra" secondAttribute="width" id="g6N-5E-IAN"/>
+                                            <constraint firstAttribute="height" constant="40" id="yZi-fn-cZz"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="yZi-fn-cZz"/>
+                                                <exclude reference="Rbe-Uf-pc8"/>
+                                                <exclude reference="g6N-5E-IAN"/>
+                                                <exclude reference="aP8-HN-AR6"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="subviews">
+                                                <include reference="H76-OQ-YFw"/>
+                                                <include reference="YeF-Y7-I24"/>
+                                                <include reference="Za8-l5-eaZ"/>
+                                            </mask>
+                                            <mask key="constraints">
+                                                <include reference="yZi-fn-cZz"/>
+                                                <include reference="Rbe-Uf-pc8"/>
+                                                <include reference="g6N-5E-IAN"/>
+                                                <include reference="aP8-HN-AR6"/>
+                                            </mask>
+                                        </variation>
+                                    </stackView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cuisine(like indian or american or italian)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PWS-um-6jH">
                                         <rect key="frame" x="0.0" y="120" width="560" height="32"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -549,110 +611,43 @@
                                             </mask>
                                         </variation>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gk5-Db-ALU">
-                                        <rect key="frame" x="0.0" y="0.0" width="200" height="110"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vegan" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLr-Kf-qra">
-                                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                                <variation key="widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="101"/>
-                                                </variation>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H76-OQ-YFw">
-                                                <rect key="frame" x="-25" y="-15" width="51" height="31"/>
-                                                <variation key="widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="90" y="0.0" width="92" height="101"/>
-                                                </variation>
-                                                <connections>
-                                                    <action selector="setVeganOption:" destination="8iv-ja-xEu" eventType="valueChanged" id="55S-L2-tGo"/>
-                                                </connections>
-                                            </switch>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vegetarian" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeF-Y7-I24">
-                                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                                <variation key="widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="180" y="0.0" width="90" height="101"/>
-                                                </variation>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Za8-l5-eaZ">
-                                                <rect key="frame" x="-25" y="-15" width="51" height="31"/>
-                                                <variation key="widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="270" y="0.0" width="92" height="101"/>
-                                                </variation>
-                                                <connections>
-                                                    <action selector="setVegetarianOption:" destination="8iv-ja-xEu" eventType="valueChanged" id="4fj-ab-NSf"/>
-                                                </connections>
-                                            </switch>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="H76-OQ-YFw" firstAttribute="width" secondItem="SLr-Kf-qra" secondAttribute="width" id="Rbe-Uf-pc8"/>
-                                            <constraint firstItem="Za8-l5-eaZ" firstAttribute="width" secondItem="SLr-Kf-qra" secondAttribute="width" id="aP8-HN-AR6"/>
-                                            <constraint firstItem="YeF-Y7-I24" firstAttribute="width" secondItem="SLr-Kf-qra" secondAttribute="width" id="g6N-5E-IAN"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="yZi-fn-cZz"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="yZi-fn-cZz"/>
-                                                <exclude reference="Rbe-Uf-pc8"/>
-                                                <exclude reference="g6N-5E-IAN"/>
-                                                <exclude reference="aP8-HN-AR6"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="390" width="360" height="101"/>
-                                            <mask key="subviews">
-                                                <include reference="H76-OQ-YFw"/>
-                                                <include reference="YeF-Y7-I24"/>
-                                                <include reference="Za8-l5-eaZ"/>
-                                            </mask>
-                                            <mask key="constraints">
-                                                <include reference="yZi-fn-cZz"/>
-                                                <include reference="Rbe-Uf-pc8"/>
-                                                <include reference="g6N-5E-IAN"/>
-                                                <include reference="aP8-HN-AR6"/>
-                                            </mask>
-                                        </variation>
-                                    </stackView>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="wMj-tZ-CUg">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="wMj-tZ-CUg">
                                         <rect key="frame" x="0.0" y="292" width="560" height="0.0"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Yul-5j-JJC"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="DDy-Dp-TJx"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="Yul-5j-JJC"/>
+                                                <exclude reference="DDy-Dp-TJx"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="491" width="360" height="0.0"/>
+                                        <variation key="widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="Yul-5j-JJC"/>
+                                                <include reference="DDy-Dp-TJx"/>
                                             </mask>
                                         </variation>
                                     </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.39385270760000002" blue="0.21396886570000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="PWS-um-6jH" firstAttribute="top" secondItem="SLr-Kf-qra" secondAttribute="bottom" constant="30" id="1Pi-IQ-9f9"/>
                                     <constraint firstItem="mkN-as-FQ4" firstAttribute="height" secondItem="PWS-um-6jH" secondAttribute="height" id="ftS-BU-xI0"/>
                                     <constraint firstItem="qBr-0Y-3Hj" firstAttribute="height" secondItem="PWS-um-6jH" secondAttribute="height" id="m56-xE-ihh"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="1Pi-IQ-9f9"/>
                                         <exclude reference="m56-xE-ihh"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="20" y="53" width="360" height="491"/>
                                     <mask key="subviews">
-                                        <include reference="qBr-0Y-3Hj"/>
                                         <include reference="gk5-Db-ALU"/>
+                                        <include reference="qBr-0Y-3Hj"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <include reference="1Pi-IQ-9f9"/>
                                         <include reference="m56-xE-ihh"/>
                                     </mask>
                                 </variation>
@@ -665,19 +660,8 @@
                             <constraint firstItem="JC0-ef-Ee4" firstAttribute="top" secondItem="lF3-wG-abx" secondAttribute="bottom" constant="35" id="33g-cl-fE4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JC0-ef-Ee4" secondAttribute="trailing" id="5Y4-gS-mN5"/>
                             <constraint firstAttribute="bottomMargin" secondItem="JC0-ef-Ee4" secondAttribute="bottom" constant="10" id="a7d-nJ-Ihh"/>
-                            <constraint firstItem="3OE-MJ-fTJ" firstAttribute="centerY" secondItem="1ZE-9E-30P" secondAttribute="centerY" id="de2-47-vS9"/>
                             <constraint firstItem="JC0-ef-Ee4" firstAttribute="leading" secondItem="1ZE-9E-30P" secondAttribute="leadingMargin" id="q0S-ZC-fi3"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="de2-47-vS9"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="de2-47-vS9"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Search Recipes" id="X7q-xS-hnr"/>
                     <connections>
