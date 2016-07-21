@@ -74,11 +74,12 @@ class SearchRecipeViewController: UIViewController  {
     
     
     func getLastSwitchValue() {
-        if let veggie = NSUserDefaults.standardUserDefaults().boolForKey("Vegetarian")  as? Bool{
+        
+        if let veggie = NSUserDefaults.standardUserDefaults().objectForKey("Vegetarian") as? Bool  {
             self.vegtarianSwitch.setOn(veggie, animated: false)
         }
         
-        if let vegan = NSUserDefaults.standardUserDefaults().boolForKey("Vegan") as? Bool {
+        if let vegan = NSUserDefaults.standardUserDefaults().objectForKey("Vegan") as? Bool {
             veganSwitch.setOn(vegan, animated: true)
         }
         

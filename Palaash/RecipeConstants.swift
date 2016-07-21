@@ -11,15 +11,14 @@ struct RecipeConstants {
     
     
     struct SearchRecipe {
-       // static let ServiceEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex"
-        /*https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/searchComplex?includeIngredients=broccoli,rice%20&cuisine=Indian%20&query=rice&limitLicense=false&type=sides*/
+       
         static let ApiScheme = "https"
         static let ApiHome = "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
         static let ApiPath = "/recipes"
         static let Extension = "searchComplex"
         static let AnalyzedInstructions = "analyzedInstructions"
         
-        /*https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/{id}/analyzedInstructions*/
+      
     }
     
     struct MashapeQuery {
