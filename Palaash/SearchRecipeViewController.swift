@@ -14,7 +14,7 @@ class SearchRecipeViewController: UIViewController  {
     
     @IBOutlet weak var activityController: UIActivityIndicatorView!
     @IBOutlet weak var ingredient1: UITextField!
-   
+    var keyboardOnScreen = false
     @IBOutlet weak var cuisine: UITextField!
     @IBOutlet weak var typeOfRecipe: UITextField!
     
@@ -31,7 +31,19 @@ class SearchRecipeViewController: UIViewController  {
             setSwitchMode(vegtarianSwitch, mode: false)
         }
         activityController.hidesWhenStopped = true
+        
+        subscribeToNotification(UIKeyboardWillShowNotification, selector: Selectors.KeyboardWillShow)
+        subscribeToNotification(UIKeyboardWillHideNotification, selector: Selectors.KeyboardWillHide)
+        subscribeToNotification(UIKeyboardDidShowNotification, selector: Selectors.KeyboardDidShow)
+        subscribeToNotification(UIKeyboardDidHideNotification, selector: Selectors.KeyboardDidHide)
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeFromAllNotifications()
+    }
+    
+    
     
     func setSwitchMode(swit: UISwitch!, mode:Bool){
         swit.setOn(mode, animated: true)
@@ -126,5 +138,74 @@ class SearchRecipeViewController: UIViewController  {
         return
     }
 
+}
+
+
+extension SearchRecipeViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // MARK: Show/Hide Keyboard
+    
+    func keyboardWillShow(notification: NSNotification) {
+        print("will show")
+        if !keyboardOnScreen {
+            view.frame.origin.y -= keyboardHeight(notification)
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if keyboardOnScreen {
+            view.frame.origin.y += keyboardHeight(notification)
+        }
+    }
+    
+    func keyboardDidShow(notification: NSNotification) {
+        keyboardOnScreen = true
+    }
+    
+    func keyboardDidHide(notification: NSNotification) {
+        keyboardOnScreen = false
+    }
+    
+    private func keyboardHeight(notification: NSNotification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.CGRectValue().height
+    }
+    
+    private func resignIfFirstResponder(textField: UITextField) {
+        if textField.isFirstResponder() {
+            textField.resignFirstResponder()
+        }
+    }
+    
+    @IBAction func userDidTapView(sender: AnyObject) {
+        print("tapped view")
+        resignIfFirstResponder(cuisine)
+        resignIfFirstResponder(ingredient1)
+        resignIfFirstResponder(typeOfRecipe)
+    }
+}
+
+extension SearchRecipeViewController {
+    
+    private func subscribeToNotification(notification: String, selector: Selector) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: selector, name: notification, object: nil)
+    }
+    
+    private func unsubscribeFromAllNotifications() {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+}
+
+struct Selectors {
+    static let KeyboardWillShow: Selector = #selector(SearchRecipeViewController.keyboardWillShow(_:))
+    static let KeyboardWillHide: Selector = #selector(SearchRecipeViewController.keyboardWillHide(_:))
+    static let KeyboardDidShow: Selector = #selector(SearchRecipeViewController.keyboardDidShow(_:))
+    static let KeyboardDidHide: Selector = #selector(SearchRecipeViewController.keyboardDidHide(_:))
 }
 

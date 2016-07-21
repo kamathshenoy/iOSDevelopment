@@ -99,6 +99,7 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
             imgView.image = RecipeUtil.sharedInstance().resizeImageWithAspect(UIImage(data: recipes.image!)!,  scaledToMaxWidth: 80, maxHeight: 80)
             cell.textLabel!.text = recipes.name
         }
+        cell.textLabel!.font = UIFont(name:"System", size:10)
         return cell
     }
    

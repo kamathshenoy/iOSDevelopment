@@ -40,6 +40,7 @@ class ListRecipeViewController: UIViewController, UITableViewDelegate, UITableVi
         let imgView: UIImageView = cell.imageView!
         imgView.image = RecipeUtil.sharedInstance().resizeImageWithAspect(recipe.image,  scaledToMaxWidth: 80, maxHeight: 80)
         cell.textLabel!.text = recipe.title
+        cell.textLabel!.font = UIFont(name:"System", size:10)
         return cell
     }
     
