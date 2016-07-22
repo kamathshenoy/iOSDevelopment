@@ -31,7 +31,12 @@ class SearchRecipeViewController: UIViewController  {
             setSwitchMode(vegtarianSwitch, mode: false)
         }
         activityController.hidesWhenStopped = true
+        typeOfRecipe.delegate = self
+        ingredient1.delegate = self
+        typeOfRecipe.delegate = self
         
+    }
+    override func viewWillAppear(animated: Bool) {
         subscribeToNotification(UIKeyboardWillShowNotification, selector: Selectors.KeyboardWillShow)
         subscribeToNotification(UIKeyboardWillHideNotification, selector: Selectors.KeyboardWillHide)
         subscribeToNotification(UIKeyboardDidShowNotification, selector: Selectors.KeyboardDidShow)
@@ -145,12 +150,14 @@ extension SearchRecipeViewController: UITextFieldDelegate {
     // MARK: Show/Hide Keyboard
     
     func keyboardWillShow(notification: NSNotification) {
+        
         if !keyboardOnScreen {
             view.frame.origin.y -= keyboardHeight(notification)
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
+        
         if keyboardOnScreen {
             view.frame.origin.y += keyboardHeight(notification)
         }

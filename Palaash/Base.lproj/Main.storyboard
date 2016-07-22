@@ -591,26 +591,6 @@
                                             <action selector="searchRecipes:" destination="8iv-ja-xEu" eventType="touchUpInside" id="aoM-MK-C66"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We search for vegetarian or vegan recipes only." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8l-c8-CfH">
-                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="ZEl-Ux-nec"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="ZEl-Ux-nec"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="381" width="360" height="63"/>
-                                            <mask key="constraints">
-                                                <include reference="ZEl-Ux-nec"/>
-                                            </mask>
-                                        </variation>
-                                    </label>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="wMj-tZ-CUg">
                                         <rect key="frame" x="0.0" y="292" width="560" height="0.0"/>
                                         <constraints>
@@ -621,35 +601,37 @@
                                                 <exclude reference="DDy-Dp-TJx"/>
                                             </mask>
                                         </variation>
-                                        <variation key="widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="454" width="360" height="37"/>
+                                        <variation key="widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="DDy-Dp-TJx"/>
                                             </mask>
                                         </variation>
                                     </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We search for vegetarian or vegan recipes only." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8l-c8-CfH">
+                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.39385270760000002" blue="0.21396886570000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="PWS-um-6jH" firstAttribute="top" secondItem="SLr-Kf-qra" secondAttribute="bottom" constant="30" id="1Pi-IQ-9f9"/>
                                     <constraint firstItem="mkN-as-FQ4" firstAttribute="height" secondItem="PWS-um-6jH" secondAttribute="height" id="ftS-BU-xI0"/>
                                     <constraint firstItem="qBr-0Y-3Hj" firstAttribute="height" secondItem="PWS-um-6jH" secondAttribute="height" id="m56-xE-ihh"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="1Pi-IQ-9f9"/>
                                         <exclude reference="m56-xE-ihh"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="53" width="360" height="491"/>
+                                    <rect key="frame" x="20" y="53" width="360" height="486"/>
                                     <mask key="subviews">
                                         <include reference="gk5-Db-ALU"/>
                                         <include reference="qBr-0Y-3Hj"/>
                                         <include reference="Y8l-c8-CfH"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="1Pi-IQ-9f9"/>
                                         <include reference="m56-xE-ihh"/>
                                     </mask>
                                 </variation>
@@ -659,10 +641,10 @@
                         <color key="tintColor" red="1" green="0.39385270760000002" blue="0.21396886570000001" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="JC0-ef-Ee4" firstAttribute="top" secondItem="lF3-wG-abx" secondAttribute="bottom" constant="35" id="33g-cl-fE4"/>
+                            <constraint firstItem="JC0-ef-Ee4" firstAttribute="top" secondItem="lF3-wG-abx" secondAttribute="bottom" constant="50" id="33g-cl-fE4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JC0-ef-Ee4" secondAttribute="trailing" id="5Y4-gS-mN5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Za8-l5-eaZ" secondAttribute="trailing" constant="70" id="E8L-9J-dV5"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="JC0-ef-Ee4" secondAttribute="bottom" constant="10" id="a7d-nJ-Ihh"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="JC0-ef-Ee4" secondAttribute="bottom" id="a7d-nJ-Ihh"/>
                             <constraint firstItem="JC0-ef-Ee4" firstAttribute="leading" secondItem="1ZE-9E-30P" secondAttribute="leadingMargin" id="q0S-ZC-fi3"/>
                             <constraint firstAttribute="leadingMargin" secondItem="SLr-Kf-qra" secondAttribute="leading" constant="-40" id="t9D-lH-F9w"/>
                         </constraints>
