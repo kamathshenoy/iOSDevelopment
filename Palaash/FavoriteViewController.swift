@@ -21,21 +21,20 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
             try fetchedResultsController.performFetch()
         } catch let error as NSError {
             print("ERROR FETCHING DATA", error.localizedDescription)
+            showAlertMsg("Unable to retrieve your favorite recipes.")
         }
         fetchedResultsController.delegate = self
     }
     
-    
+  
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
+
         self.tableView.beginUpdates()
     }
     
-    //
-    // This is the most important method. It adds and removes rows in the table, in response to changes in the data.
-    //
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-      
+
         switch type {
         case .Insert:
             tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
@@ -46,8 +45,9 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
         }
     }
     
-    // When endUpdates() is invoked, the table makes the changes visible.
+   
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
+
         self.tableView.endUpdates()
     }
 
@@ -125,7 +125,7 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
         return fetchedResultsController
         
     }()
-
+    
 
 }
 

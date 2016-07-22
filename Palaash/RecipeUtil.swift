@@ -30,13 +30,13 @@ class RecipeUtil: NSObject {
                 components.queryItems!.append(queryItem)
             }
         }
-        print("\n\ncomponents.URL", components.URL)
+        
         return components.URL!
     }
     
     
     func searchRecipeForIngredients(ingredients:String, cuisine:String, typeOfRecipe:String, dietValue: String, completionHandlerForSearch: (result: [[String:String]], error: NSError?) -> Void){
-        print("\n\n GET THE RECIPES")
+        
         var tor = typeOfRecipe
         if(typeOfRecipe.containsString("main") || typeOfRecipe.isEmpty){
             tor = "main dish"
@@ -79,9 +79,7 @@ class RecipeUtil: NSObject {
             let parsedResult: AnyObject!
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
-                 /* print("===========")
-                    print(parsedResult)
-                  print("===========")*/
+
             } catch {
                 print("Could not parse the data as JSON: '\(data)'")
                 return
@@ -92,9 +90,7 @@ class RecipeUtil: NSObject {
                 completionHandlerForSearch(result: [[String:String]](), error: NSError(domain: "completionHandlerForSearch", code: 1, userInfo: info))
                 return
             }
-            
-            print("\nTOTAL RECIPES RETRIEVED", totalResults)
-            
+           
             if(totalResults == 0){
                 completionHandlerForSearch(result: [[String:String]](), error: NSError(domain: "completionHandlerForSearch", code: 1, userInfo: info))
                 return
@@ -116,7 +112,7 @@ class RecipeUtil: NSObject {
             var countOfResultsProcessedFetchDetails = 0
             for result in sessionResult {
             //get the detailed instructions and ingredients list for each recipe
-                print("\n\nFetching the details for recipe", result["id"]!)
+                
                 self.getInstructions(result["id"] as! Int){ (ingredients,instructions, error) in
                     countOfResultsProcessedFetchDetails += 1
                     if error != nil {
@@ -143,7 +139,7 @@ class RecipeUtil: NSObject {
    
     
     func getImagesForRecipes(myNewDictArray : [[String:String]], completionHandlerForSearchRecipes: (result: [RecipeData]?, error: NSError?) -> Void){
-        print("\n\n GET THE IMAGES", myNewDictArray.count )
+        
         var rdata = [RecipeData]()
         var countOfResultsProcessedFetchImage = 0
         for aGoodRecipe in myNewDictArray {
@@ -206,9 +202,7 @@ class RecipeUtil: NSObject {
             let parsedResult: AnyObject!
             do {
                 parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
-              /*  print("===========")
-                print(parsedResult)
-                print("===========")*/
+
             } catch {
                 print("Could not parse the data as JSON: '\(data)'")
                 completionHandlerForInstructions(ingredients : "", steps: "", error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
@@ -219,9 +213,9 @@ class RecipeUtil: NSObject {
             
                 if  (parsedResult?.count ?? 0) > 0 {
                     firstElement = parsedResult[0]
-                    //print("response contains first element")
+                    
                 }else{
-                   // print("empty results -  no content")
+                  
                     completionHandlerForInstructions(ingredients : "", steps: "", error: NSError(domain: "completionHandlerForInstructions",  code: 1, userInfo: info))
                     return
                 }

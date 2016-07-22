@@ -17,11 +17,6 @@ class ListRecipeViewController: UIViewController, UITableViewDelegate, UITableVi
     var recipeData = RecipeCollection.sharedInstance().recipeData
 
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-   
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // get cell type
         let cellReuseIdentifier = "Recipe"
@@ -52,7 +47,7 @@ class ListRecipeViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func dismissVC(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     

@@ -35,7 +35,7 @@ class RecipeDetailViewController: UIViewController, NSFetchedResultsControllerDe
         fetchedResultsController.delegate = self
         for fav in fetchedResultsController.fetchedObjects as! [FavoriteRecipes] {
             if(fav.id! == recipe.recipeID){
-                print(" This is already a favorite")
+                
                 isFavMode = true
             }
         }
@@ -64,7 +64,7 @@ class RecipeDetailViewController: UIViewController, NSFetchedResultsControllerDe
         }else{
             
             for fav in fetchedResultsController.fetchedObjects as! [FavoriteRecipes] {
-                print("deleting photos")
+               
                 if(fav.id! == recipe.recipeID){
                     sharedContext.deleteObject(fav)
                 }
