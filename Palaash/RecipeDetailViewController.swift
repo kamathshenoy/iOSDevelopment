@@ -48,7 +48,6 @@ class RecipeDetailViewController: UIViewController, NSFetchedResultsControllerDe
     }
     
     @IBAction func newFav(sender: AnyObject) {
-  
         if(!isFavMode){
             makeFav.image = UIImage(named: "Hearts-48.png")
             isFavMode = true
