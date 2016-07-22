@@ -36,11 +36,11 @@ Favorite Recipe scene
 
 Prerequisites/Limitations
 
-	This app supportsiPhone 5 and iPhone 6. Other devices are untested and will be released a later date.
+	This app supports iPhone 5 and iPhone 6 in portrait mode only. Other devices and landscape orientation is untested and will be released a later date. 
 
 Installation and deployment 
 
- 	Please download the code from github and execute the code using xCode. Please run the code in a simulator or using a iPhone 6 device.
+ 	Please download the code from github and execute the code using xCode. Please run the code in a simulator or using a iPhone 6 device.  Please use the Device Orientation in General setting to set the app in portrait mode.
 
 API References
 
