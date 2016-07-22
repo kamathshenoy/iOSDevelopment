@@ -10,16 +10,16 @@ import Foundation
 import CoreData
 import UIKit
 class SearchRecipeViewController: UIViewController  {
-    var sharedContext = CoreDataStackManager.sharedInstance().managedObjectContext
     
     @IBOutlet weak var activityController: UIActivityIndicatorView!
     @IBOutlet weak var ingredient1: UITextField!
-    var keyboardOnScreen = false
     @IBOutlet weak var cuisine: UITextField!
     @IBOutlet weak var typeOfRecipe: UITextField!
-    
     @IBOutlet weak var vegtarianSwitch: UISwitch!
     @IBOutlet weak var veganSwitch: UISwitch!
+    
+    var sharedContext = CoreDataStackManager.sharedInstance().managedObjectContext
+    var keyboardOnScreen = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,11 +45,6 @@ class SearchRecipeViewController: UIViewController  {
     
     
     
-    func setSwitchMode(swit: UISwitch!, mode:Bool){
-        swit.setOn(mode, animated: true)
-    }
-    
-    
     @IBAction func setVeganOption(sender: AnyObject) {
         if(veganSwitch.on){
             setSwitchMode(vegtarianSwitch, mode: false)
@@ -65,25 +60,6 @@ class SearchRecipeViewController: UIViewController  {
         saveLastSwitchValue()
     }
     
-    func saveLastSwitchValue(){
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("Vegan")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("Vegetarian")
-        NSUserDefaults.standardUserDefaults().setObject(veganSwitch.on, forKey: "Vegan")
-        NSUserDefaults.standardUserDefaults().setObject(vegtarianSwitch.on, forKey: "Vegetarian")
-    }
-    
-    
-    func getLastSwitchValue() {
-        
-        if let veggie = NSUserDefaults.standardUserDefaults().objectForKey("Vegetarian") as? Bool  {
-            self.vegtarianSwitch.setOn(veggie, animated: false)
-        }
-        
-        if let vegan = NSUserDefaults.standardUserDefaults().objectForKey("Vegan") as? Bool {
-            veganSwitch.setOn(vegan, animated: true)
-        }
-        
-    }
     
     @IBAction func searchRecipes(sender: AnyObject) {
         activityController.startAnimating()
@@ -91,8 +67,7 @@ class SearchRecipeViewController: UIViewController  {
             self.showAlertMsg(RecipeConstants.Messages.UserErorrMsg)
             return
         }
-        print("is vegan switch", veganSwitch.on)
-        print("is vegetarian switch", vegtarianSwitch.on)
+
         RecipeUtil.sharedInstance().searchRecipeForIngredients(ingredient1.text!, cuisine: cuisine.text!, typeOfRecipe: typeOfRecipe.text!, dietValue: veganSwitch.on ? "vegan" : "vegetarian" ) { (data, error) in
             
             if error != nil {
@@ -110,22 +85,36 @@ class SearchRecipeViewController: UIViewController  {
                             return
                         }
                     }else{
-                        print("the count ",data!.count)
+                       
                         RecipeCollection.sharedInstance().recipeData = data!
                         self.showNextScene()
                     }
                 }
-                
             }
-
+        }
+    }
+    
+    func saveLastSwitchValue(){
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("Vegan")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("Vegetarian")
+        NSUserDefaults.standardUserDefaults().setObject(veganSwitch.on, forKey: "Vegan")
+        NSUserDefaults.standardUserDefaults().setObject(vegtarianSwitch.on, forKey: "Vegetarian")
+    }
+    
+    
+    func getLastSwitchValue() {
+        if let veggie = NSUserDefaults.standardUserDefaults().objectForKey("Vegetarian") as? Bool  {
+            self.vegtarianSwitch.setOn(veggie, animated: false)
+        }
+        
+        if let vegan = NSUserDefaults.standardUserDefaults().objectForKey("Vegan") as? Bool {
+            veganSwitch.setOn(vegan, animated: true)
         }
         
     }
     
-    
     private func showNextScene() -> Void {
         dispatch_async(dispatch_get_main_queue()) {
-            
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ListRecipeViewController") 
             self.presentViewController(controller, animated: true, completion: nil)
         }
@@ -138,7 +127,11 @@ class SearchRecipeViewController: UIViewController  {
         self.presentViewController(alert, animated: true, completion: nil)
         return
     }
-
+    
+    
+    func setSwitchMode(swit: UISwitch!, mode:Bool){
+        swit.setOn(mode, animated: true)
+    }
 }
 
 
@@ -152,7 +145,6 @@ extension SearchRecipeViewController: UITextFieldDelegate {
     // MARK: Show/Hide Keyboard
     
     func keyboardWillShow(notification: NSNotification) {
-        print("will show")
         if !keyboardOnScreen {
             view.frame.origin.y -= keyboardHeight(notification)
         }
@@ -185,7 +177,6 @@ extension SearchRecipeViewController: UITextFieldDelegate {
     }
     
     @IBAction func userDidTapView(sender: AnyObject) {
-        print("tapped view")
         resignIfFirstResponder(cuisine)
         resignIfFirstResponder(ingredient1)
         resignIfFirstResponder(typeOfRecipe)

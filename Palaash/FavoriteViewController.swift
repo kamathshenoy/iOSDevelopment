@@ -10,61 +10,24 @@ import Foundation
 import UIKit
 import CoreData
 class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate  {
-    var sharedContext = CoreDataStackManager.sharedInstance().managedObjectContext
-    @IBOutlet var tableView: UITableView!
     
-  //  @IBOutlet weak var instructionLabel: UILabel!
+    @IBOutlet var tableView: UITableView!
+    var sharedContext = CoreDataStackManager.sharedInstance().managedObjectContext
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // instructionLabel.text = "Tap on the recipe to change favorites."
         do {
-           
             try fetchedResultsController.performFetch()
-            
         } catch let error as NSError {
             print("ERROR FETCHING DATA", error.localizedDescription)
         }
-          fetchedResultsController.delegate = self
-    }
-    
-    func showAlertMsg(msg:String)->Void {
-        let alert = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-        return
-    }
-    
-    lazy var fetchedResultsController: NSFetchedResultsController = {
-        
-        //Create the fetch request
-        let fetchRequest = NSFetchRequest(entityName: "FavoriteRecipes")
-        
-        //Add a sort descriptor
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
-        
-        // Fetch only photos from the selected pin
-        //let predicate = NSPredicate(format: "photoToPin == %@", self.)
-        //fetchRequest.predicate = predicate
-        
-        //Create the Fetched Results Controller
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
-        //fetchedResultsController.
-        //Return the fetched results controller
-        print("fetched results", fetchedResultsController.sections)
-        return fetchedResultsController
-        
-    }()
+    }
+    
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        // This invocation prepares the table to recieve a number of changes. It will store them up
-        // until it receives endUpdates(), and then perform them all at once.
         self.tableView.beginUpdates()
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-        // Our project does not use sections. So we can ignore these invocations.
     }
     
     //
@@ -108,7 +71,6 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let sections = fetchedResultsController.sections {
             let currentSection = sections[section]
-            print("currentSection.numberOfObjects",currentSection.numberOfObjects)
             return currentSection.numberOfObjects
         }
         return 0
@@ -140,6 +102,29 @@ class FavoriteViewController: UIViewController,UITableViewDelegate, UITableViewD
             CoreDataStackManager.sharedInstance().saveContext()
         }
     }
+    
+    func showAlertMsg(msg:String)->Void {
+        let alert = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        return
+    }
+    
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        
+        //Create the fetch request
+        let fetchRequest = NSFetchRequest(entityName: "FavoriteRecipes")
+        
+        //Add a sort descriptor
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        
+        //Create the Fetched Results Controller
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController.delegate = self
+        
+        return fetchedResultsController
+        
+    }()
 
 
 }
